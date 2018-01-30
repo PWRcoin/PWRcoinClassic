@@ -1,4 +1,4 @@
-### Powercoin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=0.==1.0.0&x2=0">
+### Powercoin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=1.0.0.0&x2=0">
 
 **Important Notice:** While Power Coin is a great coin it suffers some nearly fatal issues that must be addressed. Without getting overly technical let's simply say that the code has issues which create an out of control staking situtation. Over time this has led to broken wallets, negative balances, exchange de-listings, coin devaluation and other problems. 
 
