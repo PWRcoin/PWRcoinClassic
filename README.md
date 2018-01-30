@@ -6,17 +6,24 @@ At the moment it appears that the best path to healing this coin will include a 
 
 **Development Updates**
 
-A totally new block explorer has been created and you can find that at https://blockexplorer.pwr-coin.com/
-A totally new website is being developed and it will go live at https://pwr-coin.com
-The coin is currently being traded at Yobit: https://yobit.net/en/trade/PWR/DOGE
+  * New block explorer https://blockexplorer.pwr-coin.com/
+  * New website is being developed and it will go live at https://pwr-coin.com
+  * The coin is currently being traded at Yobit: https://yobit.net/en/trade/PWR/DOGE (Deposit/Withdrawal does not work)
 
-Current tasks that are being worked on include, new logo, new client identity, new website, VPS node for testnet testing, new Facebook page, new Twitter page, new Google Plus page, new YouTube page, analysis of code deficiences to determine necessary code rework to correct the too high POS, too high coin supply and QT wallet crashes when staking on Windows operating systems.
+Current tasks that are being worked on include:
+ * new logo
+ * new client identity
+ * new website
+ * VPS node for testnet testing
+ * new Facebook page, Twitter page, Google Plus page and new YouTube page
+ * analysis of code deficiences to determine necessary code rework to correct the too high POS, too high coin supply
 
 **Important Note:** *The current development team handling the tasks listed above have no connection to nor assocation with any other group and specifically the individual or group that has been conducting a swap of these coins for tokens on the Waves platform.*
 
 
 PWR coin (PWR)
 
+```
 Name: PWR coin
 Ticker: PWR
 Powercoin Maturity: 30 Blocks
@@ -35,7 +42,7 @@ Blocks 0-10: Airdrop PWR
 Blocks 10-100 0 PWR
 350 PWR first 43100 Blocks
 230 PWR until PoW end,Block 86400
-
+```
 
 PowerPos:
 Blocks: 86000-86400: 5 PWR (Warm-Up)
