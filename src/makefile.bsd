@@ -141,7 +141,7 @@ OBJS= \
     obj/Powercoin/Params.o \
     obj/Powercoin/SerialNumberSignatureOfKnowledge.o \
     obj/Powercoin/SpendMetaData.o \
-    obj/Powercoin/ZeroTest.o
+    obj/Powercoin/PowerTest.o
 
 all: powercoind
 
