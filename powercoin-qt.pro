@@ -208,7 +208,7 @@ HEADERS += src/qt/powercoingui.h \
     src/Powercoin/Params.h \
     src/Powercoin/SerialNumberSignatureOfKnowledge.h \
     src/Powercoin/SpendMetaData.h \
-    src/Powercoin/ZeroTest.h \
+    src/Powercoin/PowerTest.h \
     src/Powercoin/Powercoin.h \
     src/serialize.h \
     src/strlcpy.h \
@@ -355,7 +355,7 @@ SOURCES += src/qt/powercoin.cpp src/qt/powercoingui.cpp \
     src/Powercoin/Params.cpp \
     src/Powercoin/SerialNumberSignatureOfKnowledge.cpp \
     src/Powercoin/SpendMetaData.cpp \
-    src/Powercoin/ZeroTest.cpp
+    src/Powercoin/PowerTest.cpp
 
 RESOURCES += \
     src/qt/powercoin.qrc
