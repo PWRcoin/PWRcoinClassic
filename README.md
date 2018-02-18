@@ -8,14 +8,19 @@ At the moment it appears that the best path to healing this coin will include a 
 
   * New block explorer https://blockexplorer.pwr-coin.com/
   * New website is being developed and it will go live at https://pwr-coin.com
-  * The coin is currently being traded at Yobit: https://yobit.net/en/trade/PWR/DOGE (Deposit/Withdrawal does not work)
+  * You can buy and sell PWR coin at CryptoHub Exchange at https://cryptohub.online/market/PWR/
+  * You can follow the PWR coin market cap statistics at https://cryptocapworld.com/coin/PWR
+  * Follow us on Facebook at https://www.facebook.com/pwrcoin/
+  * Follow us on Twitter at https://twitter.com/pwr_coin
+  * Follow us on Google Plus at https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
+  * Follow us on YouTube at https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
 
 Current tasks that are being worked on include:
- * new logo
- * new client identity
+ * new logo - Completed
+ * new client identity - Completed
+ * new Facebook page, Twitter page, Google Plus page and new YouTube page - Completed
  * new website
  * VPS node for testnet testing
- * new Facebook page, Twitter page, Google Plus page and new YouTube page
  * analysis of code deficiences to determine necessary code rework to correct the too high POS, too high coin supply
 
 **Important Note:** *The current development team handling the tasks listed above have no connection to nor assocation with any other group and specifically the individual or group that has been conducting a swap of these coins for tokens on the Waves platform.*
