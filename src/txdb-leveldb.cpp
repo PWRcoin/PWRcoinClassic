@@ -19,6 +19,7 @@
 #include "txdb.h"
 #include "util.h"
 #include "main.h"
+#include "uint256.h"
 
 using namespace std;
 using namespace boost;
