@@ -970,8 +970,24 @@ int64_t GetProofOfWorkReward(int64_t nFees)
     int64_t nSubsidy = 0 * COIN;
         if(pindexBest->nHeight < 10) { nSubsidy = 2500000 * COIN; } // airdrop
          else if(pindexBest->nHeight < 100) { nSubsidy = 0 * COIN; } // zero reward
-          else if(pindexBest->nHeight < 43200) { nSubsidy = 350 * COIN; } // Month 1 approx 15085000
-           else if(pindexBest->nHeight < 86400) { nSubsidy = 230 * COIN; } // Month 2 approx 9936000
+         else if(pindexBest->nHeight < 43200) { nSubsidy = 350 * COIN; } // Month 1 approx 15085000
+         else if(pindexBest->nHeight < 86400) { nSubsidy = 230 * COIN; } // Month 2 approx 9936000
+          else if(pindexBest->nHeight >= 800000) { nsubsidy = 1000 * COIN; } //Turning POW mining back on at fork block 800,000
+          else if(pindexBest->nHeight >= 972800) { nsubsidy = 900 * COIN; } //Dropping POW subsidy about 90 days post fork
+          else if(pindexBest->nHeight >= 1145600) { nsubsidy = 800 * COIN; } //Dropping POW subsidy about 180 days post fork
+          else if(pindexBest->nHeight >= 1318400) { nsubsidy = 700 * COIN; } //Dropping POW subsidy about 270 days post fork
+          else if(pindexBest->nHeight >= 1491200) { nsubsidy = 600 * COIN; } //Dropping POW subsidy about 360 days post fork
+          else if(pindexBest->nHeight >= 1664000) { nsubsidy = 500 * COIN; } //Dropping POW subsidy about 350 days post fork
+          else if(pindexBest->nHeight >= 1836800) { nsubsidy = 400 * COIN; } //Dropping POW subsidy about 440 days post fork
+          else if(pindexBest->nHeight >= 2009600) { nsubsidy = 300 * COIN; } //Dropping POW subsidy about 530 days post fork
+          else if(pindexBest->nHeight >= 2182400) { nsubsidy = 275 * COIN; } //Dropping POW subsidy about 620 days post fork
+          else if(pindexBest->nHeight >= 2355200) { nsubsidy = 250 * COIN; } //Dropping POW subsidy about 710 days post fork
+          else if(pindexBest->nHeight >= 2355200) { nsubsidy = 225 * COIN; } //Dropping POW subsidy about 800 days post fork
+          else if(pindexBest->nHeight >= 2528000) { nsubsidy = 200 * COIN; } //Dropping POW subsidy about 890 days post fork
+          else if(pindexBest->nHeight >= 2873600) { nsubsidy = 175 * COIN; } //Dropping POW subsidy about 1070 days post fork
+          else if(pindexBest->nHeight >= 3219200) { nsubsidy = 150 * COIN; } //Dropping POW subsidy about 1250 days post fork
+          else if(pindexBest->nHeight >= 3564800) { nsubsidy = 125 * COIN; } //Dropping POW subsidy about 1430 days post fork
+          else if(pindexBest->nHeight >= 4256000) { nsubsidy = 100 * COIN; } //Dropping POW subsidy about 1795 days post fork
 
        if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
