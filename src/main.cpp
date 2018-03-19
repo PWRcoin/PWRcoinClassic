@@ -1035,7 +1035,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     }
     else
     {
-    nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
+    nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8); //This should yield 12% APR
     }
 
     return nSubsidy + nFees;
