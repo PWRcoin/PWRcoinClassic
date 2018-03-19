@@ -2510,8 +2510,8 @@ bool LoadBlockIndex(bool fAllowNew)
         pchMessageStart[3] = 0xe1;
 
         bnProofOfWorkLimit = bnProofOfWorkLimitTestNet; // 0x0000ffff PoW base target is fixed in testnet
-        nStakeMinAge = 20 * 60; // test net min age is 20 min
-        nCoinbaseMaturity = 20; // test maturity is 10 blocks
+        nStakeMinAge = 1 * 60 * 10; // test net min age is 10 min
+        nCoinbaseMaturity = 5; // test maturity is 5 blocks
     }
 #if 0
     // Set up the Powercoin Params object
