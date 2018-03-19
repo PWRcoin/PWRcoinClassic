@@ -10,8 +10,8 @@
 * @license    This project is released under the MIT license.
 **/
 
-#ifndef Powercoin_H_
-#define Powercoin_H_
+#ifndef POWERCOIN_H_
+#define POWERCOIN_H_
 
 #include <stdexcept>
 
