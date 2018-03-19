@@ -40,8 +40,8 @@ CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // "standard" scrypt target limit
 CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 CBigNum bnProofOfWorkLimitTestNet(~uint256(0) >> 16);
 
-unsigned int nTargetSpacing = 60; // 60 seconds
-unsigned int nStakeMinAge = 8 * 60 * 60 ; // 8 hours
+unsigned int nTargetSpacing = 1 * 45; // 45 second block timing
+unsigned int nStakeMinAge = 60 * 60 * 24 * 3; // minimum age for coin age 3 days
 unsigned int nStakeMaxAge = -1;           //unlimited
 unsigned int nModifierInterval = 10 * 60 ; // time to elapse before new modifier is computed
 
@@ -970,8 +970,24 @@ int64_t GetProofOfWorkReward(int64_t nFees)
     int64_t nSubsidy = 0 * COIN;
         if(pindexBest->nHeight < 10) { nSubsidy = 2500000 * COIN; } // airdrop
          else if(pindexBest->nHeight < 100) { nSubsidy = 0 * COIN; } // zero reward
-          else if(pindexBest->nHeight < 43200) { nSubsidy = 350 * COIN; } // Month 1 approx 15085000
-           else if(pindexBest->nHeight < 86400) { nSubsidy = 230 * COIN; } // Month 2 approx 9936000
+         else if(pindexBest->nHeight < 43200) { nSubsidy = 350 * COIN; } // Month 1 approx 15085000
+         else if(pindexBest->nHeight < 86400) { nSubsidy = 230 * COIN; } // Month 2 approx 9936000
+          else if(pindexBest->nHeight >= 800000) { nsubsidy = 1000 * COIN; } //Turning POW mining back on at fork block 800,000
+          else if(pindexBest->nHeight >= 972800) { nsubsidy = 900 * COIN; } //Dropping POW subsidy about 90 days post fork
+          else if(pindexBest->nHeight >= 1145600) { nsubsidy = 800 * COIN; } //Dropping POW subsidy about 180 days post fork
+          else if(pindexBest->nHeight >= 1318400) { nsubsidy = 700 * COIN; } //Dropping POW subsidy about 270 days post fork
+          else if(pindexBest->nHeight >= 1491200) { nsubsidy = 600 * COIN; } //Dropping POW subsidy about 360 days post fork
+          else if(pindexBest->nHeight >= 1664000) { nsubsidy = 500 * COIN; } //Dropping POW subsidy about 350 days post fork
+          else if(pindexBest->nHeight >= 1836800) { nsubsidy = 400 * COIN; } //Dropping POW subsidy about 440 days post fork
+          else if(pindexBest->nHeight >= 2009600) { nsubsidy = 300 * COIN; } //Dropping POW subsidy about 530 days post fork
+          else if(pindexBest->nHeight >= 2182400) { nsubsidy = 275 * COIN; } //Dropping POW subsidy about 620 days post fork
+          else if(pindexBest->nHeight >= 2355200) { nsubsidy = 250 * COIN; } //Dropping POW subsidy about 710 days post fork
+          else if(pindexBest->nHeight >= 2355200) { nsubsidy = 225 * COIN; } //Dropping POW subsidy about 800 days post fork
+          else if(pindexBest->nHeight >= 2528000) { nsubsidy = 200 * COIN; } //Dropping POW subsidy about 890 days post fork
+          else if(pindexBest->nHeight >= 2873600) { nsubsidy = 175 * COIN; } //Dropping POW subsidy about 1070 days post fork
+          else if(pindexBest->nHeight >= 3219200) { nsubsidy = 150 * COIN; } //Dropping POW subsidy about 1250 days post fork
+          else if(pindexBest->nHeight >= 3564800) { nsubsidy = 125 * COIN; } //Dropping POW subsidy about 1430 days post fork
+          else if(pindexBest->nHeight >= 4256000) { nsubsidy = 100 * COIN; } //Dropping POW subsidy about 1795 days post fork
 
        if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
@@ -1019,7 +1035,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     }
     else
     {
-    nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
+    nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8); //This should yield 12% APR
     }
 
     return nSubsidy + nFees;
@@ -1038,7 +1054,7 @@ unsigned int ComputeMaxBits(CBigNum bnTargetLimit, unsigned int nBase, int64_t n
     {
         // Maximum 200% adjustment per day...
         bnResult *= 2;
-        nTime -= 24 * 60 * 60;
+        nTime -= 1 * 60 * 60;
     }
     if (bnResult > bnTargetLimit)
         bnResult = bnTargetLimit;
@@ -2494,8 +2510,8 @@ bool LoadBlockIndex(bool fAllowNew)
         pchMessageStart[3] = 0xe1;
 
         bnProofOfWorkLimit = bnProofOfWorkLimitTestNet; // 0x0000ffff PoW base target is fixed in testnet
-        nStakeMinAge = 20 * 60; // test net min age is 20 min
-        nCoinbaseMaturity = 20; // test maturity is 10 blocks
+        nStakeMinAge = 1 * 60 * 10; // test net min age is 10 min
+        nCoinbaseMaturity = 5; // test maturity is 5 blocks
     }
 #if 0
     // Set up the Powercoin Params object
