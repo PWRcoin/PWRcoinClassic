@@ -185,7 +185,7 @@ Once you are in the proper directory where the daemon is located you are ready t
 ./powercoind -daemon -txindex=1
 ```
 
-You should get a message that says, "powercoin serving starting."
+You should get a message that says, "powercoin server starting."
 
 Give it a few seconds and check that it is running:
 
