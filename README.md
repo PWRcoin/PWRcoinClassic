@@ -9,21 +9,34 @@ At the moment it appears that the best path to healing this coin will include a 
 **Development Updates**
 
   * New block explorer https://blockexplorer.pwr-coin.com/
-  * New website is being developed and it will go live at https://pwr-coin.com
+  * New website is being developed https://pwr-coin.com
+  * New ANN at BitcoinTalk https://bitcointalk.org/index.php?topic=2868184.0
   * You can buy and sell PWR coin at CryptoHub Exchange at https://cryptohub.online/market/PWR/
   * You can follow the PWR coin market cap statistics at https://cryptocapworld.com/coin/PWR
   * Follow us on Facebook at https://www.facebook.com/pwrcoin/
   * Follow us on Twitter at https://twitter.com/pwr_coin
   * Follow us on Google Plus at https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
   * Follow us on YouTube at https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
+  * Join our Discord channel at at https://discord.gg/8jhcqqs
 
 Current tasks that are being worked on include:
- * new logo - Completed
- * new client identity - Completed
- * new Facebook page, Twitter page, Google Plus page and new YouTube page - Completed
- * new website
- * VPS node for testnet testing
- * analysis of code deficiences to determine necessary code rework to correct the too high POS, too high coin supply
+ * New block explorer - Completed
+ * New Professionally Managed Github Repository – Completed
+ * New ANN Announcement – Completed
+New Name And Tagline – Done
+Listing At A New Market Cap Site – Done
+New Social Pages At Facebook, Twitter, Google Plus, YouTube & Discord – Done
+New Logo – Done
+Listing At A New Exchange – Done
+New Social Media Graphics – Done
+Review And Analysis Of Existing Code Deficiencies – In Progress
+New Website – In Progress
+Set Up VPS Node For TestNet Testing – In Progress
+New RoadMap – On The Do List
+2nd Block Explorer – On The Do List
+Multiple VPS Seed Nodes – On The Do List
+Code Rework & Release Of New Binaries – On The Do List
+New White Paper – On The Do List
 
 **Important Note:** *The current development team handling the tasks listed above have no connection to nor assocation with any other group and specifically the individual or group that has been conducting a swap of these coins for tokens on the Waves platform.*
 
