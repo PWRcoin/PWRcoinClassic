@@ -86,24 +86,12 @@ Install Dependencies
 When running the commands in the build instructions below, copy and paste one line and let it complete before running the next line. Watch for prompts in case you need to respond to a requested input and also to watch for any errors if they occur.
 
 ```
-sudo apt-get install build-essential
-sudo apt-get update
-sudo apt-get install libssl-dev
 sudo add-apt-repository universe
-sudo apt-get update
-sudo apt-get install libboost-all-dev
-sudo apt-get install libqrencode-dev
-sudo apt-get install libminiupnpc-dev
-sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:bitcoin/bitcoin
 sudo apt-get update
-sudo apt-get install libdb4.8-dev libdb4.8++-dev
-sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-sudo apt-get install make
-sudo apt-get install g++
-sudo apt-get update
-apt-get install qt5-default qt5-qmake qtbase5-dev-tools qttools5-dev-tools
-sudo apt-get update
+sudo apt-get install build-essential make g++
+sudo apt-get install libssl-dev libboost-all-dev libqrencode-dev libminiupnpc-dev software-properties-common libdb4.8-dev libdb4.8++-dev
+sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qtbase5-dev-tools qt5-qmake qt5-default qttools5-dev-tools libprotobuf-dev protobuf-compiler
 ```
 
 Get The Source Code And Compile
@@ -171,22 +159,12 @@ Install Dependencies
 When running the commands in the build instructions below, copy and paste one line and let it complete before running the next line. Watch for prompts in case you need to respond to a requested input and also to watch for any errors if they occur.
 
 ```
-sudo apt-get install build-essential
-sudo apt-get update
-sudo apt-get install libssl-dev
 sudo add-apt-repository universe
-sudo apt-get update
-sudo apt-get install libboost-all-dev
-sudo apt-get install libqrencode-dev
-sudo apt-get install libminiupnpc-dev
-sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:bitcoin/bitcoin
 sudo apt-get update
-sudo apt-get install libdb4.8-dev libdb4.8++-dev
-sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-sudo apt-get install make
-sudo apt-get install g++
-sudo apt-get update
+sudo apt-get install build-essential make g++
+sudo apt-get install libssl-dev libboost-all-dev libqrencode-dev libminiupnpc-dev software-properties-common libdb4.8-dev libdb4.8++-dev
+sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qtbase5-dev-tools qt5-qmake qt5-default qttools5-dev-tools libprotobuf-dev protobuf-compiler
 ```
 
 Get The Source Code And Compile
@@ -220,12 +198,11 @@ Setup And Launch The Daemon
 ---------------------
 
 ```
-./powercoind -daemon -txindex=1
+./powercoind -daemon 
 ```
 **Note:** *The above command will launch the daemon and create some necessary files however it will fail with a complaint that your powercoin.conf file is not setup properly:*
 
 Navigate to the default location where the powercoin.conf file will need to be setup at:  ``` /root/.powercoin/ ```
-If you have problems finding the correct location: ``` find /root -iname “wallet.dat” ```
 
 Once you are inside the ``` .powercoin/ ``` directory you will need to create and setup the powercoin.conf file:
 
@@ -246,6 +223,7 @@ While each powercoin.conf file may need different setup depending on what you ar
 ```
 rpcuser=PutRpcUserHere
 rpcpassword=PutPasswordHere
+logtimestamps=1
 listen=1
 server=1
 maxconnections=500
@@ -262,7 +240,7 @@ Now that you have created, setup and saved the powercoin.conf file you should se
 sudo chmod 400 powercoin.conf
 ```
 
-Now you will need to navigate back to the directory where the PWR coin daemon is. If you have problems finding the correct location: ``` find /root -iname “powercoind” ``` 
+Now you will need to navigate back to the directory where the PWR coin daemon is.
 
 Once you are in the proper directory where the daemon is located you are ready to launch again:
 
