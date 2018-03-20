@@ -79,7 +79,7 @@ Blocks: 172800 > 5% Fixed Yearly
 Approx: 2 Months PowerPoS
 ```
 
-## PWR Coin Linux QT Compiled With Ubuntu 16.04.4 x 64 (Tested 3-19-2018)
+## PWR Coin Linux QT Compiled With Ubuntu 16.04.4 x86_64 (Tested 3-19-2018)
 
 Install Dependencies
 ---------------------
@@ -152,7 +152,7 @@ After you add the IP addresses save the powercoin.conf file and then you will ne
 ---------------------
 ---------------------
 
-## PWR Coin Linux Daemon Compiled With Ubuntu 16.04.4 x 64 (Tested 3-19-2018) ##
+## PWR Coin Linux Daemon Compiled With Ubuntu 16.04.4 x86_64 (Tested 3-19-2018) ##
 
 Install Dependencies
 ---------------------
@@ -218,7 +218,7 @@ rpcpassword=PutPasswordHere
 ```
 **Note:** *The rpcuser and rpcpassword can't be the same they must be different from one another!*
 
-While each powercoin.conf file may need different setup depending on what you are doing a typical configuration for something like a blockexplorer might look like this:
+While each powercoin.conf file may need different setup depending on what you are doing a typical configuration might look like this:
 
 ```
 rpcuser=PutRpcUserHere
@@ -226,7 +226,6 @@ rpcpassword=PutPasswordHere
 logtimestamps=1
 listen=1
 server=1
-maxconnections=500
 addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
@@ -245,7 +244,7 @@ Now you will need to navigate back to the directory where the PWR coin daemon is
 Once you are in the proper directory where the daemon is located you are ready to launch again:
 
 ```
-./powercoind -daemon -txindex=1
+./powercoind -daemon
 ```
 
 You should get a message that says, "powercoin server starting."
@@ -276,7 +275,7 @@ If for any reason you want to stop the daemon from running use this command:
 If for any reason you need to start the daemon use this command:
 
 ```
-./powercoind -daemon -txindex=1
+./powercoind -daemon
 ```
 
 
