@@ -17,7 +17,7 @@ At the moment it appears that the best path to healing this coin will include a 
   * Follow us on Twitter at https://twitter.com/pwr_coin
   * Follow us on Google Plus at https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
   * Follow us on YouTube at https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
-  * Join our Discord channel at at https://discord.gg/8jhcqqs
+  * Join our Discord channel at https://discord.gg/8jhcqqs
 
 **Current tasks that are being worked on include:**
 
@@ -114,7 +114,7 @@ make clean -f makefile.unix
 make -f makefile.unix
 
 ```
-**Note:** *It's possible the compile may file and give an error message that you have ran out of memory. If this happens please follow the steps below to create a swap file:*  
+**Note:** *It's possible the compile may fail and give an error message that you have run out of memory. If this happens please follow the steps below to create a swap file:*  
 
 ```
 fallocate -l 2G /swapfile
@@ -162,6 +162,7 @@ While each powercoin.conf file may need different setup depending on what you ar
 rpcuser=PutRpcUserHere
 rpcpassword=PutPasswordHere
 listen=1
+server=1
 maxconnections=500
 addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
@@ -169,6 +170,13 @@ addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
 ```
+
+Now that you have created, setup and saved the powercoin.conf file you should set it to read only:
+
+```
+sudo chmod 400 powercoin.conf
+```
+
 Now you will need to navigate back to the directory where the PWR coin daemon is. If you have problems finding the correct location: ``` find /root -iname “powercoind” ``` 
 
 Once you are in the proper directory where the daemon is located you are ready to launch again:
@@ -194,7 +202,7 @@ Let the daemon run for several more minutes and once again check it with:
 
 You should compare the block number now to the last one you saw and you should see it climbing higher because it is synchronizing the blockchain. If the number stays at 0 you need to revisit your powercoin.conf file and try some different addnodes. A good place to get those is here https://cryptohub.online/glossary/ajax_coin_nodes/58/ or here https://blockexplorer.pwr-coin.com/network
 
-Let your daemon run and check it periodically. Once the block number in getinfo matches the block number on the block explorer you are fully synchronized.
+Let your daemon run and check it periodically. Once the block number in getinfo matches the block number on the block explorer you are fully synchronized. If you notice that your daemon reaches a certain block height but then stops synchronizing for any reason it's always a good idea to try stopping and restarting it using the commands listed below:
 
 If for any reason you want to stop the daemon from running use this command:
 
