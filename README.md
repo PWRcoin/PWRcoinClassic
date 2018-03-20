@@ -83,6 +83,7 @@ Approx: 2 Months PowerPoS
 
 Install Dependencies
 ---------------------
+When running the commands in the build instructions below, copy and paste one line and let it complete before running the next line. Watch for prompts in case you need to respond to a requested input and also to watch for any errors if they occur.
 
 ```
 sudo apt-get install build-essential
@@ -138,10 +139,10 @@ Setup And Launch The Daemon
 ```
 **Note:** *The above command will launch the daemon and create some necessary files however it will fail with a complaint that your powercoin.conf file is not setup properly:*
 
-Navigate to the default location where the powercoin.conf file will need to be setup at:  /root/.powercoin/
-If you have problems finding the correct location: find /root -iname “wallet.dat”
+Navigate to the default location where the powercoin.conf file will need to be setup at:  ``` /root/.powercoin/ ```
+If you have problems finding the correct location: ``` find /root -iname “wallet.dat” ```
 
-Once you are inside the .powercoin/ directory you will need to create and setup the powercoin.conf file:
+Once you are inside the ``` .powercoin/ ``` directory you will need to create and setup the powercoin.conf file:
 
 ```
 sudo nano powercoin.conf
@@ -168,7 +169,7 @@ addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
 ```
-Now you will need to navigate back to the directory where the PWR coin daemon is. If you have problems finding the correct location: find /root -iname “powercoind” 
+Now you will need to navigate back to the directory where the PWR coin daemon is. If you have problems finding the correct location: ``` find /root -iname “powercoind” ``` 
 
 Once you are in the proper directory where the daemon is located you are ready to launch again:
 
