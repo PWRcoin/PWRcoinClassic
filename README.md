@@ -79,7 +79,92 @@ Blocks: 172800 > 5% Fixed Yearly
 Approx: 2 Months PowerPoS
 ```
 
-## PWR Coin Daemon Compile on Ubuntu 16.04.4 x 64 - Tested 3-19-2018
+## PWR Coin Linux QT Compiled With Ubuntu 16.04.4 x 64 (Tested 3-19-2018)
+
+Install Dependencies
+---------------------
+When running the commands in the build instructions below, copy and paste one line and let it complete before running the next line. Watch for prompts in case you need to respond to a requested input and also to watch for any errors if they occur.
+
+```
+sudo apt-get install build-essential
+sudo apt-get update
+sudo apt-get install libssl-dev
+sudo add-apt-repository universe
+sudo apt-get update
+sudo apt-get install libboost-all-dev
+sudo apt-get install libqrencode-dev
+sudo apt-get install libminiupnpc-dev
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:bitcoin/bitcoin
+sudo apt-get update
+sudo apt-get install libdb4.8-dev libdb4.8++-dev
+sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
+sudo apt-get install make
+sudo apt-get install g++
+sudo apt-get update
+apt-get install qt5-default qt5-qmake qtbase5-dev-tools qttools5-dev-tools
+sudo apt-get update
+```
+
+Get The Source Code And Compile
+---------------------
+
+```
+git clone https://github.com/PWRcoin/PWRcoin.git pwrcoin
+cd pwrcoin
+qmake
+make
+
+```
+**Note:** *It's possible the compile may fail and give an error message that you have run out of memory. If this happens please follow the steps below to create a swap file:*  
+
+```
+fallocate -l 2G /swapfile
+chown root:root /swapfile
+chmod 0600 /swapfile
+sudo bash -c "echo 'vm.swappiness = 10' >> /etc/sysctl.conf"
+mkswap /swapfile
+swapon /swapfile
+```
+After creating the swap file above run the folowing commands again:
+
+```
+qmake
+make
+```
+
+Setup And Launch The QT
+---------------------
+From the command line:
+```
+./powercoin-qt
+```
+From the desktop GUI:
+```
+Double click the Powercoin-QT icon wherever you have it located in your system
+```
+
+**Note:** *The above will launch the QT and create some necessary files however it will fail and close and will have to be restarted a second time. From then on it will launch with no failures:*
+
+Navigate to the location on your computer where the powercoin.conf file will need to be setup at - you will know you are in the right folder because the wallet.dat file will be in there:
+
+Create a new file called powercoin.conf and add the following lines:
+
+```
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+```
+You will need to replace SomeIPAddressHere with IP addresses that you can find here https://cryptohub.online/glossary/ajax_coin_nodes/58/ or here https://blockexplorer.pwr-coin.com/network
+
+After you add the IP addresses save the powercoin.conf file and then you will need to restart the QT wallet for the changes to take effect. You will now note that your wallet is sychronizing the blockchain. If your wallet will not begin to synchronize you should try adding some more/different IP addresses in the powercoin.conf file. If your wallet partially synchronizes but then stops at some point and won't progress you should shut it down and restart it. Once your QT wallet is fully synchronized you should check and make sure that the wallet block number matches the block height on the official block eplorer at https://blockexplorer.pwr-coin.com/
+
+---------------------
+---------------------
+
+## PWR Coin Linux Daemon Compiled With Ubuntu 16.04.4 x 64 (Tested 3-19-2018) ##
 
 Install Dependencies
 ---------------------
