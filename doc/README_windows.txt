@@ -1,6 +1,6 @@
-pwrcoin 0.4.4 BETA
+PWRcoin 1.0.0.0
 
-Copyright (c) PWR Bitcoin team
+Copyright (c) 2018 the PWRcoin Developers
 Copyright (c) 2011-2013 PPCoin Developers
 Distributed under the MIT/X11 software license, see the accompanying
 file license.txt or http://www.opensource.org/licenses/mit-license.php.
