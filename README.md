@@ -1,0 +1,283 @@
+### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=1.0.0.0&x2=0">
+
+<p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
+
+**Important Notice:** While Power Coin is a great coin it suffers some nearly fatal issues that must be addressed. Without getting overly technical let's simply say that the code has issues which create an out of control staking situtation. Over time this has led to broken wallets, negative balances, exchange de-listings, coin devaluation and other problems. 
+
+At the moment it appears that the best path to healing this coin will include a major rebranding, a new digital footprint, code rework and fixes all followed by a paid marketing push. The current development team is already in motion handling this variety of tasks and will give new updates as they become available.
+
+**Development Updates**
+
+  * New block explorer https://blockexplorer.pwr-coin.com/
+  * New website is being developed https://pwr-coin.com
+  * New ANN at pwrcoinTalk https://pwrcointalk.org/index.php?topic=2868184.0
+  * You can buy and sell PWR coin at CryptoHub Exchange at https://cryptohub.online/market/PWR/
+  * You can follow the PWR coin market cap statistics at https://cryptocapworld.com/coin/PWR
+  * Follow us on Facebook at https://www.facebook.com/pwrcoin/
+  * Follow us on Twitter at https://twitter.com/pwr_coin
+  * Follow us on Google Plus at https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
+  * Follow us on YouTube at https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
+  * Join our Discord channel at https://discord.gg/8jhcqqs
+
+**Current tasks that are being worked on include:**
+
+ * New block explorer - Completed
+ * New Professionally Managed Github Repository – Completed
+ * New ANN Announcement – Completed
+ * New Name And Tagline – Completed
+ * Listing At A New Market Cap Site – Completed
+ * New Social Pages At Facebook, Twitter, Google Plus, YouTube & Discord – Done
+ * New Logo – Completed
+ * Listing At A New Exchange – Completed
+ * New Social Media Graphics – Completed
+ * Review And Analysis Of Existing Code Deficiencies – Completed
+ * New Website – In Progress
+ * Set Up VPS Node For TestNet Testing – In Progress
+ * New RoadMap – On The Do List
+ * 2nd Block Explorer – On The Do List
+ * Multiple VPS Seed Nodes – On The Do List
+ * Code Rework & Release Of New Binaries – On The Do List
+ * New White Paper – On The Do List
+
+**Important Note:** *The current development team handling the tasks listed above have no connection to nor assocation with any other group and specifically the individual or group that has been conducting a swap of these coins for tokens on the Waves platform.*
+
+
+**PWR coin (PWR) Old Specifications**
+
+```
+Name: PWR coin
+Ticker: PWR
+PWRcoin Maturity: 30 Blocks
+Block Size: 8MB
+Block time: 60 seconds
+Algo: Nist5 (Quite,Low Consumption,GPU Optimized with BLAKE - Grøstl - JH - Keccak - Skein)
+Pow supply: 50021000 (25 Millions Distribuited by Airdrop Form Application)
+        + Dpos (Power Stages) with 3200000 PWR minted first 60 days Dpos + Fixed Pos subsidy at 5% Yearly
+Pos: 5% Annually - Minimum Stake Age: 8 Hours - Max Stake Age: Unlimited
+PWRcoin Distribution: 50% Airdrop Form Application + 50% PoW
+Port: 4504
+Rpcport: 4502 
+
+
+Block Reward:
+Blocks 0-10: Airdrop PWR
+Blocks 10-100 0 PWR
+350 PWR first 43100 Blocks
+230 PWR until PoW end,Block 86400
+```
+
+```
+PowerPos:
+Blocks: 86000-86400: 5 PWR (Warm-Up)
+Blocks: 86400-100800: 10 PWR (1 Stage)
+Blocks: 100800-115200: 25 PWR (2 Stage)
+Blocks: 115200-129600: 50 PWR (3 Stage)
+Blocks: 129600-144000: 100 PWR (Full Power)
+Blocks: 144000-158400: 20 PWR (5 Stage)
+Blocks: 158400-172800: 15 PWR (6 Stage)
+Blocks: 172800 > 5% Fixed Yearly 
+Approx: 2 Months PowerPoS
+```
+
+## PWR Coin Linux QT Compiled With Ubuntu 16.04.4 x86_64 (Tested 3-19-2018)
+
+Install Dependencies
+---------------------
+When running the commands in the build instructions below, copy and paste one line and let it complete before running the next line. Watch for prompts in case you need to respond to a requested input and also to watch for any errors if they occur.
+
+```
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:pwrcoin/pwrcoin
+sudo apt-get update
+sudo apt-get install build-essential make g++
+sudo apt-get install libssl-dev libboost-all-dev libqrencode-dev libminiupnpc-dev software-properties-common libdb4.8-dev libdb4.8++-dev
+sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qtbase5-dev-tools qt5-qmake qt5-default qttools5-dev-tools libprotobuf-dev protobuf-compiler
+```
+
+Get The Source Code And Compile
+---------------------
+
+```
+git clone https://github.com/PWRcoin/PWRcoin.git pwrcoin
+cd pwrcoin
+qmake
+make
+
+```
+**Note:** *It's possible the compile may fail and give an error message that you have run out of memory. If this happens please follow the steps below to create a swap file:*  
+
+```
+fallocate -l 2G /swapfile
+chown root:root /swapfile
+chmod 0600 /swapfile
+sudo bash -c "echo 'vm.swappiness = 10' >> /etc/sysctl.conf"
+mkswap /swapfile
+swapon /swapfile
+```
+After creating the swap file above run the folowing commands again:
+
+```
+qmake
+make
+```
+
+Setup And Launch The QT
+---------------------
+From the command line:
+```
+./pwrcoin-qt
+```
+From the desktop GUI:
+```
+Double click the PWRcoin-QT icon wherever you have it located in your system
+```
+
+**Note:** *The above will launch the QT and create some necessary files however it will fail and close and will have to be restarted a second time. From then on it will launch with no failures:*
+
+Navigate to the location on your computer where the pwrcoin.conf file will need to be setup at - you will know you are in the right folder because the wallet.dat file will be in there:
+
+Create a new file called pwrcoin.conf and add the following lines:
+
+```
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+```
+You will need to replace SomeIPAddressHere with IP addresses that you can find here https://cryptohub.online/glossary/ajax_coin_nodes/58/ or here https://blockexplorer.pwr-coin.com/network
+
+After you add the IP addresses save the pwrcoin.conf file and then you will need to restart the QT wallet for the changes to take effect. You will now note that your wallet is sychronizing the blockchain. If your wallet will not begin to synchronize you should try adding some more/different IP addresses in the pwrcoin.conf file. If your wallet partially synchronizes but then stops at some point and won't progress you should shut it down and restart it. Once your QT wallet is fully synchronized you should check and make sure that the wallet block number matches the block height on the official block eplorer at https://blockexplorer.pwr-coin.com/
+
+---------------------
+---------------------
+
+## PWR Coin Linux Daemon Compiled With Ubuntu 16.04.4 x86_64 (Tested 3-19-2018) ##
+
+Install Dependencies
+---------------------
+When running the commands in the build instructions below, copy and paste one line and let it complete before running the next line. Watch for prompts in case you need to respond to a requested input and also to watch for any errors if they occur.
+
+```
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:pwrcoin/pwrcoin
+sudo apt-get update
+sudo apt-get install build-essential make g++
+sudo apt-get install libssl-dev libboost-all-dev libqrencode-dev libminiupnpc-dev software-properties-common libdb4.8-dev libdb4.8++-dev
+sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qtbase5-dev-tools qt5-qmake qt5-default qttools5-dev-tools libprotobuf-dev protobuf-compiler
+```
+
+Get The Source Code And Compile
+---------------------
+
+```
+git clone https://github.com/PWRcoin/PWRcoin.git pwrcoin
+cd pwrcoin/src
+make clean -f makefile.unix
+make -f makefile.unix
+
+```
+**Note:** *It's possible the compile may fail and give an error message that you have run out of memory. If this happens please follow the steps below to create a swap file:*  
+
+```
+fallocate -l 2G /swapfile
+chown root:root /swapfile
+chmod 0600 /swapfile
+sudo bash -c "echo 'vm.swappiness = 10' >> /etc/sysctl.conf"
+mkswap /swapfile
+swapon /swapfile
+```
+After creating the swap file above run the folowing commands again:
+
+```
+make clean -f makefile.unix
+make -f makefile.unix
+```
+
+Setup And Launch The Daemon
+---------------------
+
+```
+./pwrcoind -daemon 
+```
+**Note:** *The above command will launch the daemon and create some necessary files however it will fail with a complaint that your pwrcoin.conf file is not setup properly:*
+
+Navigate to the default location where the pwrcoin.conf file will need to be setup at:  ``` /root/.pwrcoin/ ```
+
+Once you are inside the ``` .pwrcoin/ ``` directory you will need to create and setup the pwrcoin.conf file:
+
+```
+sudo nano pwrcoin.conf
+```
+
+The bare minimum pwrcoin.conf configuration required to get the daemon running is:
+
+```
+rpcuser=PutRpcUserHere
+rpcpassword=PutPasswordHere
+```
+**Note:** *The rpcuser and rpcpassword can't be the same they must be different from one another!*
+
+While each pwrcoin.conf file may need different setup depending on what you are doing a typical configuration might look like this:
+
+```
+rpcuser=PutRpcUserHere
+rpcpassword=PutPasswordHere
+logtimestamps=1
+listen=1
+server=1
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+addnode=SomeIPAddressHere
+```
+
+Now that you have created, setup and saved the pwrcoin.conf file you should set it to read only:
+
+```
+sudo chmod 400 pwrcoin.conf
+```
+
+Now you will need to navigate back to the directory where the PWR coin daemon is.
+
+Once you are in the proper directory where the daemon is located you are ready to launch again:
+
+```
+./pwrcoind -daemon
+```
+
+You should get a message that says, "pwrcoin server starting."
+
+Give it a few seconds and check that it is running:
+
+```
+./pwrcoind getinfo
+```
+You should get a full response with all of the getinfo output. If you take a look at "blocks": make a note of the block number.
+
+Let the daemon run for several more minutes and once again check it with:
+
+```
+./pwrcoind getinfo
+```
+
+You should compare the block number now to the last one you saw and you should see it climbing higher because it is synchronizing the blockchain. If the number stays at 0 you need to revisit your pwrcoin.conf file and try some different addnodes. A good place to get those is here https://cryptohub.online/glossary/ajax_coin_nodes/58/ or here https://blockexplorer.pwr-coin.com/network
+
+Let your daemon run and check it periodically. Once the block number in getinfo matches the block number on the block explorer you are fully synchronized. If you notice that your daemon reaches a certain block height but then stops synchronizing for any reason it's always a good idea to try stopping and restarting it using the commands listed below:
+
+If for any reason you want to stop the daemon from running use this command:
+
+```
+./pwrcoind stop
+```
+
+If for any reason you need to start the daemon use this command:
+
+```
+./pwrcoind -daemon
+```
+
+
+
+

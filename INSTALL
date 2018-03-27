@@ -1,0 +1,9 @@
+Building pwrcoin
+
+See doc/readme-qt.rst for instructions on building pwrcoin QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of pwrcoin.
+
+See doc/build-*.txt for instructions on building pwrcoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of pwrcoin.
