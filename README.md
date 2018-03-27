@@ -4,7 +4,7 @@
 
 **Important Notice:** While Power Coin is a great coin it suffers some nearly fatal issues that must be addressed. Without getting overly technical let's simply say that the code has issues which create an out of control staking situtation. Over time this has led to broken wallets, negative balances, exchange de-listings, coin devaluation and other problems. 
 
-At the moment it appears that the best path to healing this coin will include a major rebranding, a new digital footprint, code rework and fixes all followed by a paid marketing push. The current development team is already in motion handling this variety of tasks and will give new updates as they become available.
+At the moment it appears that the best path to healing this coin will include a major rebranding (PWR), a new digital footprint, code rework and fixes all followed by a paid marketing push. The current development team is already in motion handling this variety of tasks and will give new updates as they become available.
 
 **Development Updates**
 
