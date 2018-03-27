@@ -1,4 +1,4 @@
-pwrcoin-qt: Qt5 GUI for pwrcoin
+pwrcoin-qt: Qt5 GUI for PWRcoin
 ===============================
 
 Build instructions
