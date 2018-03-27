@@ -6,6 +6,8 @@ the OpenSSL Toolkit (http://www.openssl.org/).  This product includes
 cryptographic software written by Eric Young (eay@cryptsoft.com) and UPnP
 software written by Thomas Bernard.
 
+Granted this is old and to be honest a bit lacking but the PWR dev team has decided to preserve it in the repository for historical purposes. ~DisasterFaster~
+
 
 See readme-qt.rst for instructions on building powercoin QT, the
 graphical user interface.
