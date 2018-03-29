@@ -29,7 +29,7 @@
 
 #include "netbase.h" // for AddTimeData
 
-// to obtain PRId64 on some old systems
+// to obtain  PRId64 on some old systems
 #define __STDC_FORMAT_MACROS 1
 
 #include <stdint.h>
@@ -122,7 +122,7 @@ inline void MilliSleep(int64_t n)
  * Parameters count from 1.
  */
 #ifdef __GNUC__
-#define ATTR_WARN_PRINTF(X,Y) __attribute__((format(printf,X,Y)))
+#define ATTR_WARN_PRINTF(X,Y) __attribute__((format(gnu_printf,X,Y)))
 #else
 #define ATTR_WARN_PRINTF(X,Y)
 #endif
@@ -238,7 +238,7 @@ void runCommand(std::string strCommand);
 
 inline std::string i64tostr(int64_t n)
 {
-    return strprintf("%"PRId64, n);
+    return strprintf("%" PRId64, n);
 }
 
 inline std::string itostr(int n)
