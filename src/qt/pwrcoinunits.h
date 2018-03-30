@@ -16,7 +16,9 @@ public:
       @note Source: https://en.pwrcoin.it/wiki/Units . Please add only sensible ones
      */
     enum Unit
-    {
+    { 
+        BPWR,
+        MPWR,
         PWR,
         mPWR,
         uPWR
