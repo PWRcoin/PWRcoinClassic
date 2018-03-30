@@ -236,7 +236,7 @@ std::string HelpMessage()
         "  -wallet=<dir>          " + _("Specify wallet file (within data directory)") + "\n" +
         "  -dbcache=<n>           " + _("Set database cache size in megabytes (default: 25)") + "\n" +
         "  -dblogsize=<n>         " + _("Set database disk log size in megabytes (default: 100)") + "\n" +
-        "  -timeout=<n>           " + _("Specify connection timeout in milliseconds (default: 5000)") + "\n" +
+        "  -timeout=<n>           " + _("Specify connection timeout in milliseconds (default: 20000)") + "\n" +
         "  -proxy=<ip:port>       " + _("Connect through socks proxy") + "\n" +
         "  -socks=<n>             " + _("Select the version of socks proxy to use (4-5, default: 5)") + "\n" +
         "  -tor=<ip:port>         " + _("Use proxy to reach tor hidden services (default: same as -proxy)") + "\n"
@@ -452,11 +452,11 @@ bool AppInit2()
 #endif
     fPrintToConsole = GetBoolArg("-printtoconsole");
     fPrintToDebugger = GetBoolArg("-printtodebugger");
-    fLogTimestamps = GetBoolArg("-logtimestamps");
+    fLogTimestamps = GetBoolArg("-logtimestamps", true);
 
     if (mapArgs.count("-timeout"))
     {
-        int nNewTimeout = GetArg("-timeout", 5000);
+        int nNewTimeout = GetArg("-timeout", 20000);
         if (nNewTimeout > 0 && nNewTimeout < 600000)
             nConnectTimeout = nNewTimeout;
     }

@@ -213,9 +213,8 @@ void ThreadIRCSeed2(void* parg)
     if (mapArgs.count("-connect") && fNoListen)
         return;
 
-    // ... or if IRC is not enabled.
-    if (!GetBoolArg("-irc", false))
-        return;
+    // DISABLE THIS GIANT SECURITY HoLE 
+    return;
 
     printf("ThreadIRCSeed started\n");
     int nErrorWait = 10;
