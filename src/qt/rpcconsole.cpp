@@ -332,19 +332,23 @@ void RPCConsole::clear()
                 "b { color: #006060; } "
                 );
 
+
     message(CMD_REPLY, (tr("Welcome to the pwrcoin RPC console.") + "<br>" +
                         tr("Use up and down arrows to navigate history, and <b>Ctrl-L</b> to clear screen.") + "<br>" +
                         tr("Type <b>help</b> for an overview of available commands.") + "<br>" +
-                        "<tt>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .___.<br>" +
-                        "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/&nbsp; &nbsp; &nbsp;\\<br>" +
-                        "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |&nbsp;<b>O</b>&nbsp;<b>_</b>&nbsp;<b>O</b>&nbsp;|<br>" +
-                        "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <b>/&nbsp; \\_/&nbsp; \\</b><br>" +
-                        "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .'&nbsp;/&nbsp; &nbsp; &nbsp;\\&nbsp;`.<br>" +
-                        "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/&nbsp;_|&nbsp; &nbsp; &nbsp; &nbsp;|_&nbsp;\\<br>" +
-                        "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (_/&nbsp;|&nbsp; &nbsp; &nbsp; &nbsp;|&nbsp;\\_)<br>" +
-                        "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; \\&nbsp; &nbsp; &nbsp; &nbsp;/<br>" +
-                        "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>__</b>\\_>-&lt;_/<b>__</b><br>" +
-                        "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>~;/&nbsp; &nbsp; &nbsp;\\;~</b><br></tt>"), true);
+                        "<tt><pre><br>"+
+                        "&nbsp;RPWRPWRPWR&nbsp;&nbsp;RPWRP&nbsp;&nbsp;PWRP&nbsp;&nbsp;PWRPW&nbsp;&nbsp;WRPWRPWRPW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
+                        "&nbsp;&nbsp;RPWRPWRPWR&nbsp;WRPWR&nbsp;&nbsp;RPWR&nbsp;&nbsp;RPWRP&nbsp;&nbsp;PWRPWRPWRPW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
+                        "&nbsp;&nbsp;WRPW&nbsp;&nbsp;&nbsp;&nbsp;PWR&nbsp;WRPW&nbsp;&nbsp;WRPW&nbsp;&nbsp;WRPW&nbsp;&nbsp;&nbsp;&nbsp;PWR&nbsp;&nbsp;&nbsp;&nbsp;WRP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
+                        "&nbsp;&nbsp;PWRPWRPWRPW&nbsp;&nbsp;WRP&nbsp;&nbsp;&nbsp;WRP&nbsp;&nbsp;PWR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RPWRPWRPWR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
+                        "&nbsp;&nbsp;RPWRPWRPWR&nbsp;&nbsp;&nbsp;PWR&nbsp;&nbsp;RPWR&nbsp;&nbsp;RP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WRPWRPWRP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
+                        "&nbsp;&nbsp;WRPWRPWRP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PW&nbsp;&nbsp;WRPWRPWR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PWRPWRPW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
+                        "&nbsp;&nbsp;PWR&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RPWRPWRPWRPW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RPWRPWRPW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
+                        "&nbsp;&nbsp;RPW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RPWRPWRPWRP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WRP&nbsp;&nbsp;&nbsp;WRP&nbsp;&nbsp;P&nbsp;&nbsp;&nbsp;<br>"+
+                        "&nbsp;&nbsp;WRP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RPW&nbsp;&nbsp;WRPW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PWR&nbsp;&nbsp;&nbsp;PWRPWR&nbsp;&nbsp;&nbsp;<br>"+
+                        "&nbsp;RPWRPW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WR&nbsp;&nbsp;&nbsp;PWRP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WRPWR&nbsp;&nbsp;RPWRPW&nbsp;&nbsp;&nbsp;<br>"+
+                        "&nbsp;WRPWRP&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PW&nbsp;&nbsp;&nbsp;&nbsp;PW&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PWRPW&nbsp;&nbsp;&nbsp;RPWR&nbsp;&nbsp;&nbsp;&nbsp;</pre></tt>"),true);
+
 }
 
 void RPCConsole::message(int category, const QString &message, bool html)
