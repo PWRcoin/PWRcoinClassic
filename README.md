@@ -17,7 +17,7 @@ At the moment it appears that the best path to healing this coin will include a 
   * Follow us on Twitter at https://twitter.com/pwr_coin
   * Follow us on Google Plus at https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
   * Follow us on YouTube at https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
-  * Join our Discord channel at https://discord.gg/8jhcqqs
+  * Join our Discord channel at https://discord.gg/Pgw2RNS
 
 **Current tasks that are being worked on include:**
 
