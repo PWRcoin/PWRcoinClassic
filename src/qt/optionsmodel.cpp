@@ -62,19 +62,27 @@ void OptionsModel::Init()
         SoftSetBoolArg("-detachdb", settings.value("detachDB").toBool());
     if (!language.isEmpty())
         SoftSetArg("-lang", language.toStdString());
+
+    printf("optionsmodel init completed\n");
 }
 
 bool OptionsModel::Upgrade()
 {
     QSettings settings;
 
+    printf("OptionsModel::Upgrade() called\n");
+
     if (settings.contains("bImportFinished"))
         return false; // Already upgraded
 
     settings.setValue("bImportFinished", true);
-
+    
     // Move settings from old wallet.dat (if any):
+    std::string strWalletFileName = GetArg("-wallet", "wallet.dat"); 
+    printf("OptionsModel::Upgrade() bImportFinished flag set, about to init %s\n",strWalletFileName.c_str());
     CWalletDB walletdb(strWalletFileName);
+
+    printf("OptionsModel walletdb created.\n");
 
     QList<QString> intOptions;
     intOptions << "nDisplayUnit" << "nTransactionFee" << "nReserveBalance";
