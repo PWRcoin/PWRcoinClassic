@@ -1051,7 +1051,8 @@ unsigned int ComputeMaxBits(CBigNum bnTargetLimit, unsigned int nBase, int64_t n
 //
 unsigned int ComputeMinWork(unsigned int nBase, int64_t nTime)
 {
-    return ComputeMaxBits(bnProofOfWorkLimit, nBase, nTime);
+    CBigNum actualTargetLimit = !fTestNet ? bnProofOfWorkLimit : bnProofOfWorkLimitTestNet;
+    return ComputeMaxBits(actualTargetLimit, nBase, nTime);
 }
 
 //
@@ -1074,7 +1075,8 @@ const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfSta
 
 static unsigned int GetNextTargetRequired_(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
-    CBigNum bnTargetLimit = fProofOfStake ? bnProofOfStakeLimit : bnProofOfWorkLimit;
+    CBigNum actualTargetLimit = !fTestNet ? bnProofOfWorkLimit : bnProofOfWorkLimitTestNet;
+    CBigNum bnTargetLimit = fProofOfStake ? bnProofOfStakeLimit : actualTargetLimit;
 
     if (pindexLast == NULL)
         return bnTargetLimit.GetCompact(); // genesis block
@@ -1114,8 +1116,10 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
     CBigNum bnTarget;
     bnTarget.SetCompact(nBits);
 
+    CBigNum actualTargetLimit = !fTestNet ? bnProofOfWorkLimit : bnProofOfWorkLimitTestNet;
+
     // Check range
-    if (bnTarget <= 0 || bnTarget > bnProofOfWorkLimit)
+    if (bnTarget <= 0 || bnTarget > actualTargetLimit)
         return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
@@ -1174,16 +1178,6 @@ void CBlock::UpdateTime(const CBlockIndex* pindexPrev)
 {
     nTime = max(GetBlockTime(), GetAdjustedTime());
 }
-
-
-
-
-
-
-
-
-
-
 
 bool CTransaction::DisconnectInputs(CTxDB& txdb)
 {
@@ -2511,20 +2505,28 @@ bool LoadBlockIndex(bool fAllowNew)
 
     //
     // Init with genesis block
+    //  TestNet Code Thanks to nemo83 - https://github.com/nemo83
+    //  TestNet integration into PWRcoin - plainkoin
     //
     if (mapBlockIndex.empty())
     {
         if (!fAllowNew)
             return false;
+	
+	CTransaction txNew;
+	CBlock block;
+
+	if(!fTestNet)
+	{
 
         const char* pszTimestamp = "cogito ergo sum";
-        CTransaction txNew;
+        //CTransaction txNew;
         txNew.nTime = 1462298970;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
         txNew.vout[0].SetEmpty();
-        CBlock block;
+        //CBlock block;
         block.vtx.push_back(txNew);
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
@@ -2532,25 +2534,44 @@ bool LoadBlockIndex(bool fAllowNew)
         block.nTime    = 1462298970; 
         block.nBits    = bnProofOfWorkLimit.GetCompact();
         block.nNonce   = 275071;
-        if(fTestNet)
+	}
+		else
         {
-            block.nNonce   = 0;
+        const char* pszTimestamp = "Knowledge is PWR - Testnet";
+        //CTransaction txNew;
+        txNew.nTime = 1523218187;
+        txNew.vin.resize(1);
+        txNew.vout.resize(1);
+        txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+        txNew.vout[0].SetEmpty();
+        //CBlock block;
+        block.vtx.push_back(txNew);
+        block.hashPrevBlock = 0;
+        block.hashMerkleRoot = block.BuildMerkleTree();
+        block.nVersion = 1;
+        block.nTime    = 1523218187;
+        block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
+        block.nNonce   = 0;
         }
-        if (false  && (block.GetHash() != hashGenesisBlock)) {
 
-        // This will figure out a valid hash and Nonce if you're
-        // creating a different genesis block:
-            uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
-            while (block.GetHash() > hashTarget)
-               {
-                   ++block.nNonce;
-                   if (block.nNonce == 0)
-                   {
-                       printf("NONCE WRAPPED, incrementing time");
-                       ++block.nTime;
-                   }
-               }
-        }
+	uint256 actualGenesisBlock = !fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet;
+
+        if (block.GetHash() != actualGenesisBlock) {
+            // This will figure out a valid hash and Nonce if you're
+            // creating a different genesis block:
+             uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
+             while (block.GetHash() > hashTarget)
+        
+		{
+                ++block.nNonce;
+                if (block.nNonce == 0)
+                {
+                    printf("NONCE WRAPPED, incrementing time");
+                    ++block.nTime;
+                }
+            }
+	}
+
         block.print();
         printf("block.GetHash() == %s\n", block.GetHash().ToString().c_str());
         printf("block.hashMerkleRoot == %s\n", block.hashMerkleRoot.ToString().c_str());
@@ -2558,10 +2579,21 @@ bool LoadBlockIndex(bool fAllowNew)
         printf("block.nNonce = %u \n", block.nNonce);
 
         //// debug print
-        assert(block.hashMerkleRoot == uint256("0x619de95fad57b2886dc74d8f5995c2d9d2197958aeb69dc5abf99fe26628dac4"));
-        block.print();
-        assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));
+       
+         if(!fTestNet)
+        {
+            assert(block.hashMerkleRoot == uint256("0x00000b78589fe157df10d1ad5de457ed0c5d3877041aa8172df2111a2d0e4267"));
+        }
+        else
+        {
+            assert(block.hashMerkleRoot == uint256("0x619de95fad57b2886dc74d8f5995c2d9d2197958aeb69dc5abf99fe26628dac4"));
+        }
+
+	block.print();
+        assert(block.GetHash() == actualGenesisBlock);
         assert(block.CheckBlock());
+
+
         // Start new block file
         unsigned int nFile;
         unsigned int nBlockPos;
