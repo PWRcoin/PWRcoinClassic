@@ -976,14 +976,26 @@ int64_t GetProofOfWorkReward(int64_t nFees)
         nSubsidy = 350 * COIN; 
     } else if(pindexBest->nHeight < 86400) { 
         nSubsidy = 230 * COIN; 
-    } 
 
     // Re-enable POW at FORK1
-    if(pindexBest->nHeight > FORK1_BLOCK) {
-        nSubsidy = 230 * COIN;
-    }
+    } else if(pindexBest->nHeight >= FORK1_BLOCK) { // Bonus POW begins at fork block
+        nSubsidy = 5000 * COIN; 
+    } else if(pindexBest->nHeight >= 993600) { // Tier 1 POW begins 3 months post fork
+        nSubsidy = 2500 * COIN; 
+    } else if(pindexBest->nHeight >= 1123200) { // Tier 2 POW begins 6 months post fork
+        nSubsidy = 1250 * COIN;
+    } else if(pindexBest->nHeight >= 1389600) { // Tier 3 POW begins 1 year post fork
+        nSubsidy = 750 * COIN;
+    } else if(pindexBest->nHeight >= 1915200) { // Tier 4 POW begins 2 years post fork
+        nSubsidy = 500 * COIN;
+    } else if(pindexBest->nHeight >= 2440800) { // Tier 5 POW begins 3 years post fork
+        nSubsidy = 400 * COIN;
+    } else if(pindexBest->nHeight >= 2966400) { // Tier 6 POW begins 3 years post fork
+        nSubsidy = 300 * COIN;
+    } else if(pindexBest->nHeight >= 3492000) { // Tier 7 POW begins 5 years post fork
+        nSubsidy = 200 * COIN;
 
-    if (fDebug && GetBoolArg("-printcreation"))
+    } if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfWorkReward() : create=%s nSubsidy=%" PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
 
     return nSubsidy + nFees;
