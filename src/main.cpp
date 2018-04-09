@@ -968,12 +968,22 @@ uint256 WantedByOrphan(const CBlock* pblockOrphan)
 int64_t GetProofOfWorkReward(int64_t nFees)
 {
     int64_t nSubsidy = 0 * COIN;
-        if(pindexBest->nHeight < 10) { nSubsidy = 2500000 * COIN; } // airdrop
-         else if(pindexBest->nHeight < 100) { nSubsidy = 0 * COIN; } // zero reward
-          else if(pindexBest->nHeight < 43200) { nSubsidy = 350 * COIN; } // Month 1 approx 15085000
-           else if(pindexBest->nHeight < 86400) { nSubsidy = 230 * COIN; } // Month 2 approx 9936000
+    if(pindexBest->nHeight < 10) { 
+        nSubsidy = 2500000 * COIN; 
+    } else if(pindexBest->nHeight < 100) { 
+        nSubsidy = 0 * COIN; 
+    } else if(pindexBest->nHeight < 43200) { 
+        nSubsidy = 350 * COIN; 
+    } else if(pindexBest->nHeight < 86400) { 
+        nSubsidy = 230 * COIN; 
+    } 
 
-       if (fDebug && GetBoolArg("-printcreation"))
+    // Re-enable POW at FORK1
+    if(pindexBest->nHeight > FORK1_BLOCK) {
+        nSubsidy = 230 * COIN;
+    }
+
+    if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfWorkReward() : create=%s nSubsidy=%" PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
 
     return nSubsidy + nFees;
@@ -1019,8 +1029,15 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     }
     else
     {
-    nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
+        // TODO REVIEW THIS
+        if(pindexBest->nHeight > FORK1_BLOCK)
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD / 365;
+        else
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
     }
+
+    if (fDebug && GetBoolArg("-printcreation", false))
+        printf("GetProofOfStakeReward(): create=%s nCoinAge=%" PRId64" nFees=%s\n", FormatMoney(nSubsidy).c_str(), nCoinAge,FormatMoney(nFees).c_str());
 
     return nSubsidy + nFees;
 }
@@ -1040,6 +1057,7 @@ unsigned int ComputeMaxBits(CBigNum bnTargetLimit, unsigned int nBase, int64_t n
         bnResult *= 2;
         nTime -= 24 * 60 * 60;
     }
+
     if (bnResult > bnTargetLimit)
         bnResult = bnTargetLimit;
     return bnResult.GetCompact();
@@ -1080,6 +1098,10 @@ static unsigned int GetNextTargetRequired_(const CBlockIndex* pindexLast, bool f
 
     if (pindexLast == NULL)
         return bnTargetLimit.GetCompact(); // genesis block
+
+    // fix difficulty for moving chain again at FORK1
+    if (pindexLast->nHeight == FORK1_BLOCK)
+       return bnTargetLimit.GetCompact(); 
 
     const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
     if (pindexPrev->pprev == NULL)
@@ -1925,6 +1947,7 @@ bool CTransaction::GetCoinAge(CTxDB& txdb, uint64_t& nCoinAge) const
             printf("coin age nValueIn=%" PRId64" nTimeDiff=%d bnCentSecond=%s\n", nValueIn, nTime - txPrev.nTime, bnCentSecond.ToString().c_str());
     }
 
+    // TODO THIS MAY NEED TO BE ADDJUSTED WITH EXTRA / COIN
     CBigNum bnCoinDay = bnCentSecond * CENT / (24 * 60 * 60);
     if (fDebug && GetBoolArg("-printcoinage"))
         printf("coin age bnCoinDay=%s\n", bnCoinDay.ToString().c_str());
@@ -2128,7 +2151,8 @@ bool CBlock::AcceptBlock()
     CBlockIndex* pindexPrev = (*mi).second;
     int nHeight = pindexPrev->nHeight+1;
 
-    if (IsProofOfWork() && nHeight > LAST_POW_BLOCK)
+    // Re-enable at FORK1
+    if (IsProofOfWork() && nHeight > LAST_POW_BLOCK && nHeight < FORK1_BLOCK)
         return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
 
     if (IsProofOfStake() && nHeight < MODIFIER_INTERVAL_SWITCH)
@@ -2887,17 +2911,17 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
         CAddress addrFrom;
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
-        if (pfrom->nVersion < MIN_PROTO_VERSION)
+        
+        if (pfrom->nVersion < MIN_PROTO_VERSION || (pindexBest->nHeight > FORK1_BLOCK && pfrom->nVersion < MIN_PROTO_VERSION_FORK1 ))
         {
-            // Since February 20, 2012, the protocol is initiated at version 209,
-            // and earlier versions are no longer supported
             printf("partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString().c_str(), pfrom->nVersion);
             pfrom->fDisconnect = true;
             return false;
         }
 
-        if (pfrom->nVersion == 10300)
-            pfrom->nVersion = 300;
+        // TODO why is this needed ?
+        if (pfrom->nVersion == 10300) pfrom->nVersion = 300;
+        
         if (!vRecv.empty())
             vRecv >> addrFrom >> nNonce;
         if (!vRecv.empty())

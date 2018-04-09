@@ -28,6 +28,7 @@ class CRequestTracker;
 class CNode;
 
 static const int LAST_POW_BLOCK = 86400;
+static const int FORK1_BLOCK = 840000; // Proposed Fork Height May 1 2018
 
 static const unsigned int MAX_BLOCK_SIZE = 8000000;
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
@@ -126,13 +127,6 @@ uint256 WantedByOrphan(const CBlock* pblockOrphan);
 const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfStake);
 void StakeMiner(CWallet *pwallet);
 void ResendWalletTransactions(bool fForce = false);
-
-
-
-
-
-
-
 
 
 
@@ -244,8 +238,6 @@ public:
         printf("%s\n", ToString().c_str());
     }
 };
-
-
 
 
 /** An input of a transaction.  It contains the location of the previous
