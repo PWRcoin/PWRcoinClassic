@@ -990,7 +990,7 @@ int64_t GetProofOfWorkReward(int64_t nFees)
         nSubsidy = 500 * COIN;
     } else if(pindexBest->nHeight >= 2440800) { // Tier 5 POW begins 3 years post fork
         nSubsidy = 400 * COIN;
-    } else if(pindexBest->nHeight >= 2966400) { // Tier 6 POW begins 3 years post fork
+    } else if(pindexBest->nHeight >= 2966400) { // Tier 6 POW begins 4 years post fork
         nSubsidy = 300 * COIN;
     } else if(pindexBest->nHeight >= 3492000) { // Tier 7 POW begins 5 years post fork
         nSubsidy = 200 * COIN;
