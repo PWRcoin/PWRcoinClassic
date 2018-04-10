@@ -2669,12 +2669,12 @@ bool LoadBlockIndex(bool fAllowNew)
        
          if(!fTestNet)
         {
-            assert(block.hashMerkleRoot == uint256("0x00000b78589fe157df10d1ad5de457ed0c5d3877041aa8172df2111a2d0e4267"));
+            assert(block.hashMerkleRoot == uint256("0x619de95fad57b2886dc74d8f5995c2d9d2197958aeb69dc5abf99fe26628dac4"));
         }
         else
         {
-            assert(block.hashMerkleRoot == uint256("0x619de95fad57b2886dc74d8f5995c2d9d2197958aeb69dc5abf99fe26628dac4"));
-        }
+            assert(block.hashMerkleRoot == uint256("0x00000b78589fe157df10d1ad5de457ed0c5d3877041aa8172df2111a2d0e4267"));
+        }                                                //Testnet Hash
 
 	block.print();
         assert(block.GetHash() == actualGenesisBlock);
