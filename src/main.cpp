@@ -995,6 +995,7 @@ uint256 WantedByOrphan(const CBlock* pblockOrphan)
 int64_t GetProofOfWorkReward(int64_t nFees)
 {
     int64_t nSubsidy = 0 * COIN;
+
     if(pindexBest->nHeight < 10) { 
         nSubsidy = 2500000 * COIN; 
     } else if(pindexBest->nHeight < 100) { 
@@ -1021,8 +1022,24 @@ int64_t GetProofOfWorkReward(int64_t nFees)
         nSubsidy = 300 * COIN;
     } else if(pindexBest->nHeight >= 3492000) { // Tier 7 POW begins 5 years post fork
         nSubsidy = 200 * COIN;
+    } 
 
-    } if (fDebug && GetBoolArg("-printcreation"))
+    if(fTestNet)
+    {
+        if(pindexBest->nHeight < 10) {
+            nSubsidy = 50000000 * COIN; // 50M
+        } else if(pindexBest->nHeight < 20) {
+            nSubsidy = 25000000 * COIN; // 25M
+        } else if(pindexBest->nHeight < 50) {
+            nSubsidy = 0 * COIN; // TEST PROOF OF STAKE WITHOUT POW
+        } else if(pindexBest->nHeight >= FORK1_BLOCK) { // Bonus POW begins at fork block
+            nSubsidy = 5000 * COIN;
+        } else if(pindexBest->nHeight >= FORK1_BLOCK+10) { // Tier 1 POW begins 3 months post fork
+            nSubsidy = 200 * COIN;
+        }
+    }
+
+    if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfWorkReward() : create=%s nSubsidy=%" PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
 
     return nSubsidy + nFees;
