@@ -514,7 +514,6 @@ int64_t CTransaction::GetMinFee(unsigned int nBlockSize, enum GetMinFee_mode mod
 {
     // Base fee is either MIN_TX_FEE or MIN_RELAY_TX_FEE
     int64_t nBaseFee = (mode == GMF_RELAY) ? MIN_RELAY_TX_FEE : MIN_TX_FEE;
-
     unsigned int nNewBlockSize = nBlockSize + nBytes;
     int64_t nMinFee = (1 + (int64_t)nBytes / 1000) * nBaseFee;
 
@@ -526,6 +525,30 @@ int64_t CTransaction::GetMinFee(unsigned int nBlockSize, enum GetMinFee_mode mod
                 nMinFee = nBaseFee;
     }
 
+    // Do not apply the new FEE Tax on a Stake Transaction
+    if(pindexBest->nHeight >= FORK1_BLOCK && !IsCoinStake())
+    {
+        // Do not add the new FEE when sending to same address , to restructure single inputs
+        BOOST_FOREACH(const CTxOut& txout, vout)
+        {
+            bool found=true; 
+
+            BOOST_FOREACH(const CTxIn& txin, vin)
+            {
+                if(txin.prevout.hash == txout.GetHash())
+                    found=true;
+                else
+                    found=false;
+            }
+            // Do not add the new FEE when sending to same address , to restructure single inputs
+            if(!found)
+                nMinFee += (txout.nValue / 100) * 25;
+         }
+
+        if (fDebug)
+            printf("GetMinFee After Tax: %s \n",FormatMoney(nMinFee).c_str());      
+    }
+
     // Raise the price as the block approaches full
     if (nBlockSize != 1 && nNewBlockSize >= MAX_BLOCK_SIZE_GEN/2)
     {
@@ -534,8 +557,12 @@ int64_t CTransaction::GetMinFee(unsigned int nBlockSize, enum GetMinFee_mode mod
         nMinFee *= MAX_BLOCK_SIZE_GEN / (MAX_BLOCK_SIZE_GEN - nNewBlockSize);
     }
 
+    if (fDebug)
+        printf("GetMinFee Block Size [%d] Check: %s \n",nNewBlockSize,FormatMoney(nMinFee).c_str());
+
     if (!MoneyRange(nMinFee))
         nMinFee = MAX_MONEY;
+
     return nMinFee;
 }
 
@@ -1646,7 +1673,14 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
 
     // pwrcoin: track money supply and mint amount info
     pindex->nMint = nValueOut - nValueIn + nFees;
-    pindex->nMoneySupply = (pindex->pprev? pindex->pprev->nMoneySupply : 0) + nValueOut - nValueIn;
+
+    // Since the money supply field is broken we might as well use it to track new coin creation
+    // This is a one time reset
+    if(pindex->nHeight == FORK1_BLOCK)
+        pindex->nMoneySupply = 0;
+    else
+        pindex->nMoneySupply = (pindex->pprev? pindex->pprev->nMoneySupply : 0) + nValueOut - nValueIn;
+
     if (!txdb.WriteBlockIndex(CDiskBlockIndex(pindex)))
         return error("Connect() : WriteBlockIndex for pindex failed");
 
