@@ -383,8 +383,6 @@ bool AppInit2()
 
     nDerivationMethodIndex = 0;
 
-    fTestNet = GetBoolArg("-testnet", false);
-
     if (mapArgs.count("-bind")) {
         // when specifying an explicit binding address, you want to listen on it
         // even when -connect or -proxy is specified
