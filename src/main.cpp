@@ -1412,8 +1412,6 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs, map<uint256, CTx
             for (unsigned int i = 0; i < vout.size(); i++) {
                 if (vout[i].scriptPubKey[1] == OP_BURN) {
                     nBurnCoins += vout[i].nValue;
-                    if (fDebug)
-                        printf("ConnectInputs() : burning coins %" PRId64"\n", vout[i].nValue);
                 }
             }
 
