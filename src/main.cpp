@@ -533,8 +533,8 @@ int64_t CTransaction::GetMinFee(unsigned int nBlockSize, enum GetMinFee_mode mod
         nMinFee *= MAX_BLOCK_SIZE_GEN / (MAX_BLOCK_SIZE_GEN - nNewBlockSize);
     }
 
-    if (fDebug)
-        printf("GetMinFee Block Size [%d] Check: %s \n",nNewBlockSize,FormatMoney(nMinFee).c_str());
+    //if (fDebug)
+    //printf("GetMinFee Block Size [%d] Check: %s \n",nNewBlockSize,FormatMoney(nMinFee).c_str());
 
     if (!MoneyRange(nMinFee))
         nMinFee = MAX_MONEY;
