@@ -1365,12 +1365,22 @@ bool CWallet::SelectCoinsSimple(int64_t nTargetValue, unsigned int nSpendTime, i
 bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, const CCoinControl* coinControl)
 {
     int64_t nValue = 0;
+    uint64_t nCoinBurn  = 0;
+    bool isFork1 = pindexBest->nHeight > FORK1_BLOCK;
+
     BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
     {
         if (nValue < 0)
             return false;
-        nValue += s.second;
+        
+        if(isFork1){
+            nCoinBurn += ((s.second * 100) / 10) ; // 10 % COIN BURN
+            nValue    += ((s.second * 100) / 90 );
+        } else {
+            nValue += s.second;
+        }
     }
+
     if (vecSend.empty() || nValue < 0)
         return false;
 
@@ -1388,24 +1398,41 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
                 wtxNew.vout.clear();
                 wtxNew.fFromMe = true;
 
-                int64_t nTotalValue = nValue + nFeeRet;
+                // We add back the coin burn value because nTotalValue is used by SelectCoins to find Inputs !!
+                int64_t nTotalValue = nValue + nCoinBurn + nFeeRet;
                 double dPriority = 0;
-                // vouts to the payees
-                BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
+
+                // ADD COIN BURN HERE
+                if(isFork1)
+                {
+                    CScript scriptBurnPubKey = CScript() << OP_RETURN << OP_BURN;
+                    wtxNew.vout.push_back(CTxOut(nCoinBurn, scriptBurnPubKey));
+                    if(fDebug)
+                        printf("CreateTransaction: added coin burn for %" PRId64" nTotalValue=%" PRId64"\n",nCoinBurn, nTotalValue);
+
+                    // ADD vouts to Payees ( 10% coinburn subtracted )
+                    BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
+                        wtxNew.vout.push_back(CTxOut(((s.second * 100) / 90), s.first));
+
+                } else {
+                    BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
                     wtxNew.vout.push_back(CTxOut(s.second, s.first));
+                }
 
                 // Choose coins to use
                 set<pair<const CWalletTx*,unsigned int> > setCoins;
                 int64_t nValueIn = 0;
                 if (!SelectCoins(nTotalValue, wtxNew.nTime, setCoins, nValueIn, coinControl))
                     return false;
+                
                 BOOST_FOREACH(PAIRTYPE(const CWalletTx*, unsigned int) pcoin, setCoins)
                 {
                     int64_t nCredit = pcoin.first->vout[pcoin.second].nValue;
                     dPriority += (double)nCredit * pcoin.first->GetDepthInMainChain();
                 }
-
-                int64_t nChange = nValueIn - nValue - nFeeRet;
+                
+                // nCoinBurn needs to be added or else the nChange will include it.
+                int64_t nChange = nValueIn - nValue - nCoinBurn - nFeeRet;
                 // if sub-cent change is required, the fee must be raised to at least MIN_TX_FEE
                 // or until nChange becomes zero
                 // NOTE: this depends on the exact behaviour of GetMinFee

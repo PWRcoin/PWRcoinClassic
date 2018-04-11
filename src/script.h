@@ -192,7 +192,8 @@ enum opcodetype
     OP_NOP9 = 0xb8,
     OP_NOP10 = 0xb9,
 
-
+    // extra control funcion
+    OP_BURN = 0xd0,
 
     // template matching params
     OP_SMALLINTEGER = 0xfa,
