@@ -41,11 +41,11 @@ CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 CBigNum bnProofOfWorkLimitTestNet(~uint256(0) >> 16);
 
 unsigned int nTargetSpacing = 60; // 60 seconds
-unsigned int nStakeMinAge = 8 * 60 * 60 ; // 8 hours
+unsigned int nStakeMinAge = 30 * 60 ; // 8hrs for MAINNET 8 * 60 * 60
 unsigned int nStakeMaxAge = -1;           //unlimited
 unsigned int nModifierInterval = 10 * 60 ; // time to elapse before new modifier is computed
 
-int nCoinbaseMaturity = 20;
+int nCoinbaseMaturity = 6; // 20 for mainnet 
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 
@@ -1028,14 +1028,12 @@ int64_t GetProofOfWorkReward(int64_t nFees)
     {
         if(pindexBest->nHeight < 10) {
             nSubsidy = 50000000 * COIN; // 50M
-        } else if(pindexBest->nHeight < 20) {
-            nSubsidy = 25000000 * COIN; // 25M
         } else if(pindexBest->nHeight < 50) {
+            nSubsidy = 25000000 * COIN; // 25M
+        } else if(pindexBest->nHeight < FORK1_BLOCK) {
             nSubsidy = 0 * COIN; // TEST PROOF OF STAKE WITHOUT POW
         } else if(pindexBest->nHeight >= FORK1_BLOCK) { // Bonus POW begins at fork block
             nSubsidy = 5000 * COIN;
-        } else if(pindexBest->nHeight >= FORK1_BLOCK+10) { // Tier 1 POW begins 3 months post fork
-            nSubsidy = 200 * COIN;
         }
     }
 
