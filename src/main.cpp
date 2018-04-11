@@ -525,30 +525,6 @@ int64_t CTransaction::GetMinFee(unsigned int nBlockSize, enum GetMinFee_mode mod
                 nMinFee = nBaseFee;
     }
 
-    // Do not apply the new FEE Tax on a Stake Transaction
-    if(pindexBest->nHeight >= FORK1_BLOCK && !IsCoinStake())
-    {
-        // Do not add the new FEE when sending to same address , to restructure single inputs
-        BOOST_FOREACH(const CTxOut& txout, vout)
-        {
-            bool found=true; 
-
-            BOOST_FOREACH(const CTxIn& txin, vin)
-            {
-                if(txin.prevout.hash == txout.GetHash())
-                    found=true;
-                else
-                    found=false;
-            }
-            // Do not add the new FEE when sending to same address , to restructure single inputs
-            if(!found)
-                nMinFee += (txout.nValue / 100) * 25;
-         }
-
-        if (fDebug)
-            printf("GetMinFee After Tax: %s \n",FormatMoney(nMinFee).c_str());      
-    }
-
     // Raise the price as the block approaches full
     if (nBlockSize != 1 && nNewBlockSize >= MAX_BLOCK_SIZE_GEN/2)
     {
