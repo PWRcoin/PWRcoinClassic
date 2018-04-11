@@ -1374,8 +1374,11 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
             return false;
         
         if(isFork1){
-            nCoinBurn += ((s.second * 100) / 10) ; // 10 % COIN BURN
-            nValue    += ((s.second * 100) / 90 );
+            nCoinBurn += ((s.second * 10) / 100) ; // 10 % COIN BURN
+            nValue    += ((s.second * 90) / 100 );
+
+           if(fDebug) printf("CreateTransaction:1 tx.value=%s nCoinBurn=%s nValue=%s\n", FormatMoney(s.second).c_str(), FormatMoney(nCoinBurn).c_str(), FormatMoney(nValue).c_str());
+ 
         } else {
             nValue += s.second;
         }
@@ -1399,6 +1402,8 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
                 wtxNew.fFromMe = true;
 
                 // We add back the coin burn value because nTotalValue is used by SelectCoins to find Inputs !!
+                if(fDebug) printf("CreateTransaction:2 nFeeRet=%s\n",FormatMoney(nFeeRet).c_str());
+
                 int64_t nTotalValue = nValue + nCoinBurn + nFeeRet;
                 double dPriority = 0;
 
@@ -1408,11 +1413,11 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
                     CScript scriptBurnPubKey = CScript() << OP_RETURN << OP_BURN;
                     wtxNew.vout.push_back(CTxOut(nCoinBurn, scriptBurnPubKey));
                     if(fDebug)
-                        printf("CreateTransaction: added coin burn for %" PRId64" nTotalValue=%" PRId64"\n",nCoinBurn, nTotalValue);
+                        printf("CreateTransaction:3 added coin burn for %s  nTotalValue=%s\n",FormatMoney(nCoinBurn).c_str(), FormatMoney(nTotalValue).c_str());
 
                     // ADD vouts to Payees ( 10% coinburn subtracted )
                     BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
-                        wtxNew.vout.push_back(CTxOut(((s.second * 100) / 90), s.first));
+                        wtxNew.vout.push_back(CTxOut(((s.second * 90) / 100), s.first));
 
                 } else {
                     BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
@@ -1433,6 +1438,8 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
                 
                 // nCoinBurn needs to be added or else the nChange will include it.
                 int64_t nChange = nValueIn - nValue - nCoinBurn - nFeeRet;
+                if(fDebug) printf("CreateTransaction:4 nValueIn=%s nChange=%s\n",FormatMoney(nValueIn).c_str(),FormatMoney(nChange).c_str());
+
                 // if sub-cent change is required, the fee must be raised to at least MIN_TX_FEE
                 // or until nChange becomes zero
                 // NOTE: this depends on the exact behaviour of GetMinFee
