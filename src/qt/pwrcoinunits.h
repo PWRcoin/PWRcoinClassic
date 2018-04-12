@@ -17,8 +17,6 @@ public:
      */
     enum Unit
     { 
-        BPWR,
-        MPWR,
         PWR,
         mPWR,
         uPWR

@@ -11,8 +11,6 @@ pwrcoinUnits::pwrcoinUnits(QObject *parent):
 QList<pwrcoinUnits::Unit> pwrcoinUnits::availableUnits()
 {
     QList<pwrcoinUnits::Unit> unitlist;
-    unitlist.append(BPWR);
-    unitlist.append(MPWR);
     unitlist.append(PWR);
     unitlist.append(mPWR);
     unitlist.append(uPWR);
@@ -23,8 +21,6 @@ bool pwrcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case BPWR:
-    case MPWR:
     case PWR:
     case mPWR:
     case uPWR:
@@ -38,8 +34,6 @@ QString pwrcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case BPWR: return QString("BPWR");
-    case MPWR: return QString("MPWR");
     case PWR: return QString("PWR");
     case mPWR: return QString("mPWR");
     case uPWR: return QString::fromUtf8("μPWR");
@@ -51,8 +45,6 @@ QString pwrcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BPWR: return QString("Mega-pwrcoins ( 1,000,000,000 )");
-    case MPWR: return QString("Mega-pwrcoins ( 1,000,000 )");
     case PWR: return QString("pwrcoins");
     case mPWR: return QString("Milli-pwrcoins (1 / 1,000)");
     case uPWR: return QString("Micro-pwrcoins (1 / 1,000,000)");
@@ -64,8 +56,6 @@ qint64 pwrcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case BPWR: return 100000000000000000;
-    case MPWR: return 100000000000000;
     case PWR:  return 100000000;
     case mPWR: return 100000;
     case uPWR: return 100;
@@ -77,8 +67,6 @@ int pwrcoinUnits::amountDigits(int unit)
 {
     switch(unit)
     {
-    case BPWR: return 8;
-    case MPWR: return 8;
     case PWR: return  8; // 21,000,000 (# digits, without commas)
     case mPWR: return 11; // 21,000,000,000
     case uPWR: return 14; // 21,000,000,000,000
@@ -90,8 +78,6 @@ int pwrcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case BPWR: return 0;
-    case MPWR: return 0;
     case PWR: return 8;
     case mPWR: return 5;
     case uPWR: return 2;
