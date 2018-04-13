@@ -1011,10 +1011,6 @@ void CWallet::ResendWalletTransactions(bool fForce)
 }
 
 
-
-
-
-
 //////////////////////////////////////////////////////////////////////////////
 //
 // Actions
@@ -1368,24 +1364,25 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
     uint64_t nCoinBurn  = 0;
     bool isFork1 = pindexBest->nHeight > FORK1_BLOCK;
 
+    // Lets avoid doing work if no sender is specified
+    if (vecSend.empty()) return false;
+    
     BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
     {
-        if (nValue < 0)
-            return false;
+        // negative values not allowed
+        if (nValue < 0) return false;
         
-        if(isFork1){
+        if(isFork1 && !::IsMine(*this,s.first)){
             nCoinBurn += ((s.second * 10) / 100) ; // 10 % COIN BURN
             nValue    += ((s.second * 90) / 100 );
-
-           if(fDebug) printf("CreateTransaction:1 tx.value=%s nCoinBurn=%s nValue=%s\n", FormatMoney(s.second).c_str(), FormatMoney(nCoinBurn).c_str(), FormatMoney(nValue).c_str());
- 
         } else {
-            nValue += s.second;
+           nValue += s.second;
         }
+        if(fDebug) printf("CreateTransaction:1 send=%s tx.value=%s nCoinBurn=%s nValue=%s\n", s.first.ToString(), FormatMoney(s.second).c_str(), FormatMoney(nCoinBurn).c_str(), FormatMoney(nValue).c_str());
     }
 
-    if (vecSend.empty() || nValue < 0)
-        return false;
+    // Negative values not allowed
+    if (nValue < 0) return false;
 
     wtxNew.BindWallet(this);
 
@@ -1407,21 +1404,24 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
                 int64_t nTotalValue = nValue + nCoinBurn + nFeeRet;
                 double dPriority = 0;
 
-                // ADD COIN BURN HERE
-                if(isFork1)
+                // ADD COIN BURN WHEN NOT SENDING TO SELF
+                BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
                 {
-                    CScript scriptBurnPubKey = CScript() << OP_RETURN << OP_BURN;
-                    wtxNew.vout.push_back(CTxOut(nCoinBurn, scriptBurnPubKey));
-                    if(fDebug)
-                        printf("CreateTransaction:3 added coin burn for %s  nTotalValue=%s\n",FormatMoney(nCoinBurn).c_str(), FormatMoney(nTotalValue).c_str());
+                    if(isFork1 && !::IsMine(*this,s.first))
+                    {
+                        CScript scriptBurnPubKey = CScript();
+                        CpwrcoinAddress burnAddr("MT7H4664PzSRitgyEpzfU4LKV35gxwQGcP");
+                        scriptBurnPubKey.SetDestination(burnAddr.Get());
+                        wtxNew.vout.push_back(CTxOut(nCoinBurn, scriptBurnPubKey));
+                        if(fDebug)
+                            printf("CreateTransaction:3 added coin burn for %s  nTotalValue=%s\n",FormatMoney(nCoinBurn).c_str(), FormatMoney(nTotalValue).c_str());
 
-                    // ADD vouts to Payees ( 10% coinburn subtracted )
-                    BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
+                        // ADD vouts to Payee ( 10% coinburn subtracted )
                         wtxNew.vout.push_back(CTxOut(((s.second * 90) / 100), s.first));
 
-                } else {
-                    BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
-                    wtxNew.vout.push_back(CTxOut(s.second, s.first));
+                    } else {
+                        wtxNew.vout.push_back(CTxOut(s.second, s.first));
+                    }
                 }
 
                 // Choose coins to use

@@ -79,8 +79,11 @@ Value burn(const Array& params, bool fHelp)
             "<amount> is a real and is rounded to the nearest 0.00000001"
             + HelpRequiringPassphrase());
 
+    
+    // TODO SET correct burnaddress
+    CpwrcoinAddress burnAddr("MT7H4664PzSRitgyEpzfU4LKV35gxwQGcP");
     CScript scriptPubKey;
-    scriptPubKey = CScript() << OP_RETURN << OP_BURN;
+    scriptPubKey.SetDestination(burnAddr.Get());
 
     // Amount
     int64_t nAmount = AmountFromValue(params[0]);
