@@ -562,6 +562,7 @@ void StakeMiner(CWallet *pwallet)
             fTryToSync = false;
             if (vNodes.size() < 3 || nBestHeight < GetNumBlocksOfPeers())
             {
+                printf("StakeMiner: sleeping 1 min because of %d / [%d/%d] \n",vNodes.size(), nBestHeight, GetNumBlocksOfPeers());
                 MilliSleep(60000);
                 continue;
             }
@@ -571,6 +572,7 @@ void StakeMiner(CWallet *pwallet)
         // Create new block
         //
         int64_t nFees;
+
         auto_ptr<CBlock> pblock(CreateNewBlock(pwallet, true, &nFees));
         if (!pblock.get())
             return;
@@ -584,6 +586,8 @@ void StakeMiner(CWallet *pwallet)
             MilliSleep(500);
         }
         else
+        {
             MilliSleep(nMinerSleep);
+        }
     }
 }
