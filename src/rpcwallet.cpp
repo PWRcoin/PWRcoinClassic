@@ -81,7 +81,10 @@ Value burn(const Array& params, bool fHelp)
 
     
     // TODO SET correct burnaddress
-    CpwrcoinAddress burnAddr("MT7H4664PzSRitgyEpzfU4LKV35gxwQGcP");
+    CpwrcoinAddress burnAddr("69BURnBLrcKMwQmfFGFzz4r52scZvJpozs");
+    if(fTestNet)
+        burnAddr = CpwrcoinAddress("MT7H4664PzSRitgyEpzfU4LKV35gxwQGcP");
+
     CScript scriptPubKey;
     scriptPubKey.SetDestination(burnAddr.Get());
 

@@ -1362,7 +1362,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
 {
     int64_t nValue = 0;
     uint64_t nCoinBurn  = 0;
-    bool isFork1 = pindexBest->nHeight > FORK1_BLOCK;
+    bool isFork1 = false; // disabled for now pindexBest->nHeight > FORK1_BLOCK;
 
     // Lets avoid doing work if no sender is specified
     if (vecSend.empty()) return false;
@@ -1410,7 +1410,10 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
                     if(isFork1 && !::IsMine(*this,s.first))
                     {
                         CScript scriptBurnPubKey = CScript();
-                        CpwrcoinAddress burnAddr("MT7H4664PzSRitgyEpzfU4LKV35gxwQGcP");
+                        CpwrcoinAddress burnAddr("69BURnBLrcKMwQmfFGFzz4r52scZvJpozs");
+                        if(fTestNet)
+                        	burnAddr = CpwrcoinAddress("MT7H4664PzSRitgyEpzfU4LKV35gxwQGcP");
+                        
                         scriptBurnPubKey.SetDestination(burnAddr.Get());
                         wtxNew.vout.push_back(CTxOut(nCoinBurn, scriptBurnPubKey));
                         if(fDebug)
