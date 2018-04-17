@@ -2647,7 +2647,7 @@ bool LoadBlockIndex(bool fAllowNew)
        
          if(!fTestNet)
         {
-            assert(block.hashMerkleRoot == uint256("0xfadade880293d63543af06aefe24367d287470aaa458a39304fa5538a74f0fda"));
+            assert(block.hashMerkleRoot == uint256("0x619de95fad57b2886dc74d8f5995c2d9d2197958aeb69dc5abf99fe26628dac4"));
         }
         else
         {
