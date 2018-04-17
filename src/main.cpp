@@ -43,7 +43,7 @@ CBigNum bnProofOfWorkLimitTestNet(~uint256(0) >> 16);
 unsigned int nTargetSpacing = 60; // 60 seconds
 unsigned int nStakeMinAge = 30 * 60 ; // 8hrs for MAINNET 8 * 60 * 60
 unsigned int nStakeMaxAge = -1;           //unlimited
-unsigned int nModifierInterval = 10 * 60 ; // time to elapse before new modifier is computed
+unsigned int nModifierInterval = 60 ; // 10*60 on mainnet -- time to elapse before new modifier is computed
 
 int nCoinbaseMaturity = 6; // 20 for mainnet 
 CBlockIndex* pindexGenesisBlock = NULL;
@@ -1061,7 +1061,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     {
         // TODO REVIEW THIS
         if(pindexBest->nHeight > FORK1_BLOCK)
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD / 365;
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / ( 365 * 33 + 8) ;
         else
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
     }
@@ -1069,7 +1069,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     if(fTestNet)
     {
         if(pindexBest->nHeight > FORK1_BLOCK)
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD / 365;
+            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
         else
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
     }
@@ -1093,7 +1093,7 @@ unsigned int ComputeMaxBits(CBigNum bnTargetLimit, unsigned int nBase, int64_t n
     {
         // Maximum 200% adjustment per day...
         bnResult *= 2;
-        nTime -= 24 * 60 * 60;
+        nTime -= 1 * 60 * 60;
     }
 
     if (bnResult > bnTargetLimit)
@@ -1993,7 +1993,8 @@ bool CTransaction::GetCoinAge(CTxDB& txdb, uint64_t& nCoinAge) const
     }
 
     // TODO THIS MAY NEED TO BE ADDJUSTED WITH EXTRA / COIN
-    CBigNum bnCoinDay = bnCentSecond * CENT / (24 * 60 * 60);
+    //CBigNum bnCoinDay = bnCentSecond * CENT / (24 * 60 * 60);
+    CBigNum bnCoinDay = bnCentSecond * CENT / COIN / (24 * 60 * 60);
     if (fDebug && GetBoolArg("-printcoinage"))
         printf("coin age bnCoinDay=%s\n", bnCoinDay.ToString().c_str());
     nCoinAge = bnCoinDay.getuint64();
@@ -2058,8 +2059,8 @@ bool CBlock::AddToBlockIndex(unsigned int nFile, unsigned int nBlockPos, const u
         return error("AddToBlockIndex() : ComputeNextStakeModifier() failed");
     pindexNew->SetStakeModifier(nStakeModifier, fGeneratedStakeModifier);
     pindexNew->nStakeModifierChecksum = GetStakeModifierChecksum(pindexNew);
-    if (!CheckStakeModifierCheckpoints(pindexNew->nHeight, pindexNew->nStakeModifierChecksum))
-        return error("AddToBlockIndex() : Rejected by stake modifier checkpoint height=%d, modifier=0x%016" PRIx64, pindexNew->nHeight, nStakeModifier);
+    //if (!CheckStakeModifierCheckpoints(pindexNew->nHeight, pindexNew->nStakeModifierChecksum))
+    //    return error("AddToBlockIndex() : Rejected by stake modifier checkpoint height=%d, modifier=0x%016" PRIx64, pindexNew->nHeight, nStakeModifier);
 
     // Add to mapBlockIndex
     map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.insert(make_pair(hash, pindexNew)).first;
@@ -2409,7 +2410,10 @@ bool CBlock::SignBlock(CWallet& wallet, int64_t nFees)
     // if we are trying to sign
     //    something except proof-of-stake block template
     if (!vtx[0].vout[0].IsEmpty())
+    {
+        printf("SignBlock: not a proof-of-stake block.\n");
         return false;
+    }
 
     // if we are trying to sign
     //    a complete proof-of-stake block
@@ -2417,15 +2421,22 @@ bool CBlock::SignBlock(CWallet& wallet, int64_t nFees)
         return true;
 
     static int64_t nLastCoinStakeSearchTime = GetAdjustedTime(); // startup timestamp
-
+   
+    if(fTestNet) sleep(1); // sleep 1 seconds to kick start
+ 
     CKey key;
     CTransaction txCoinStake;
+    printf("SignBlock tx=%s\n",txCoinStake.ToString().c_str());
+
     int64_t nSearchTime = txCoinStake.nTime; // search to current time
+
+    printf("SignBlock nLastCoinStakeSearchTime=%" PRId64" nSearchTime=%" PRId64"\n",nLastCoinStakeSearchTime,nSearchTime);
 
     if (nSearchTime > nLastCoinStakeSearchTime)
     {
         if (wallet.CreateCoinStake(wallet, nBits, nSearchTime-nLastCoinStakeSearchTime, nFees, txCoinStake, key))
         {
+            printf("SignBlock GetPastLimitTime=%" PRId64" GetBlockTime=%" PRId64"\n",pindexBest->GetPastTimeLimit()+1,PastDrift(pindexBest->GetBlockTime()));
             if (txCoinStake.nTime >= max(pindexBest->GetPastTimeLimit()+1, PastDrift(pindexBest->GetBlockTime())))
             {
                 // make sure coinstake would meet timestamp protocol
@@ -2446,6 +2457,7 @@ bool CBlock::SignBlock(CWallet& wallet, int64_t nFees)
                 return key.Sign(GetHash(), vchBlockSig);
             }
         }
+        
         nLastCoinStakeSearchInterval = nSearchTime - nLastCoinStakeSearchTime;
         nLastCoinStakeSearchTime = nSearchTime;
     }
