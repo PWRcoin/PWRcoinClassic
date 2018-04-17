@@ -454,6 +454,9 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     //// debug print
     printf("CheckWork() : new proof-of-work block found  \n  hash: %s  \ntarget: %s\n", hashBlock.GetHex().c_str(), hashTarget.GetHex().c_str());
     pblock->print();
+    if(pblock->vtx[0].vout[0].nValue > MAX_MONEY)
+        return error("CheckWork() : block rejected because vout.nValue exceeds MAX_MONEY, split your inputs");
+
     printf("generated %s\n", FormatMoney(pblock->vtx[0].vout[0].nValue).c_str());
 
     // Found a solution
