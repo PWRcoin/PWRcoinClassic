@@ -1061,7 +1061,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     {
         // TODO REVIEW THIS
         if(pindexBest->nHeight > FORK1_BLOCK)
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / ( 365 * 33 + 8) ;
+            nSubsidy = nCoinAge * FORK1_COIN_YEAR_REWARD * 33 / ( 365 * 33 + 8) ;
         else
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
     }
@@ -1069,7 +1069,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     if(fTestNet)
     {
         if(pindexBest->nHeight > FORK1_BLOCK)
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
+            nSubsidy = nCoinAge * FORK1_COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
         else
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
     }
@@ -1093,7 +1093,10 @@ unsigned int ComputeMaxBits(CBigNum bnTargetLimit, unsigned int nBase, int64_t n
     {
         // Maximum 200% adjustment per day...
         bnResult *= 2;
-        nTime -= 1 * 60 * 60;
+        if(pindexBest->nHeight >= FORK1_BLOCK)
+            nTime -= 1 * 60 * 60;
+        else
+            nTime -= 24 * 60 * 60;
     }
 
     if (bnResult > bnTargetLimit)
@@ -1992,9 +1995,10 @@ bool CTransaction::GetCoinAge(CTxDB& txdb, uint64_t& nCoinAge) const
             printf("coin age nValueIn=%" PRId64" nTimeDiff=%d bnCentSecond=%s\n", nValueIn, nTime - txPrev.nTime, bnCentSecond.ToString().c_str());
     }
 
-    // TODO THIS MAY NEED TO BE ADDJUSTED WITH EXTRA / COIN
-    //CBigNum bnCoinDay = bnCentSecond * CENT / (24 * 60 * 60);
-    CBigNum bnCoinDay = bnCentSecond * CENT / COIN / (24 * 60 * 60);
+    CBigNum bnCoinDay = bnCentSecond * CENT / (24 * 60 * 60);
+    if(pindexBest->nHeight >= FORK1_BLOCK)
+       bnCoinDay = bnCentSecond * CENT / COIN / (24 * 60 * 60);
+
     if (fDebug && GetBoolArg("-printcoinage"))
         printf("coin age bnCoinDay=%s\n", bnCoinDay.ToString().c_str());
     nCoinAge = bnCoinDay.getuint64();
