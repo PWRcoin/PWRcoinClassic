@@ -1610,6 +1610,9 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
     set<pair<const CWalletTx*,unsigned int> > setCoins;
     int64_t nValueIn = 0;
+    
+    if (fDebug && GetBoolArg("-printcoinstake"))
+                    printf("CreateCoinStake : selecting coins balance=%" PRId64" txNew.nTime=%" PRId64" nValueIn=%" PRId64"\n",nBalance,txNew.nTime,nValueIn);
 
     // Select coins with suitable depth
     if (!SelectCoinsSimple(nBalance - nReserveBalance, txNew.nTime, nCoinbaseMaturity + 10, setCoins, nValueIn))
@@ -1617,6 +1620,9 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
 
     if (setCoins.empty())
         return false;
+
+    if (fDebug && GetBoolArg("-printcoinstake"))
+                    printf("CreateCoinStake : searching for blocks\n");
 
     int64_t nCredit = 0;
     CScript scriptPubKeyKernel;
@@ -1642,6 +1648,9 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         if (block.GetBlockTime() + nStakeMinAge > txNew.nTime - nMaxStakeSearchInterval)
             continue; // only count coins meeting min age requirement
 
+        if (fDebug && GetBoolArg("-printcoinstake"))
+                    printf("CreateCoinStake : found blocks with minStakeAge requirement...\n");
+
         bool fKernelFound = false;
         for (unsigned int n=0; n<min(nSearchInterval,(int64_t)nMaxStakeSearchInterval) && !fKernelFound && !fShutdown && pindexPrev == pindexBest; n++)
         {
@@ -1649,7 +1658,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             // Search nSearchInterval seconds back up to nMaxStakeSearchInterval
             uint256 hashProofOfStake = 0, targetProofOfStake = 0;
             COutPoint prevoutStake = COutPoint(pcoin.first->GetHash(), pcoin.second);
-            if (CheckStakeKernelHash(nBits, block, txindex.pos.nTxPos - txindex.pos.nBlockPos, *pcoin.first, prevoutStake, txNew.nTime - n, hashProofOfStake, targetProofOfStake))
+            if (CheckStakeKernelHash(nBits, block, txindex.pos.nTxPos - txindex.pos.nBlockPos, *pcoin.first, prevoutStake, txNew.nTime - n, hashProofOfStake, targetProofOfStake,GetBoolArg("-printcoinstake")))
             {
                 // Found a kernel
                 if (fDebug && GetBoolArg("-printcoinstake"))
@@ -1722,6 +1731,9 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             break; // if kernel is found stop searching
     }
 
+    if (fDebug && GetBoolArg("-printcoinstake"))
+                    printf("CreateCoinStake : checking credit=%" PRId64"\n",nCredit);
+
     if (nCredit == 0 || nCredit > nBalance - nReserveBalance)
         return false;
 
@@ -1761,12 +1773,17 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
         uint64_t nCoinAge;
         CTxDB txdb("r");
         if (!txNew.GetCoinAge(txdb, nCoinAge))
-            return error("CreateCoinStake : failed to calculate coin age");
+            return error("CreateCoinStake : failed to calculate coin age\n");
 
         int64_t nReward = GetProofOfStakeReward(nCoinAge, nFees);
         if (nReward <= 0)
+        {
+            if (fDebug && GetBoolArg("-printcoinstake"))
+                    printf("CreateCoinStake : stake POS reward is 0 PWR\n");
             return false;
-
+        }
+        if (fDebug && GetBoolArg("-printcoinstake"))
+                    printf("CreateCoinStake : stake POS reward is %" PRId64"\n",nReward);
         nCredit += nReward;
     }
 
@@ -1784,7 +1801,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     BOOST_FOREACH(const CWalletTx* pcoin, vwtxPrev)
     {
         if (!SignSignature(*this, *pcoin, txNew, nIn++))
-            return error("CreateCoinStake : failed to sign coinstake");
+            return error("CreateCoinStake : failed to sign coinstake...");
     }
 
     // Limit size
