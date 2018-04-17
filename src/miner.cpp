@@ -494,6 +494,13 @@ bool CheckStake(CBlock* pblock, CWallet& wallet)
     //// debug print
     printf("CheckStake() : new proof-of-stake block found  \n  hash: %s \nproofhash: %s  \ntarget: %s\n", hashBlock.GetHex().c_str(), proofHash.GetHex().c_str(), hashTarget.GetHex().c_str());
     pblock->print();
+
+    // When the coin entry approaches MAX_MONEY, the stake reward can push it over Money_range limit
+    // GetValueOut() will assert and crash the wallet.
+    // MAX_MONEY limit is now 1B, if you do exceed it, i will reject the block.
+    if(pblock->vtx[1].GetValueOut() > MAX_MONEY)
+	return error("CheckStake() : block rejected because GetValueOut() exceeds MAX_MONEY, split your inputs");
+
     printf("out %s\n", FormatMoney(pblock->vtx[1].GetValueOut()).c_str());
 
     // Found a solution
