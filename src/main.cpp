@@ -2583,6 +2583,7 @@ bool LoadBlockIndex(bool fAllowNew)
         const char* pszTimestamp = "cogito ergo sum";
         //CTransaction txNew;
         txNew.nTime = 1462298970;
+        //txNew.nTime = 1523895135;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2592,15 +2593,18 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1462298970; 
+        block.nTime    = 1462298970;
+        //block.nTime    = 1523895135; 
         block.nBits    = bnProofOfWorkLimit.GetCompact();
+        //block.nNonce   = 463227;
         block.nNonce   = 275071;
-	}
+	
+        }
 		else
         {
         const char* pszTimestamp = "Knowledge is PWR - Testnet";
         //CTransaction txNew;
-        txNew.nTime = 1523218187;
+        txNew.nTime = 1523895135;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2610,9 +2614,9 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1523218187;
+        block.nTime    = 1523895135;
         block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
-        block.nNonce   = 0;
+        block.nNonce   = 241605;
         }
 
 	uint256 actualGenesisBlock = !fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet;
@@ -2643,11 +2647,11 @@ bool LoadBlockIndex(bool fAllowNew)
        
          if(!fTestNet)
         {
-            assert(block.hashMerkleRoot == uint256("0x619de95fad57b2886dc74d8f5995c2d9d2197958aeb69dc5abf99fe26628dac4"));
+            assert(block.hashMerkleRoot == uint256("0xfadade880293d63543af06aefe24367d287470aaa458a39304fa5538a74f0fda"));
         }
         else
         {
-            assert(block.hashMerkleRoot == uint256("0x9b204861115762005ebd995801417fd3a030eb4c6d2a1f93c0755c68ffc2224c"));
+            assert(block.hashMerkleRoot == uint256("0xb8ee629d7bd64f7e84536154ef1cd4709d4a341007c03bbb731eb05333fab37d"));
         }                                                //Testnet Hash
 
 	block.print();
