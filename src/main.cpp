@@ -2607,7 +2607,6 @@ bool LoadBlockIndex(bool fAllowNew)
         const char* pszTimestamp = "cogito ergo sum";
         //CTransaction txNew;
         txNew.nTime = 1462298970;
-        //txNew.nTime = 1523895135;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2618,9 +2617,7 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
         block.nTime    = 1462298970;
-        //block.nTime    = 1523895135; 
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-        //block.nNonce   = 463227;
         block.nNonce   = 275071;
 	
         }
@@ -2628,7 +2625,7 @@ bool LoadBlockIndex(bool fAllowNew)
         {
         const char* pszTimestamp = "Knowledge is PWR - Testnet";
         //CTransaction txNew;
-        txNew.nTime = 1523895135;
+        txNew.nTime = 1524123885;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2638,9 +2635,9 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1523895135;
+        block.nTime    = 1524123885;
         block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
-        block.nNonce   = 241605;
+        block.nNonce   = 19254;
         }
 
 	uint256 actualGenesisBlock = !fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet;
@@ -2675,7 +2672,7 @@ bool LoadBlockIndex(bool fAllowNew)
         }
         else
         {
-            assert(block.hashMerkleRoot == uint256("0xb8ee629d7bd64f7e84536154ef1cd4709d4a341007c03bbb731eb05333fab37d"));
+            assert(block.hashMerkleRoot == uint256("0x52aaf9f60dfbb8ed2772c7fde0eac9d36746482d8bc59d77af62968107769861"));
         }                                                //Testnet Hash
 
 	block.print();
