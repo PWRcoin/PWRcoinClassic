@@ -2430,11 +2430,8 @@ bool CBlock::SignBlock(CWallet& wallet, int64_t nFees)
  
     CKey key;
     CTransaction txCoinStake;
-    printf("SignBlock tx=%s\n",txCoinStake.ToString().c_str());
 
     int64_t nSearchTime = txCoinStake.nTime; // search to current time
-
-    printf("SignBlock nLastCoinStakeSearchTime=%" PRId64" nSearchTime=%" PRId64"\n",nLastCoinStakeSearchTime,nSearchTime);
 
     if (nSearchTime > nLastCoinStakeSearchTime)
     {
