@@ -28,7 +28,7 @@ class CRequestTracker;
 class CNode;
 
 static const int LAST_POW_BLOCK = 86400;
-//static const int FORK1_BLOCK = 840000; // Proposed Fork Height May 1 2018
+//static const int FORK1_BLOCK = 823000; // Proposed Fork Height May 14 2018
 static const int FORK1_BLOCK = 100;
 
 static const unsigned int MAX_BLOCK_SIZE = 8000000;
@@ -55,7 +55,7 @@ static const int fHaveUPnP = false;
 #endif
 
 static const uint256 hashGenesisBlock("0x00000b78589fe157df10d1ad5de457ed0c5d3877041aa8172df2111a2d0e4267");
-static const uint256 hashGenesisBlockTestNet("0x0000e8e5c81f085b25c632ae56a225e1594e0fb1ca2e56e73b7895ac3e76f96b");
+static const uint256 hashGenesisBlockTestNet("0x0000350fa19e4130e8c586d098705560d17213a312adc91f9ae0c7a8b96d6419");
 inline int64_t PastDrift(int64_t nTime)   { return nTime - 10 * 60; } // up to 10 minutes from the past
 inline int64_t FutureDrift(int64_t nTime) { return nTime + 10 * 60; } // up to 10 minutes from the future
 

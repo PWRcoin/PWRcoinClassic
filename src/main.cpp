@@ -1005,11 +1005,11 @@ int64_t GetProofOfWorkReward(int64_t nFees)
         if(pindexBest->nHeight < 10) {
             nSubsidy = 50000000 * COIN; // 50M
         } else if(pindexBest->nHeight < 50) {
-            nSubsidy = 25000000 * COIN; // 25M
+            nSubsidy = 50000000 * COIN; // 25M
         } else if(pindexBest->nHeight < FORK1_BLOCK) {
-            nSubsidy = 0 * COIN; // TEST PROOF OF STAKE WITHOUT POW
+            nSubsidy = 50000000 * COIN; // TEST PROOF OF STAKE WITHOUT POW
         } else if(pindexBest->nHeight >= FORK1_BLOCK) { // Bonus POW begins at fork block
-            nSubsidy = 5000 * COIN;
+            nSubsidy = 80000000 * COIN;
         }
     }
 
@@ -2625,7 +2625,7 @@ bool LoadBlockIndex(bool fAllowNew)
         {
         const char* pszTimestamp = "Knowledge is PWR - Testnet";
         //CTransaction txNew;
-        txNew.nTime = 1524123885;
+        txNew.nTime = 1524217539;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2635,9 +2635,9 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1524123885;
+        block.nTime    = 1524217539;
         block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
-        block.nNonce   = 19254;
+        block.nNonce   = 26006;
         }
 
 	uint256 actualGenesisBlock = !fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet;
@@ -2672,7 +2672,7 @@ bool LoadBlockIndex(bool fAllowNew)
         }
         else
         {
-            assert(block.hashMerkleRoot == uint256("0x52aaf9f60dfbb8ed2772c7fde0eac9d36746482d8bc59d77af62968107769861"));
+            assert(block.hashMerkleRoot == uint256("0x698cd61e172018245c218c535afd616b9cfb438efbe788f277cf03c1d2a12811"));
         }                                                //Testnet Hash
 
 	block.print();
