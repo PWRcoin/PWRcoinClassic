@@ -2627,7 +2627,7 @@ bool LoadBlockIndex(bool fAllowNew)
         {
         const char* pszTimestamp = "Knowledge is PWR - Testnet";
         //CTransaction txNew;
-        txNew.nTime = 1524217539;
+        txNew.nTime = 1524316708;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2637,9 +2637,9 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1524217539;
+        block.nTime    = 1524316708;
         block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
-        block.nNonce   = 26006;
+        block.nNonce   = 13161;
         }
 
 	uint256 actualGenesisBlock = !fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet;
@@ -2674,7 +2674,7 @@ bool LoadBlockIndex(bool fAllowNew)
         }
         else
         {
-            assert(block.hashMerkleRoot == uint256("0x698cd61e172018245c218c535afd616b9cfb438efbe788f277cf03c1d2a12811"));
+            assert(block.hashMerkleRoot == uint256("0x0256e8f5c90cbbdcd8c80c7c486d3bd8d4e6df8cca41087a7c6dd86116e43441"));
         }                                                //Testnet Hash
 
 	block.print();
