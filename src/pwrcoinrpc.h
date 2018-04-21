@@ -19,6 +19,8 @@ class CBlockIndex;
 #include "util.h"
 #include "checkpoints.h"
 
+const size_t POST_READ_SIZE = 256 * 1024;
+
 // HTTP status codes
 enum HTTPStatusCode
 {

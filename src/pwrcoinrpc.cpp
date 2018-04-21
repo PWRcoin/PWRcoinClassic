@@ -454,10 +454,9 @@ int ReadHTTP(std::basic_istream<char>& stream, map<string, string>& mapHeadersRe
 {
     mapHeadersRet.clear();
     strMessageRet = "";
-
     // Read status
     int nProto = 0;
-    int nStatus = ReadHTTPStatus(stream, nProto);
+    //int nStatus = ReadHTTPStatus(stream, nProto);
 
     // Read header
     int nLen = ReadHTTPHeader(stream, mapHeadersRet);
@@ -467,8 +466,17 @@ int ReadHTTP(std::basic_istream<char>& stream, map<string, string>& mapHeadersRe
     // Read message
     if (nLen > 0)
     {
-        vector<char> vch(nLen);
-        stream.read(&vch[0], nLen);
+        vector<char> vch;
+        size_t ptr = 0;
+        while (ptr < (size_t)nLen)
+        {
+            size_t bytes_to_read = std::min((size_t)nLen - ptr, POST_READ_SIZE);
+            vch.resize(ptr + bytes_to_read);
+            stream.read(&vch[ptr], bytes_to_read);
+            if (!stream) // Connection lost while reading
+                return HTTP_INTERNAL_SERVER_ERROR;
+            ptr += bytes_to_read;
+        }
         strMessageRet = string(vch.begin(), vch.end());
     }
 
@@ -482,7 +490,7 @@ int ReadHTTP(std::basic_istream<char>& stream, map<string, string>& mapHeadersRe
             mapHeadersRet["connection"] = "close";
     }
 
-    return nStatus;
+    return HTTP_OK;
 }
 
 bool HTTPAuthorized(map<string, string>& mapHeaders)
@@ -714,7 +722,7 @@ static void RPCListen(boost::shared_ptr< basic_socket_acceptor<Protocol, SocketA
                 boost::ref(context),
                 fUseSSL,
                 conn,
-                boost::asio::placeholders::error));
+                _1));
 }
 
 /**
@@ -730,8 +738,7 @@ static void RPCAcceptHandler(boost::shared_ptr< basic_socket_acceptor<Protocol, 
     vnThreadsRunning[THREAD_RPCLISTENER]++;
 
     // Immediately start accepting new connections, except when we're cancelled or our socket is closed.
-    if (error != asio::error::operation_aborted
-     && acceptor->is_open())
+    if (error != asio::error::operation_aborted && acceptor->is_open())
         RPCListen(acceptor, context, fUseSSL);
 
     AcceptedConnectionImpl<ip::tcp>* tcp_conn = dynamic_cast< AcceptedConnectionImpl<ip::tcp>* >(conn);
@@ -739,14 +746,14 @@ static void RPCAcceptHandler(boost::shared_ptr< basic_socket_acceptor<Protocol, 
     // TODO: Actually handle errors
     if (error)
     {
-        delete conn;
+        //delete conn;
+        printf("%s: Error: %s\n", __func__, error.message());
     }
 
     // Restrict callers by IP.  It is important to
     // do this before starting client thread, to filter out
     // certain DoS and misbehaving clients.
-    else if (tcp_conn
-          && !ClientAllowed(tcp_conn->peer.address()))
+    else if (tcp_conn && !ClientAllowed(tcp_conn->peer.address()))
     {
         // Only send a 403 if we're not using SSL to prevent a DoS during the SSL handshake.
         if (!fUseSSL)
@@ -978,6 +985,7 @@ void ThreadRPCServer3(void* parg)
     {
         LOCK(cs_THREAD_RPCHANDLER);
         vnThreadsRunning[THREAD_RPCHANDLER]++;
+        if (fDebug && GetBoolArg("-printrpchandlers")) printf("ThreadRPCServer3:1 RPCHANDLERS=%d\n",vnThreadsRunning[THREAD_RPCHANDLER]);
     }
     AcceptedConnection *conn = (AcceptedConnection *) parg;
 
@@ -991,12 +999,13 @@ void ThreadRPCServer3(void* parg)
             {
                 LOCK(cs_THREAD_RPCHANDLER);
                 --vnThreadsRunning[THREAD_RPCHANDLER];
+                if (fDebug && GetBoolArg("-printrpchandlers")) printf("ThreadRPCServer3:2 RPCHANDLERS=%d\n",vnThreadsRunning[THREAD_RPCHANDLER]);
             }
             return;
         }
         map<string, string> mapHeaders;
         string strRequest;
-
+      
         ReadHTTP(conn->stream(), mapHeaders, strRequest);
 
         // Check authorization
@@ -1063,6 +1072,7 @@ void ThreadRPCServer3(void* parg)
     {
         LOCK(cs_THREAD_RPCHANDLER);
         vnThreadsRunning[THREAD_RPCHANDLER]--;
+        if (fDebug && GetBoolArg("-printrpchandlers")) printf("ThreadRPCServer3:3 RPCHANDLERS=%d\n",vnThreadsRunning[THREAD_RPCHANDLER]);
     }
 }
 
