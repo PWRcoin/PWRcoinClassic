@@ -1075,7 +1075,7 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     }
 
     // Reduce inflation , set Max Stake Reward
-    nSubsidy = std::max(nSubsidy,500);    
+    nSubsidy = std::max(nSubsidy,MAX_POS_REWARD);    
 
     if (fDebug && GetBoolArg("-printcreation", false))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%" PRId64" nFees=%s\n", FormatMoney(nSubsidy).c_str(), nCoinAge,FormatMoney(nFees).c_str());
