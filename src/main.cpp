@@ -1059,9 +1059,11 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     }
     else
     {
-        // TODO REVIEW THIS
         if(pindexBest->nHeight > FORK1_BLOCK)
+        {
             nSubsidy = nCoinAge * FORK1_COIN_YEAR_REWARD * 33 / ( 365 * 33 + 8) ;
+            nSubsidy = std::min(nSubsidy,MAX_POS_REWARD);
+        }
         else
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
     }
@@ -1069,13 +1071,13 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
     if(fTestNet)
     {
         if(pindexBest->nHeight > FORK1_BLOCK)
+        {
             nSubsidy = nCoinAge * FORK1_COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
+            nSubsidy = std::min(nSubsidy,MAX_POS_REWARD);
+        }
         else
             nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
     }
-
-    // Reduce inflation , set Max Stake Reward
-    nSubsidy = std::min(nSubsidy,MAX_POS_REWARD);    
 
     if (fDebug && GetBoolArg("-printcreation", false))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%" PRId64" nFees=%s\n", FormatMoney(nSubsidy).c_str(), nCoinAge,FormatMoney(nFees).c_str());
