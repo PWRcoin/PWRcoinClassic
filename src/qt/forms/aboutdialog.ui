@@ -92,7 +92,7 @@
        </property>
        <property name="text">
         <string>Copyright © 2009 The Bitcoin developers
-Copyright © PR developers</string>
+Copyright © PWR developers</string>
        </property>
        <property name="textInteractionFlags">
         <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
