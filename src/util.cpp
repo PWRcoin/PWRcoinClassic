@@ -1061,7 +1061,7 @@ const boost::filesystem::path &GetDataDir(bool fNetSpecific)
     } else {
         path = GetDefaultDataDir();
     }
-    if (fNetSpecific && fTestNet)
+    if (fNetSpecific && GetBoolArg("-testnet", false))
         path /= "testnet";
 
     fs::create_directory(path);

@@ -1,8 +1,8 @@
-### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=1.2.0.0&x2=0">
+### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=2.0.0.0&x2=0">
 
 <p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
 
-**Important Notice:** While Power Coin is a great coin it suffers some nearly fatal issues that must be addressed. Without getting overly technical let's simply say that the code has issues which create an out of control staking situtation. Over time this has led to broken wallets, negative balances, exchange de-listings, coin devaluation and other problems. 
+**Important Notice:** While PWR Coin is a great coin it suffers some nearly fatal issues that must be addressed. Without getting overly technical let's simply say that the code has issues which create an out of control staking situtation. Over time this has led to broken wallets, negative balances, exchange de-listings, coin devaluation and other problems. 
 
 At the moment it appears that the best path to healing this coin will include a major rebranding (PWR), a new digital footprint, code rework and fixes all followed by a paid marketing push. The current development team is already in motion handling this variety of tasks and will give new updates as they become available.
 
@@ -87,7 +87,7 @@ When running the commands in the build instructions below, copy and paste one li
 
 ```
 sudo add-apt-repository universe
-sudo add-apt-repository ppa:pwrcoin/pwrcoin
+sudo add-apt-repository ppa:bitcoin/bitcoin
 sudo apt-get update
 sudo apt-get install build-essential make g++
 sudo apt-get install libssl-dev libboost-all-dev libqrencode-dev libminiupnpc-dev software-properties-common libdb4.8-dev libdb4.8++-dev
@@ -160,7 +160,7 @@ When running the commands in the build instructions below, copy and paste one li
 
 ```
 sudo add-apt-repository universe
-sudo add-apt-repository ppa:pwrcoin/pwrcoin
+sudo add-apt-repository ppa:bitcoin/bitcoin
 sudo apt-get update
 sudo apt-get install build-essential make g++
 sudo apt-get install libssl-dev libboost-all-dev libqrencode-dev libminiupnpc-dev software-properties-common libdb4.8-dev libdb4.8++-dev

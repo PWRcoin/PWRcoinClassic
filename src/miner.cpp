@@ -454,6 +454,9 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     //// debug print
     printf("CheckWork() : new proof-of-work block found  \n  hash: %s  \ntarget: %s\n", hashBlock.GetHex().c_str(), hashTarget.GetHex().c_str());
     pblock->print();
+    if(pblock->vtx[0].vout[0].nValue > MAX_MONEY)
+        return error("CheckWork() : block rejected because vout.nValue exceeds MAX_MONEY, split your inputs");
+
     printf("generated %s\n", FormatMoney(pblock->vtx[0].vout[0].nValue).c_str());
 
     // Found a solution
@@ -494,6 +497,13 @@ bool CheckStake(CBlock* pblock, CWallet& wallet)
     //// debug print
     printf("CheckStake() : new proof-of-stake block found  \n  hash: %s \nproofhash: %s  \ntarget: %s\n", hashBlock.GetHex().c_str(), proofHash.GetHex().c_str(), hashTarget.GetHex().c_str());
     pblock->print();
+
+    // When the coin entry approaches MAX_MONEY, the stake reward can push it over Money_range limit
+    // GetValueOut() will assert and crash the wallet.
+    // MAX_MONEY limit is now 1B, if you do exceed it, i will reject the block.
+    if(pblock->vtx[1].GetValueOut() > MAX_MONEY)
+	return error("CheckStake() : block rejected because GetValueOut() exceeds MAX_MONEY, split your inputs");
+
     printf("out %s\n", FormatMoney(pblock->vtx[1].GetValueOut()).c_str());
 
     // Found a solution
@@ -552,6 +562,7 @@ void StakeMiner(CWallet *pwallet)
             fTryToSync = false;
             if (vNodes.size() < 3 || nBestHeight < GetNumBlocksOfPeers())
             {
+                printf("StakeMiner: sleeping 1 min because of %d / [%d/%d] \n",vNodes.size(), nBestHeight, GetNumBlocksOfPeers());
                 MilliSleep(60000);
                 continue;
             }
@@ -561,6 +572,7 @@ void StakeMiner(CWallet *pwallet)
         // Create new block
         //
         int64_t nFees;
+
         auto_ptr<CBlock> pblock(CreateNewBlock(pwallet, true, &nFees));
         if (!pblock.get())
             return;
@@ -574,6 +586,8 @@ void StakeMiner(CWallet *pwallet)
             MilliSleep(500);
         }
         else
+        {
             MilliSleep(nMinerSleep);
+        }
     }
 }

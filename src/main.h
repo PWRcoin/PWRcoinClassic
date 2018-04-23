@@ -28,6 +28,7 @@ class CRequestTracker;
 class CNode;
 
 static const int LAST_POW_BLOCK = 86400;
+static const int FORK1_BLOCK = 823000; // Proposed Fork Height May 14 2018
 
 static const unsigned int MAX_BLOCK_SIZE = 8000000;
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
@@ -36,11 +37,12 @@ static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
 static const unsigned int MAX_INV_SZ = 50000;
 static const int64_t MIN_TX_FEE = 1000;
 static const int64_t MIN_RELAY_TX_FEE = MIN_TX_FEE;
-static const int64_t MAX_MONEY = 100000000 * COIN;
+static const int64_t MAX_MONEY = 1000000000 * COIN;
 static const int64_t COIN_YEAR_REWARD =  5 * CENT; // 5% per year
+static const int64_t FORK1_COIN_YEAR_REWARD =  1 * CENT; // 1% per year
 static const int64_t MAX_MINT_PROOF_OF_STAKE = 5 * CENT; // 5% annual interest
 static const int MODIFIER_INTERVAL_SWITCH = 86000;
-
+static const int64_t MAX_POS_REWARD = 500 * COIN;
 inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 // Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp.
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
@@ -52,7 +54,7 @@ static const int fHaveUPnP = false;
 #endif
 
 static const uint256 hashGenesisBlock("0x00000b78589fe157df10d1ad5de457ed0c5d3877041aa8172df2111a2d0e4267");
-static const uint256 hashGenesisBlockTestNet("");
+static const uint256 hashGenesisBlockTestNet("0x0000ca7f1b612e6aa5160106377360a769c6077c4b5ac424c2e2d1c5e3ebd521");
 inline int64_t PastDrift(int64_t nTime)   { return nTime - 10 * 60; } // up to 10 minutes from the past
 inline int64_t FutureDrift(int64_t nTime) { return nTime + 10 * 60; } // up to 10 minutes from the future
 
@@ -126,13 +128,6 @@ uint256 WantedByOrphan(const CBlock* pblockOrphan);
 const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfStake);
 void StakeMiner(CWallet *pwallet);
 void ResendWalletTransactions(bool fForce = false);
-
-
-
-
-
-
-
 
 
 
@@ -244,8 +239,6 @@ public:
         printf("%s\n", ToString().c_str());
     }
 };
-
-
 
 
 /** An input of a transaction.  It contains the location of the previous

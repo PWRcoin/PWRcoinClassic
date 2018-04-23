@@ -19,6 +19,8 @@ class CBlockIndex;
 #include "util.h"
 #include "checkpoints.h"
 
+const size_t POST_READ_SIZE = 256 * 1024;
+
 // HTTP status codes
 enum HTTPStatusCode
 {
@@ -197,6 +199,7 @@ extern json_spirit::Value walletpassphrasechange(const json_spirit::Array& param
 extern json_spirit::Value walletlock(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value encryptwallet(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value validateaddress(const json_spirit::Array& params, bool fHelp);
+extern json_spirit::Value burn(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value getinfo(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value reservebalance(const json_spirit::Array& params, bool fHelp);
 extern json_spirit::Value checkwallet(const json_spirit::Array& params, bool fHelp);
