@@ -696,7 +696,6 @@ public:
 
     int64_t GetTxTime() const;
     int GetRequestCount() const;
-    bool IsSendToSelf() const;
 
     void AddSupportingTransactions(CTxDB& txdb);
 
