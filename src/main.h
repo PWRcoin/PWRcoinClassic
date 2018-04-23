@@ -28,8 +28,7 @@ class CRequestTracker;
 class CNode;
 
 static const int LAST_POW_BLOCK = 86400;
-//static const int FORK1_BLOCK = 823000; // Proposed Fork Height May 14 2018
-static const int FORK1_BLOCK = 100;
+static const int FORK1_BLOCK = 823000; // Proposed Fork Height May 14 2018
 
 static const unsigned int MAX_BLOCK_SIZE = 8000000;
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
@@ -397,8 +396,8 @@ public:
     std::string ToString() const
     {
         if (IsEmpty()) return "CTxOut(empty)";
-        //if (scriptPubKey.size() < 6)
-        //    return "CTxOut(error)";
+        if (scriptPubKey.size() < 6)
+            return "CTxOut(error)";
         return strprintf("CTxOut(nValue=%s, scriptPubKey=%s)", FormatMoney(nValue).c_str(), scriptPubKey.ToString().c_str());
     }
 
