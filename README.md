@@ -2,69 +2,68 @@
 
 <p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
 
-**Important Notice:** While PWR Coin is a great coin it suffers some nearly fatal issues that must be addressed. Without getting overly technical let's simply say that the code has issues which create an out of control staking situtation. Over time this has led to broken wallets, negative balances, exchange de-listings, coin devaluation and other problems. 
+**Important Notice:** PWR Coin will be hard forking at block 823000 around May 14th. You must update to wallet version 2.0 prior to the fork. Any coins generated via POS on the old wallet after the fork will be rejected and lost when you update.
 
-At the moment it appears that the best path to healing this coin will include a major rebranding (PWR), a new digital footprint, code rework and fixes all followed by a paid marketing push. The current development team is already in motion handling this variety of tasks and will give new updates as they become available.
+## Important Links
 
-**Development Updates**
+  * Block explorer https://blockexplorer.pwr-coin.com/
+  * Website https://pwr-coin.com
+  * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
+  * CryptoHub Exchange https://cryptohub.online/market/PWR/
+  * Market cap statistics https://cryptocapworld.com/coin/PWR
+  * Facebook https://www.facebook.com/pwrcoin/
+  * Twitter https://twitter.com/pwr_coin
+  * Google Plus https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
+  * YouTube https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
+  * Discord channel https://discord.gg/8jhcqqs
+  * Reddit https://www.reddit.com/r/PWRcoin/
 
-  * New block explorer https://blockexplorer.pwr-coin.com/
-  * New website is being developed https://pwr-coin.com
-  * New ANN at pwrcoinTalk https://pwrcointalk.org/index.php?topic=2868184.0
-  * You can buy and sell PWR coin at CryptoHub Exchange at https://cryptohub.online/market/PWR/
-  * You can follow the PWR coin market cap statistics at https://cryptocapworld.com/coin/PWR
-  * Follow us on Facebook at https://www.facebook.com/pwrcoin/
-  * Follow us on Twitter at https://twitter.com/pwr_coin
-  * Follow us on Google Plus at https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
-  * Follow us on YouTube at https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
-  * Join our Discord channel at https://discord.gg/8jhcqqs
-
-**Current tasks that are being worked on include:**
+## Development Updates
 
  * New block explorer - Completed
  * New Professionally Managed Github Repository – Completed
  * New ANN Announcement – Completed
  * New Name And Tagline – Completed
  * Listing At A New Market Cap Site – Completed
- * New Social Pages At Facebook, Twitter, Google Plus, YouTube & Discord – Done
+ * New Social Pages At Facebook, Twitter, Google Plus, YouTube & Discord – Completed
  * New Logo – Completed
  * Listing At A New Exchange – Completed
  * New Social Media Graphics – Completed
  * Review And Analysis Of Existing Code Deficiencies – Completed
- * New Website – In Progress
  * Set Up VPS Node For TestNet Testing – Completed
- * New RoadMap – In Progress
- * 2nd Block Explorer – On The Do List
- * Multiple VPS Seed Nodes – On The Do List
  * Code Rework & Release Of New Binaries – Completed
- * New White Paper – On The Do List
+  * Multiple VPS Seed Nodes – Completed
+ * New Website – In Progress
+ * New RoadMap – In Progress
+ * New White Paper – In Progress
+ * 2nd Block Explorer – On The Do List
 
-**Important Note:** *The current development team handling the tasks listed above have no connection to nor assocation with any other group and specifically the individual or group that has been conducting a swap of these coins for tokens on the Waves platform.*
-
-
-**PWR coin (PWR) Old Specifications**
+## PWR Coin Specifications
 
 ```
-Name: PWR coin
+Name: PWR Coin
 Ticker: PWR
-PWRcoin Maturity: 30 Blocks
+Maturity: 30 Blocks
 Block Size: 8MB
 Block time: 60 seconds
-Algo: Nist5 (Quite,Low Consumption,GPU Optimized with BLAKE - Grøstl - JH - Keccak - Skein)
-Pos: Minimum Stake Age: 8 Hours - Max Stake Age: Unlimited - max 500 COINS per proof-of-stake block found
-P2PPort: 4504
-RPCport: 4502 
+POW Algo: Nist5
+POS: 1% Annually – Maximum single POS payout is 500 coins
+Port: 4504
+Rpcport: 4502  
 
 POW Block Reward:
-- block 993600   -> 5000 COINS Tier 1 POW begins 3 months post fork
-- block 1123200  -> 2500 COINS Tier 2 POW begins 6 months post fork
-- block 1389600  -> 1250 COINS Tier 3 POW begins 1 year   post fork
-- block 1915200  ->  750 COINS Tier 4 POW begins 2 years  post fork
-- block 2440800  ->  500 COINS Tier 5 POW begins 3 years  post fork
-- block 2966400  ->  400 COINS Tier 6 POW begins 4 years  post fork
-- block 3492000  ->  200 COINS Tier 7 POW begins 5 years  post fork
+- block 823000-993600    -> 5000 COINS 
+- block 993600-1123200   -> 2500 COINS 
+- block 1123200-1389600  -> 1250 COINS 
+- block 1389600-1915200  ->  750 COINS 
+- block 1915200-2440800  ->  500 COINS 
+- block 2440800-2966400  ->  400 COINS 
+- block 2966400-3492000  ->  300 COINS
+- block 3492000 and up   ->  200 COINS
 
 ```
+
+## Wallet Instructions
 
 ## PWR Coin Linux QT Compiled With Ubuntu 16.04.4 x86_64 (Tested 3-19-2018)
 
