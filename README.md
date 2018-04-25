@@ -1,42 +1,8 @@
-### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=2.0.0.0&x2=0">
+### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=2.1.0.0&x2=0">
 
 <p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
 
-**Important Notice:** PWR Coin will be hard forking at block 823000 around May 14th. You must update to wallet version 2.0 prior to the fork. Any coins generated via POS on the old wallet after the fork will be rejected and lost when you update.
-
-## Important Links
-
-  * Block explorer https://blockexplorer.pwr-coin.com/
-  * Website https://pwr-coin.com
-  * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
-  * CryptoHub Exchange https://cryptohub.online/market/PWR/
-  * Market cap statistics https://cryptocapworld.com/coin/PWR
-  * Facebook https://www.facebook.com/pwrcoin/
-  * Twitter https://twitter.com/pwr_coin
-  * Google Plus https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
-  * YouTube https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
-  * Discord channel https://discord.gg/8jhcqqs
-  * Reddit https://www.reddit.com/r/PWRcoin/
-
-## Development Updates
-
- * New block explorer - Completed
- * New Professionally Managed Github Repository – Completed
- * New ANN Announcement – Completed
- * New Name And Tagline – Completed
- * Listing At A New Market Cap Site – Completed
- * New Social Pages At Facebook, Twitter, Google Plus, YouTube & Discord – Completed
- * New Logo – Completed
- * Listing At A New Exchange – Completed
- * New Social Media Graphics – Completed
- * Review And Analysis Of Existing Code Deficiencies – Completed
- * Set Up VPS Node For TestNet Testing – Completed
- * Code Rework & Release Of New Binaries – Completed
-  * Multiple VPS Seed Nodes – Completed
- * New Website – In Progress
- * New RoadMap – In Progress
- * New White Paper – In Progress
- * 2nd Block Explorer – On The Do List
+This is the DEV Branch
 
 ## PWR Coin Specifications
 
