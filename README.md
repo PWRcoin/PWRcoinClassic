@@ -4,7 +4,7 @@
 
 **Important Notice:** PWR Coin will be hard forking at block 823000 around May 14th. You must update to wallet version 2.0 prior to the fork. Any coins generated via POS on the old wallet after the fork will be rejected and lost when you update.
 
-**Important Links**
+##Important Links
 
   * Block explorer https://blockexplorer.pwr-coin.com/
   * Website https://pwr-coin.com
@@ -18,7 +18,7 @@
   * Discord channel https://discord.gg/8jhcqqs
   * Reddit https://www.reddit.com/r/PWRcoin/
 
-**Development Updates:**
+##Development Updates
 
  * New block explorer - Completed
  * New Professionally Managed Github Repository – Completed
@@ -38,12 +38,12 @@
  * New White Paper – In Progress
  * 2nd Block Explorer – On The Do List
 
-**PWR Coin Specifications**
+##PWR Coin Specifications
 
 ```
 Name: PWR Coin
 Ticker: PWR
-PWRcoin Maturity: 30 Blocks
+Maturity: 30 Blocks
 Block Size: 8MB
 Block time: 60 seconds
 POW Algo: Nist5
@@ -63,7 +63,7 @@ POW Block Reward:
 
 ```
 
-**Wallet Instructions:**
+##Wallet Instructions
 
 ## PWR Coin Linux QT Compiled With Ubuntu 16.04.4 x86_64 (Tested 3-19-2018)
 
