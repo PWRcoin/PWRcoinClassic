@@ -4,20 +4,21 @@
 
 **Important Notice:** PWR Coin will be hard forking at block 823000 around May 14th. You must update to wallet version 2.0 prior to the fork. Any coins generated via POS on the old wallet after the fork will be rejected and lost when you update.
 
-**Development Updates**
+**Important Links**
 
-  * New block explorer https://blockexplorer.pwr-coin.com/
-  * New website is being developed https://pwr-coin.com
-  * New ANN at pwrcoinTalk https://pwrcointalk.org/index.php?topic=2868184.0
-  * You can buy and sell PWR coin at CryptoHub Exchange at https://cryptohub.online/market/PWR/
-  * You can follow the PWR coin market cap statistics at https://cryptocapworld.com/coin/PWR
-  * Follow us on Facebook at https://www.facebook.com/pwrcoin/
-  * Follow us on Twitter at https://twitter.com/pwr_coin
-  * Follow us on Google Plus at https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
-  * Follow us on YouTube at https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
-  * Join our Discord channel at https://discord.gg/8jhcqqs
+  * Block explorer https://blockexplorer.pwr-coin.com/
+  * Website https://pwr-coin.com
+  * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
+  * CryptoHub Exchange https://cryptohub.online/market/PWR/
+  * Market cap statistics https://cryptocapworld.com/coin/PWR
+  * Facebook https://www.facebook.com/pwrcoin/
+  * Twitter https://twitter.com/pwr_coin
+  * Google Plus https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
+  * YouTube https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
+  * Discord channel https://discord.gg/8jhcqqs
+  * Reddit https://www.reddit.com/r/PWRcoin/
 
-**Current tasks that are being worked on include:**
+**Development Updates:**
 
  * New block explorer - Completed
  * New Professionally Managed Github Repository – Completed
@@ -61,6 +62,8 @@ POW Block Reward:
 - block 3492000 and up   ->  200 COINS
 
 ```
+
+**Wallet Instructions:**
 
 ## PWR Coin Linux QT Compiled With Ubuntu 16.04.4 x86_64 (Tested 3-19-2018)
 
