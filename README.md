@@ -32,11 +32,11 @@ At the moment it appears that the best path to healing this coin will include a 
  * New Social Media Graphics – Completed
  * Review And Analysis Of Existing Code Deficiencies – Completed
  * New Website – In Progress
- * Set Up VPS Node For TestNet Testing – In Progress
- * New RoadMap – On The Do List
+ * Set Up VPS Node For TestNet Testing – Completed
+ * New RoadMap – In Progress
  * 2nd Block Explorer – On The Do List
  * Multiple VPS Seed Nodes – On The Do List
- * Code Rework & Release Of New Binaries – On The Do List
+ * Code Rework & Release Of New Binaries – Completed
  * New White Paper – On The Do List
 
 **Important Note:** *The current development team handling the tasks listed above have no connection to nor assocation with any other group and specifically the individual or group that has been conducting a swap of these coins for tokens on the Waves platform.*
@@ -51,37 +51,24 @@ PWRcoin Maturity: 30 Blocks
 Block Size: 8MB
 Block time: 60 seconds
 Algo: Nist5 (Quite,Low Consumption,GPU Optimized with BLAKE - Grøstl - JH - Keccak - Skein)
-Pow supply: 50021000 (25 Millions Distribuited by Airdrop Form Application)
-        + Dpos (Power Stages) with 3200000 PWR minted first 60 days Dpos + Fixed Pos subsidy at 5% Yearly
-Pos: 5% Annually - Minimum Stake Age: 8 Hours - Max Stake Age: Unlimited
-PWRcoin Distribution: 50% Airdrop Form Application + 50% PoW
-Port: 4504
-Rpcport: 4502 
+Pos: Minimum Stake Age: 8 Hours - Max Stake Age: Unlimited - max 500 COINS per proof-of-stake block found
+P2PPort: 4504
+RPCport: 4502 
 
+POW Block Reward:
+- block 993600   -> 5000 COINS Tier 1 POW begins 3 months post fork
+- block 1123200  -> 2500 COINS Tier 2 POW begins 6 months post fork
+- block 1389600  -> 1250 COINS Tier 3 POW begins 1 year   post fork
+- block 1915200  ->  750 COINS Tier 4 POW begins 2 years  post fork
+- block 2440800  ->  500 COINS Tier 5 POW begins 3 years  post fork
+- block 2966400  ->  400 COINS Tier 6 POW begins 4 years  post fork
+- block 3492000  ->  200 COINS Tier 7 POW begins 5 years  post fork
 
-Block Reward:
-Blocks 0-10: Airdrop PWR
-Blocks 10-100 0 PWR
-350 PWR first 43100 Blocks
-230 PWR until PoW end,Block 86400
-```
-
-```
-PowerPos:
-Blocks: 86000-86400: 5 PWR (Warm-Up)
-Blocks: 86400-100800: 10 PWR (1 Stage)
-Blocks: 100800-115200: 25 PWR (2 Stage)
-Blocks: 115200-129600: 50 PWR (3 Stage)
-Blocks: 129600-144000: 100 PWR (Full Power)
-Blocks: 144000-158400: 20 PWR (5 Stage)
-Blocks: 158400-172800: 15 PWR (6 Stage)
-Blocks: 172800 > 5% Fixed Yearly 
-Approx: 2 Months PowerPoS
 ```
 
 ## PWR Coin Linux QT Compiled With Ubuntu 16.04.4 x86_64 (Tested 3-19-2018)
 
-Install Dependencies
+Install dependencies
 ---------------------
 When running the commands in the build instructions below, copy and paste one line and let it complete before running the next line. Watch for prompts in case you need to respond to a requested input and also to watch for any errors if they occur.
 
@@ -94,8 +81,8 @@ sudo apt-get install libssl-dev libboost-all-dev libqrencode-dev libminiupnpc-de
 sudo apt-get install libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qtbase5-dev-tools qt5-qmake qt5-default qttools5-dev-tools libprotobuf-dev protobuf-compiler
 ```
 
-Get The Source Code And Compile
----------------------
+Get the source and compile
+--------------------------
 
 ```
 git clone https://github.com/PWRcoin/PWRcoin.git pwrcoin
@@ -154,7 +141,7 @@ After you add the IP addresses save the pwrcoin.conf file and then you will need
 
 ## PWR Coin Linux Daemon Compiled With Ubuntu 16.04.4 x86_64 (Tested 3-19-2018) ##
 
-Install Dependencies
+Install dependencies
 ---------------------
 When running the commands in the build instructions below, copy and paste one line and let it complete before running the next line. Watch for prompts in case you need to respond to a requested input and also to watch for any errors if they occur.
 
@@ -223,7 +210,8 @@ While each pwrcoin.conf file may need different setup depending on what you are 
 ```
 rpcuser=PutRpcUserHere
 rpcpassword=PutPasswordHere
-logtimestamps=1
+rpcallowip=127.0.0.1   
+daemon=1
 listen=1
 server=1
 addnode=SomeIPAddressHere
@@ -244,7 +232,7 @@ Now you will need to navigate back to the directory where the PWR coin daemon is
 Once you are in the proper directory where the daemon is located you are ready to launch again:
 
 ```
-./pwrcoind -daemon
+./pwrcoind 
 ```
 
 You should get a message that says, "pwrcoin server starting."
@@ -277,7 +265,3 @@ If for any reason you need to start the daemon use this command:
 ```
 ./pwrcoind -daemon
 ```
-
-
-
-
