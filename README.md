@@ -1,8 +1,8 @@
-### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=2.1.0.0&x2=0">
+This is the DEV Branch
+=======
+### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=2.0.2.0&x2=0">
 
 <p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
-
-This is the DEV Branch
 
 ## PWR Coin Specifications
 
