@@ -1,8 +1,8 @@
-### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=2.0.0.0&x2=0">
+### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=2.0.1.0&x2=0">
 
 <p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
 
-**Important Notice:** PWR Coin will be hard forking at block 823000 around May 14th. You must update to wallet version 2.0 prior to the fork. Any coins generated via POS on the old wallet after the fork will be rejected and lost when you update.
+**Important Notice:** PWR Coin will be hard forking at block 823000 around May 14th. You must update to wallet version 2.0.1 prior to the fork. Any coins generated via POS on the old wallet after the fork will be rejected and lost when you update.
 
 ## Important Links
 
