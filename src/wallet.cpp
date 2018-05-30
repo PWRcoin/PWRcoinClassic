@@ -1026,38 +1026,59 @@ uint64_t CWallet::GetBalance() const
         {
             const CWalletTx* pcoin = &(*it).second;
             if (pcoin->IsTrusted())
-                nTotal += pcoin->GetAvailableCredit();
+            {
+                uint64_t nBalance = nTotal + pcoin->GetAvailableCredit();
+                // protect against uint64 overflow , if it happens return last good max below uint64_t
+                if (nBalance > nTotal)
+                {
+                    nTotal = nBalance;
+                }
+            }
         }
     }
 
     return nTotal;
 }
 
-int64_t CWallet::GetUnconfirmedBalance() const
+uint64_t CWallet::GetUnconfirmedBalance() const
 {
-    int64_t nTotal = 0;
+    uint64_t nTotal = 0;
     {
         LOCK(cs_wallet);
         for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
         {
             const CWalletTx* pcoin = &(*it).second;
             if (!pcoin->IsFinal() || !pcoin->IsTrusted())
-                nTotal += pcoin->GetAvailableCredit();
+            {
+                uint64_t nBalance = nTotal + pcoin->GetAvailableCredit();
+                // protect against uint64 overflow , if it happens return last good max below uint64_t
+                if (nBalance > nTotal)
+                {
+                    nTotal = nBalance;
+                }
+            }
         }
     }
     return nTotal;
 }
 
-int64_t CWallet::GetImmatureBalance() const
+uint64_t CWallet::GetImmatureBalance() const
 {
-    int64_t nTotal = 0;
+    uint64_t nTotal = 0;
     {
         LOCK(cs_wallet);
         for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
         {
             const CWalletTx& pcoin = (*it).second;
             if (pcoin.IsCoinBase() && pcoin.GetBlocksToMaturity() > 0 && pcoin.IsInMainChain())
-                nTotal += GetCredit(pcoin);
+            {
+                uint64_t nBalance = nTotal + GetCredit(pcoin);
+                // protect against uint64 overflow , if it happens return last good max below uint64_t
+                if (nBalance > nTotal)
+                {
+                    nTotal = nBalance;
+                }
+            }
         }
     }
     return nTotal;
