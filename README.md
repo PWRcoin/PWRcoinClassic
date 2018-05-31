@@ -10,6 +10,8 @@
   * Website https://pwr-coin.com
   * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
   * CryptoHub Exchange https://cryptohub.online/market/PWR/
+  * CryptoHub Mining Pool https://cryptohub.online/pools/PWR/
+  * Market cap statistics https://coinmarketcap.com/currencies/powercoin/
   * Market cap statistics https://cryptocapworld.com/coin/PWR
   * Facebook https://www.facebook.com/pwrcoin/
   * Twitter https://twitter.com/pwr_coin
@@ -32,9 +34,11 @@
  * Review And Analysis Of Existing Code Deficiencies – Completed
  * Set Up VPS Node For TestNet Testing – Completed
  * Code Rework & Release Of New Binaries – Completed
-  * Multiple VPS Seed Nodes – Completed
+ * Multiple VPS Seed Nodes – Completed
+ * New RoadMap – Done
+ * Mining Pools - Done
+ * CoinMarketCap Listing - Done
  * New Website – In Progress
- * New RoadMap – In Progress
  * New White Paper – In Progress
  * 2nd Block Explorer – On The Do List
 
