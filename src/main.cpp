@@ -2953,8 +2953,10 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
 {
     static map<CService, CPubKey> mapReuseKey;
     RandAddSeedPerfmon();
+
     if (fDebug)
-        printf("received: %s (%" PRIszu" bytes)\n", strCommand.c_str(), vRecv.size());
+        printf("received: %s (%" PRIszu" bytes) \n", strCommand.c_str(), vRecv.size());
+
     if (mapArgs.count("-dropmessagestest") && GetRand(atoi(mapArgs["-dropmessagestest"])) == 0)
     {
         printf("dropmessagestest DROPPING RECV MESSAGE\n");
@@ -2966,6 +2968,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
         // Each connection can only send one version message
         if (pfrom->nVersion != 0)
         {
+            printf("connection send dupe version message\n");
             pfrom->Misbehaving(1);
             return false;
         }
@@ -3077,7 +3080,11 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
 
         pfrom->fSuccessfullyConnected = true;
 
-        printf("receive version message: version %d, blocks=%d, us=%s, them=%s, peer=%s\n", pfrom->nVersion, pfrom->nStartingHeight, addrMe.ToString().c_str(), addrFrom.ToString().c_str(), pfrom->addr.ToString().c_str());
+        printf("receive version message: %s, version %d, blocks=%d, us=%s, them=%s, peer=%s\n", pfrom->strSubVer, pfrom->nVersion, pfrom->nStartingHeight, addrMe.ToString().c_str(), addrFrom.ToString().c_str(), pfrom->addr.ToString().c_str());
+
+        int64_t nTimeOffset = nTime - GetTime();
+        pfrom->nTimeOffset = nTimeOffset;
+        //AddTimeData(pfrom->addr, nTimeOffset);
 
         cPeerBlockCounts.input(pfrom->nStartingHeight);
 
@@ -3086,10 +3093,10 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
             Checkpoints::AskForPendingSyncCheckpoint(pfrom);
     }
 
-
     else if (pfrom->nVersion == 0)
     {
         // Must have a version message before anything else
+        printf("peer %s , did not send a version message\n",pfrom->addr.ToString().c_str());
         pfrom->Misbehaving(1);
         return false;
     }
@@ -3557,7 +3564,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
             pfrom->PushMessage("pong", nonce);
         }
     }
-
 
     else if (strCommand == "alert")
     {

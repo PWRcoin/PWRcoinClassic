@@ -26,6 +26,7 @@ namespace boost {
 #include <boost/filesystem/fstream.hpp>
 #include <boost/foreach.hpp>
 #include <boost/thread.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include <openssl/crypto.h>
 #include <openssl/rand.h>
 #include <stdarg.h>
@@ -1337,3 +1338,10 @@ bool NewThread(void(*pfn)(void*), void* parg)
     }
     return true;
 }
+
+int64_t GetTimeMicros()
+{
+    return (boost::posix_time::microsec_clock::universal_time() -
+            boost::posix_time::ptime(boost::gregorian::date(1970,1,1))).total_microseconds();
+}
+
