@@ -95,6 +95,14 @@ private:
     QAction *lockWalletAction;
     QAction *aboutQtAction;
     QAction *openRPCConsoleAction;
+   
+    QAction *facebookAction;
+    QAction *twitterAction;
+    QAction *discordAction;
+    QAction *telegramAction;
+    QAction *telegram2Action;
+    QAction *youtubeAction;
+    QAction *redditAction;
 
     QSystemTrayIcon *trayIcon;
     Notificator *notificator;
@@ -161,6 +169,16 @@ private slots:
     /** Handle tray icon clicked */
     void trayIconActivated(QSystemTrayIcon::ActivationReason reason);
 #endif
+
+    /** Social Channels */
+    void facebookActionClicked();
+    void twitterActionClicked();
+    void discordActionClicked();
+    void telegramActionClicked();
+    void telegram2ActionClicked();
+    void youtubeActionClicked();
+    void redditActionClicked();
+
     /** Show incoming transaction notification for new transactions.
 
         The new items are those between start and end inclusive, under the given parent item.

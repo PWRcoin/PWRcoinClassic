@@ -3,6 +3,12 @@
         <file alias="pwrcoin">res/icons/pwrcoin.png</file>
         <file alias="drmbg">res/icons/pwrcoin-256.png</file>
         <file alias="address-book">res/icons/address-book.png</file>
+        <file alias="facebook">res/icons/facebook.png</file>
+        <file alias="twitter">res/icons/twitter.png</file>
+        <file alias="discord">res/icons/discord.png</file>
+        <file alias="telegram">res/icons/telegram.png</file>
+        <file alias="youtube">res/icons/youtube.png</file>
+        <file alias="reddit">res/icons/reddit.png</file>
         <file alias="quit">res/icons/quit.png</file>
         <file alias="send">res/icons/send.png</file>
         <file alias="toolbar">res/icons/pwrcoin-16.png</file>
