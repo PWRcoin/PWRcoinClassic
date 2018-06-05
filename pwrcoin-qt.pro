@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = pwrcoin-qt
 macx:TARGET = "pwrcoin-qt"
-VERSION = 1.0.0
+VERSION = 2.0.2
 INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE HAVE_CXX_STDHEADERS MINIUPNP_STATICLIB
 CONFIG += no_include_pwd
@@ -178,6 +178,8 @@ HEADERS += src/qt/pwrcoingui.h \
     src/qt/transactiontablemodel.h \
     src/qt/addresstablemodel.h \
     src/qt/optionsdialog.h \
+    src/qt/trafficgraphwidget.h \
+    src/qt/peertablemodel.h \ 
     src/qt/coincontroldialog.h \
     src/qt/coincontroltreewidget.h \
     src/qt/sendcoinsdialog.h \
@@ -281,6 +283,8 @@ SOURCES += src/qt/pwrcoin.cpp src/qt/pwrcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
     src/qt/addresstablemodel.cpp \
     src/qt/optionsdialog.cpp \
+    src/qt/trafficgraphwidget.cpp \
+    src/qt/peertablemodel.cpp \
     src/qt/sendcoinsdialog.cpp \
     src/qt/coincontroldialog.cpp \
     src/qt/coincontroltreewidget.cpp \
