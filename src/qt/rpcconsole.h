@@ -82,7 +82,6 @@ private:
     {
         ADDRESS_COLUMN_WIDTH = 200,
         SUBVERSION_COLUMN_WIDTH = 100,
-        PING_COLUMN_WIDTH = 80
     };
 
     Ui::RPCConsole *ui;

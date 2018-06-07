@@ -307,7 +307,6 @@ void RPCConsole::setClientModel(ClientModel *model)
         ui->peerWidget->setSelectionMode(QAbstractItemView::SingleSelection);
         ui->peerWidget->setColumnWidth(PeerTableModel::Address, ADDRESS_COLUMN_WIDTH);
         ui->peerWidget->setColumnWidth(PeerTableModel::Subversion, SUBVERSION_COLUMN_WIDTH);
-        ui->peerWidget->setColumnWidth(PeerTableModel::Ping, PING_COLUMN_WIDTH);
 
         // connect the peerWidget selection model to our peerSelected() handler
         connect(ui->peerWidget->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
@@ -640,14 +639,11 @@ void RPCConsole::updateNodeDetail(const CNodeCombinedStats *stats)
     ui->peerBytesSent->setText(FormatBytes(stats->nodeStats.nSendBytes));
     ui->peerBytesRecv->setText(FormatBytes(stats->nodeStats.nRecvBytes));
     ui->peerConnTime->setText(GUIUtil::formatDurationStr(GetTime() - stats->nodeStats.nTimeConnected));
-    ui->peerPingTime->setText(GUIUtil::formatPingTime(stats->nodeStats.dPingTime));
     ui->timeoffset->setText(GUIUtil::formatTimeOffset(stats->nodeStats.nTimeOffset));
     ui->peerVersion->setText(QString("%1").arg(stats->nodeStats.nVersion));
     ui->peerDirection->setText(stats->nodeStats.fInbound ? tr("Inbound") : tr("Outbound"));
     ui->peerHeight->setText(QString("%1").arg(stats->nodeStats.nStartingHeight));
     ui->peerSubversion->setText(QString::fromStdString(stats->nodeStats.strSubVer));
-    ui->peerBanScore->setText(tr("n/a"));
-    ui->peerSyncHeight->setText(tr("n/a"));
 
     ui->detailWidget->show();
 }
