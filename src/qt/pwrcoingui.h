@@ -94,8 +94,12 @@ private:
     QAction *unlockWalletAction;
     QAction *lockWalletAction;
     QAction *aboutQtAction;
-    QAction *openRPCConsoleAction;
-   
+    QAction* openInfoAction;
+    QAction* openRPCConsoleAction;
+    QAction* openNetworkAction;
+    QAction* openPeersAction;
+    QAction* openConfEditorAction;
+ 
     QAction *facebookAction;
     QAction *twitterAction;
     QAction *discordAction;
@@ -125,6 +129,7 @@ public slots:
     void setNumConnections(int count);
     /** Set number of blocks shown in the UI */
     void setNumBlocks(int count, int nTotalBlocks);
+
     /** Set the encryption status as shown in the UI.
        @param[in] status            current encryption status
        @see WalletModel::EncryptionStatus

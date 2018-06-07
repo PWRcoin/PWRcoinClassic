@@ -206,9 +206,14 @@ pwrcoinGUI::pwrcoinGUI(QWidget *parent):
     connect(transactionView, SIGNAL(doubleClicked(QModelIndex)), transactionView, SLOT(showDetails()));
 
     rpcConsole.reset(new RPCConsole);
-    connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(show()));
+    //connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(show()));
+    
+    connect(openInfoAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showInfo()));
+    connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showConsole()));
+    connect(openNetworkAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showNetwork()));
+    connect(openPeersAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showPeers()));
+    connect(openConfEditorAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showConfEditor()));
 
-    // Clicking on "Verify Message" in the address book sends you to the verify message tab
     connect(addressBookPage, SIGNAL(verifyMessage(QString)), this, SLOT(gotoVerifyMessageTab(QString)));
     // Clicking on "Sign Message" in the receive coins page sends you to the sign message tab
     connect(receiveCoinsPage, SIGNAL(signMessage(QString)), this, SLOT(gotoSignMessageTab(QString)));
@@ -315,8 +320,18 @@ void pwrcoinGUI::createActions()
 
     exportAction = new QAction(QIcon(":/icons/export"), tr("&Export..."), this);
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
-    openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug window"), this);
-    openRPCConsoleAction->setToolTip(tr("Open debugging and diagnostic console"));
+
+
+    openInfoAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation), tr("&Information"), this);
+    openInfoAction->setStatusTip(tr("Show diagnostic information"));
+    openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug console"), this);
+    openRPCConsoleAction->setToolTip(tr("Open diagnostic console"));
+    openNetworkAction = new QAction(QIcon(":/icons/notsynced"), tr("&Network Monitor"), this);
+    openNetworkAction->setStatusTip(tr("Show network monitor"));
+    openPeersAction = new QAction(QIcon(":/icons/connect_4"), tr("&Peers list"), this);
+    openPeersAction->setStatusTip(tr("Show peers info"));
+    openConfEditorAction = new QAction(QIcon(":/icons/edit"), tr("Open Wallet &Configuration File"), this);
+    openConfEditorAction->setStatusTip(tr("Open configuration file"));
 
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
@@ -338,6 +353,12 @@ void pwrcoinGUI::createActions()
     connect(telegram2Action, SIGNAL(triggered()), this, SLOT(telegram2ActionClicked()));
     connect(youtubeAction, SIGNAL(triggered()), this, SLOT(youtubeActionClicked()));
     connect(redditAction, SIGNAL(triggered()), this, SLOT(redditActionClicked()));
+
+    connect(openInfoAction, SIGNAL(triggered()), this, SLOT(showInfo()));
+    connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showConsole()));
+    connect(openNetworkAction, SIGNAL(triggered()), this, SLOT(showNetwork()));
+    connect(openPeersAction, SIGNAL(triggered()), this, SLOT(showPeers()));
+    connect(openConfEditorAction, SIGNAL(triggered()), this, SLOT(showConfEditor()));
 }
 
 void pwrcoinGUI::createMenuBar()
@@ -375,6 +396,14 @@ void pwrcoinGUI::createMenuBar()
     socials->addAction(telegram2Action);
     socials->addAction(youtubeAction);
     socials->addAction(redditAction);
+
+    QMenu* tools = appMenuBar->addMenu(tr("&Tools"));
+    tools->addAction(openInfoAction);
+    tools->addAction(openRPCConsoleAction);
+    tools->addAction(openNetworkAction);
+    tools->addAction(openPeersAction);
+    tools->addSeparator();
+    tools->addAction(openConfEditorAction);
 
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
     help->addAction(openRPCConsoleAction);
@@ -499,7 +528,14 @@ void pwrcoinGUI::createTrayIcon()
     trayIconMenu->addAction(verifyMessageAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(optionsAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(openInfoAction);
     trayIconMenu->addAction(openRPCConsoleAction);
+    trayIconMenu->addAction(openNetworkAction);
+    trayIconMenu->addAction(openPeersAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(openConfEditorAction);
+
 #ifndef Q_OS_MAC // This is built-in on Mac
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);

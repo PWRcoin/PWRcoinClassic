@@ -307,6 +307,29 @@
         </spacer>
        </item>
        <item row="14" column="0">
+        <widget class="QLabel" name="label_222">
+         <property name="text">
+          <string>Active Wallet File</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="1">
+        <widget class="QLabel" name="wallet_path">
+         <property name="cursor">
+          <cursorShape>IBeamCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::PlainText</enum>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+       </item>
+       <item row="15" column="0">
         <widget class="QLabel" name="labelDebugLogfile">
          <property name="font">
           <font>
@@ -319,7 +342,7 @@
          </property>
         </widget>
        </item>
-       <item row="15" column="0">
+       <item row="16" column="0">
         <widget class="QPushButton" name="openDebugLogfileButton">
          <property name="toolTip">
           <string>Open the pwrcoin debug log file from the current data directory. This can take a few seconds for large log files.</string>
@@ -332,7 +355,7 @@
          </property>
         </widget>
        </item>
-       <item row="16" column="0">
+       <item row="17" column="0">
         <widget class="QLabel" name="labelCLOptions">
          <property name="font">
           <font>
@@ -345,7 +368,7 @@
          </property>
         </widget>
        </item>
-       <item row="17" column="0">
+       <item row="18" column="0">
         <widget class="QPushButton" name="showCLOptionsButton">
          <property name="toolTip">
           <string>Show the pwrcoin-Qt help message to get a list with possible pwrcoin command-line options.</string>
@@ -358,7 +381,7 @@
          </property>
         </widget>
        </item>
-       <item row="18" column="0">
+       <item row="19" column="0">
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

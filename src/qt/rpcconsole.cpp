@@ -13,6 +13,7 @@
 #include <QKeyEvent>
 #include <QUrl>
 #include <QScrollBar>
+#include <QDir>
 
 #include <openssl/crypto.h>
 
@@ -213,6 +214,7 @@ RPCConsole::RPCConsole(QWidget *parent) :
 
     // set OpenSSL version label
     ui->openSSLVersion->setText(SSLeay_version(SSLEAY_VERSION));
+    ui->wallet_path->setText(QString::fromStdString(GetDataDir().string() + QDir::separator().toLatin1() + GetArg("-wallet", "wallet.dat")));
 
     startExecutor();
     setTrafficGraphRange(INITIAL_TRAFFIC_GRAPH_MINS);
@@ -673,6 +675,35 @@ void RPCConsole::hideEvent(QHideEvent *event)
 
     // stop PeerTableModel auto refresh
     clientModel->getPeerTableModel()->stopAutoRefresh();
+}
+
+void RPCConsole::showInfo()
+{
+    ui->tabWidget->setCurrentIndex(0);
+    show();
+}
+
+void RPCConsole::showConsole()
+{
+    ui->tabWidget->setCurrentIndex(1);
+    show();
+}
+
+void RPCConsole::showNetwork()
+{
+    ui->tabWidget->setCurrentIndex(2);
+    show();
+}
+
+void RPCConsole::showPeers()
+{
+    ui->tabWidget->setCurrentIndex(3);
+    show();
+}
+
+void RPCConsole::showConfEditor()
+{
+    GUIUtil::openConfigfile();
 }
 
 
