@@ -569,6 +569,19 @@ public:
         return nValueOut;
     }
 
+    /** Helper function theck if ValueOut is > MAX_MONEY */
+    bool CheckValueOut() const
+    {
+        int64_t nValueOut = 0;
+        BOOST_FOREACH(const CTxOut& txout, vout)
+        {
+            nValueOut += txout.nValue;
+            if (!MoneyRange(txout.nValue) || !MoneyRange(nValueOut))
+                return false;  
+        }
+        return true;
+    }
+
     /** Amount of pwrcoins coming in to this transaction
         Note that lightweight clients may not know anything besides the hash of previous transactions,
         so may not be able to calculate this.

@@ -629,6 +629,10 @@ bool CTxMemPool::accept(CTxDB& txdb, CTransaction &tx, bool fCheckInputs,
         // you should add code here to check that the transaction does a
         // reasonable number of ECDSA signature verifications.
 
+        // To prevent a wallet crash check for MAX_VALUE first and return clean error instead of runtime error
+        if (!tx.CheckValueOut())
+              return error("Main::CTransaction::GetValueOut() : value out of range for tx %s", hash.ToString().c_str());
+
         int64_t nFees = tx.GetValueIn(mapInputs)-tx.GetValueOut();
         unsigned int nSize = ::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION);
 
@@ -1477,6 +1481,10 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs, map<uint256, CTx
 
         if (!IsCoinStake())
         {
+            // To prevent a wallet crash check for MAX_VALUE first and return clean error instead of runtime error
+            if (!CheckValueOut())
+                return DoS(100, error("ConnectInputs() : value out of range for tx %s", GetHash().ToString().c_str()));
+
             if (nValueIn < GetValueOut())
                 return DoS(100, error("ConnectInputs() : %s value in < value out", GetHash().ToString().substr(0,10).c_str()));
 
@@ -1538,6 +1546,11 @@ bool CTransaction::ClientConnectInputs()
             if (!MoneyRange(txPrev.vout[prevout.n].nValue) || !MoneyRange(nValueIn))
                 return error("ClientConnectInputs() : txin values out of range");
         }
+        
+        // To prevent a wallet crash check for MAX_VALUE first and return clean error instead of runtime error
+        if (!CheckValueOut())
+              return error("ClientConnectInputs() : value out of range for tx %s", GetHash().ToString().c_str());
+
         if (GetValueOut() > nValueIn)
             return false;
     }
@@ -1624,6 +1637,10 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
         if (!fJustCheck)
             nTxPos += ::GetSerializeSize(tx, SER_DISK, CLIENT_VERSION);
 
+        // To prevent a wallet crash check for MAX_VALUE first and return clean error instead of runtime error
+        if (!tx.CheckValueOut())
+              return error("ConnectBlock() : value out of range for tx %s", hashTx.ToString().c_str());
+
         MapPrevTx mapInputs;
         if (tx.IsCoinBase())
             nValueOut += tx.GetValueOut();
@@ -1659,6 +1676,11 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
     if (IsProofOfWork())
     {
         int64_t nReward = GetProofOfWorkReward(nFees);
+        
+        // To prevent a wallet crash check for MAX_VALUE first and return clean error instead of runtime error
+        if (!vtx[0].CheckValueOut())
+              return DoS(50, error("ConnectBlock() : value out of range for tx %s", vtx[0].GetHash().ToString().c_str()));
+
         // Check coinbase reward
         if (vtx[0].GetValueOut() > nReward)
             return DoS(50, error("ConnectBlock() : coinbase reward exceeded (actual=%" PRId64" vs calculated=%" PRId64")",
