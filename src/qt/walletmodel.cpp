@@ -207,6 +207,11 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(const QList<SendCoinsRecipie
         {
             return Aborted;
         }
+        
+        // To Avoid a Wallet Crash we need to make sure transactions are valid before we commit them
+        if(!wtx.CheckTransaction())
+           return TransactionCommitFailed;
+ 
         if(!wallet->CommitTransaction(wtx, keyChange))
         {
             return TransactionCommitFailed;
