@@ -4,6 +4,22 @@ This is the DEV Branch
 
 <p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
 
+## Important Links
+
+  * Block explorer https://blockexplorer.pwr-coin.com/
+  * Website https://pwr-coin.com
+  * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
+  * CryptoHub Exchange https://cryptohub.online/market/PWR/
+  * CryptoHub Mining Pool https://cryptohub.online/pools/PWR/
+  * Market cap statistics https://coinmarketcap.com/currencies/powercoin/
+  * Market cap statistics https://cryptocapworld.com/coin/PWR
+  * Facebook https://www.facebook.com/pwrcoin/
+  * Twitter https://twitter.com/pwr_coin
+  * Google Plus https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
+  * YouTube https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
+  * Discord channel https://discord.gg/8jhcqqs
+  * Reddit https://www.reddit.com/r/PWRcoin/
+
 ## PWR Coin Specifications
 
 ```
@@ -11,7 +27,7 @@ Name: PWR Coin
 Ticker: PWR
 Maturity: 30 Blocks
 Block Size: 8MB
-Block time: 60 seconds
+Block time: 30 seconds
 POW Algo: Nist5
 POS: 1% Annually – Maximum single POS payout is 500 coins
 Port: 4504
