@@ -1,8 +1,8 @@
-### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=2.0.1.0&x2=0">
+This is the DEV Branch
+=======
+### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=2.0.2.0&x2=0">
 
 <p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
-
-**Important Notice:** PWR Coin will be hard forking at block 823000 around May 14th. You must update to wallet version 2.0.1 prior to the fork. Any coins generated via POS on the old wallet after the fork will be rejected and lost when you update.
 
 ## Important Links
 
@@ -20,28 +20,6 @@
   * Discord channel https://discord.gg/8jhcqqs
   * Reddit https://www.reddit.com/r/PWRcoin/
 
-## Development Updates
-
- * New block explorer - Completed
- * New Professionally Managed Github Repository – Completed
- * New ANN Announcement – Completed
- * New Name And Tagline – Completed
- * Listing At A New Market Cap Site – Completed
- * New Social Pages At Facebook, Twitter, Google Plus, YouTube & Discord – Completed
- * New Logo – Completed
- * Listing At A New Exchange – Completed
- * New Social Media Graphics – Completed
- * Review And Analysis Of Existing Code Deficiencies – Completed
- * Set Up VPS Node For TestNet Testing – Completed
- * Code Rework & Release Of New Binaries – Completed
- * Multiple VPS Seed Nodes – Completed
- * New RoadMap – Done
- * Mining Pools - Done
- * CoinMarketCap Listing - Done
- * New Website – In Progress
- * New White Paper – In Progress
- * 2nd Block Explorer – On The Do List
-
 ## PWR Coin Specifications
 
 ```
@@ -49,7 +27,7 @@ Name: PWR Coin
 Ticker: PWR
 Maturity: 30 Blocks
 Block Size: 8MB
-Block time: 60 seconds
+Block time: 30 seconds
 POW Algo: Nist5
 POS: 1% Annually – Maximum single POS payout is 500 coins
 Port: 4504

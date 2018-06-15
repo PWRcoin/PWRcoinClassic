@@ -629,6 +629,10 @@ bool CTxMemPool::accept(CTxDB& txdb, CTransaction &tx, bool fCheckInputs,
         // you should add code here to check that the transaction does a
         // reasonable number of ECDSA signature verifications.
 
+        // To prevent a wallet crash check for MAX_VALUE first and return clean error instead of runtime error
+        if (!tx.CheckValueOut())
+              return error("Main::CTransaction::GetValueOut() : value out of range for tx %s", hash.ToString().c_str());
+
         int64_t nFees = tx.GetValueIn(mapInputs)-tx.GetValueOut();
         unsigned int nSize = ::GetSerializeSize(tx, SER_NETWORK, PROTOCOL_VERSION);
 
@@ -1477,6 +1481,10 @@ bool CTransaction::ConnectInputs(CTxDB& txdb, MapPrevTx inputs, map<uint256, CTx
 
         if (!IsCoinStake())
         {
+            // To prevent a wallet crash check for MAX_VALUE first and return clean error instead of runtime error
+            if (!CheckValueOut())
+                return DoS(100, error("ConnectInputs() : value out of range for tx %s", GetHash().ToString().c_str()));
+
             if (nValueIn < GetValueOut())
                 return DoS(100, error("ConnectInputs() : %s value in < value out", GetHash().ToString().substr(0,10).c_str()));
 
@@ -1538,6 +1546,11 @@ bool CTransaction::ClientConnectInputs()
             if (!MoneyRange(txPrev.vout[prevout.n].nValue) || !MoneyRange(nValueIn))
                 return error("ClientConnectInputs() : txin values out of range");
         }
+        
+        // To prevent a wallet crash check for MAX_VALUE first and return clean error instead of runtime error
+        if (!CheckValueOut())
+              return error("ClientConnectInputs() : value out of range for tx %s", GetHash().ToString().c_str());
+
         if (GetValueOut() > nValueIn)
             return false;
     }
@@ -1624,6 +1637,10 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
         if (!fJustCheck)
             nTxPos += ::GetSerializeSize(tx, SER_DISK, CLIENT_VERSION);
 
+        // To prevent a wallet crash check for MAX_VALUE first and return clean error instead of runtime error
+        if (!tx.CheckValueOut())
+              return error("ConnectBlock() : value out of range for tx %s", hashTx.ToString().c_str());
+
         MapPrevTx mapInputs;
         if (tx.IsCoinBase())
             nValueOut += tx.GetValueOut();
@@ -1659,6 +1676,11 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
     if (IsProofOfWork())
     {
         int64_t nReward = GetProofOfWorkReward(nFees);
+        
+        // To prevent a wallet crash check for MAX_VALUE first and return clean error instead of runtime error
+        if (!vtx[0].CheckValueOut())
+              return DoS(50, error("ConnectBlock() : value out of range for tx %s", vtx[0].GetHash().ToString().c_str()));
+
         // Check coinbase reward
         if (vtx[0].GetValueOut() > nReward)
             return DoS(50, error("ConnectBlock() : coinbase reward exceeded (actual=%" PRId64" vs calculated=%" PRId64")",
@@ -2953,8 +2975,10 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
 {
     static map<CService, CPubKey> mapReuseKey;
     RandAddSeedPerfmon();
+
     if (fDebug)
-        printf("received: %s (%" PRIszu" bytes)\n", strCommand.c_str(), vRecv.size());
+        printf("received: %s (%" PRIszu" bytes) \n", strCommand.c_str(), vRecv.size());
+
     if (mapArgs.count("-dropmessagestest") && GetRand(atoi(mapArgs["-dropmessagestest"])) == 0)
     {
         printf("dropmessagestest DROPPING RECV MESSAGE\n");
@@ -2966,6 +2990,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
         // Each connection can only send one version message
         if (pfrom->nVersion != 0)
         {
+            printf("connection send dupe version message\n");
             pfrom->Misbehaving(1);
             return false;
         }
@@ -3079,6 +3104,10 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
 
         printf("receive version message: version %d, blocks=%d, us=%s, them=%s, peer=%s\n", pfrom->nVersion, pfrom->nStartingHeight, addrMe.ToString().c_str(), addrFrom.ToString().c_str(), pfrom->addr.ToString().c_str());
 
+        int64_t nTimeOffset = nTime - GetTime();
+        pfrom->nTimeOffset = nTimeOffset;
+        //AddTimeData(pfrom->addr, nTimeOffset);
+
         cPeerBlockCounts.input(pfrom->nStartingHeight);
 
         // pwrcoin: ask for pending sync-checkpoint if any
@@ -3086,10 +3115,10 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
             Checkpoints::AskForPendingSyncCheckpoint(pfrom);
     }
 
-
     else if (pfrom->nVersion == 0)
     {
         // Must have a version message before anything else
+        printf("peer %s , did not send a version message\n",pfrom->addr.ToString().c_str());
         pfrom->Misbehaving(1);
         return false;
     }
@@ -3557,7 +3586,6 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
             pfrom->PushMessage("pong", nonce);
         }
     }
-
 
     else if (strCommand == "alert")
     {

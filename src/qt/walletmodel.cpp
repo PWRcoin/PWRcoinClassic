@@ -36,12 +36,12 @@ WalletModel::~WalletModel()
     unsubscribeFromCoreSignals();
 }
 
-qint64 WalletModel::getBalance() const
+quint64 WalletModel::getBalance() const
 {
     return wallet->GetBalance();
 }
 
-qint64 WalletModel::getUnconfirmedBalance() const
+quint64 WalletModel::getUnconfirmedBalance() const
 {
     return wallet->GetUnconfirmedBalance();
 }
@@ -51,7 +51,7 @@ qint64 WalletModel::getStake() const
     return wallet->GetStake();
 }
 
-qint64 WalletModel::getImmatureBalance() const
+quint64 WalletModel::getImmatureBalance() const
 {
     return wallet->GetImmatureBalance();
 }
@@ -86,10 +86,10 @@ void WalletModel::pollBalanceChanged()
 
 void WalletModel::checkBalanceChanged()
 {
-    qint64 newBalance = getBalance();
+    quint64 newBalance = getBalance();
     qint64 newStake = getStake();
-    qint64 newUnconfirmedBalance = getUnconfirmedBalance();
-    qint64 newImmatureBalance = getImmatureBalance();
+    quint64 newUnconfirmedBalance = getUnconfirmedBalance();
+    quint64 newImmatureBalance = getImmatureBalance();
 
     if(cachedBalance != newBalance || cachedStake != newStake || cachedUnconfirmedBalance != newUnconfirmedBalance || cachedImmatureBalance != newImmatureBalance)
     {
@@ -207,6 +207,11 @@ WalletModel::SendCoinsReturn WalletModel::sendCoins(const QList<SendCoinsRecipie
         {
             return Aborted;
         }
+        
+        // To Avoid a Wallet Crash we need to make sure transactions are valid before we commit them
+        if(!wtx.CheckTransaction())
+           return TransactionCommitFailed;
+ 
         if(!wallet->CommitTransaction(wtx, keyChange))
         {
             return TransactionCommitFailed;

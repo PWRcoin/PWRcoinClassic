@@ -835,6 +835,11 @@ bool CWalletTx::WriteToDisk()
     return CWalletDB(pwallet->strWalletFile).WriteTx(GetHash(), *this);
 }
 
+bool CWalletTx::WriteToDisk(CWalletDB *pwalletdb)
+{
+    return pwalletdb->WriteTx(GetHash(), *this);
+}
+
 // Scan the block chain (starting in pindexStart) for transactions
 // from or to us. If fUpdate is true, found transactions that already
 // exist in the wallet will be updated.
@@ -1017,47 +1022,68 @@ void CWallet::ResendWalletTransactions(bool fForce)
 //
 
 
-int64_t CWallet::GetBalance() const
+uint64_t CWallet::GetBalance() const
 {
-    int64_t nTotal = 0;
+    uint64_t nTotal = 0;
     {
         LOCK(cs_wallet);
         for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
         {
             const CWalletTx* pcoin = &(*it).second;
             if (pcoin->IsTrusted())
-                nTotal += pcoin->GetAvailableCredit();
+            {
+                uint64_t nBalance = nTotal + pcoin->GetAvailableCredit();
+                // protect against uint64 overflow , if it happens return last good max below uint64_t
+                if (nBalance > nTotal)
+                {
+                    nTotal = nBalance;
+                }
+            }
         }
     }
 
     return nTotal;
 }
 
-int64_t CWallet::GetUnconfirmedBalance() const
+uint64_t CWallet::GetUnconfirmedBalance() const
 {
-    int64_t nTotal = 0;
+    uint64_t nTotal = 0;
     {
         LOCK(cs_wallet);
         for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
         {
             const CWalletTx* pcoin = &(*it).second;
             if (!pcoin->IsFinal() || !pcoin->IsTrusted())
-                nTotal += pcoin->GetAvailableCredit();
+            {
+                uint64_t nBalance = nTotal + pcoin->GetAvailableCredit();
+                // protect against uint64 overflow , if it happens return last good max below uint64_t
+                if (nBalance > nTotal)
+                {
+                    nTotal = nBalance;
+                }
+            }
         }
     }
     return nTotal;
 }
 
-int64_t CWallet::GetImmatureBalance() const
+uint64_t CWallet::GetImmatureBalance() const
 {
-    int64_t nTotal = 0;
+    uint64_t nTotal = 0;
     {
         LOCK(cs_wallet);
         for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
         {
             const CWalletTx& pcoin = (*it).second;
             if (pcoin.IsCoinBase() && pcoin.GetBlocksToMaturity() > 0 && pcoin.IsInMainChain())
-                nTotal += GetCredit(pcoin);
+            {
+                uint64_t nBalance = nTotal + GetCredit(pcoin);
+                // protect against uint64 overflow , if it happens return last good max below uint64_t
+                if (nBalance > nTotal)
+                {
+                    nTotal = nBalance;
+                }
+            }
         }
     }
     return nTotal;
@@ -1920,9 +1946,6 @@ string CWallet::SendMoneyToDestination(const CTxDestination& address, int64_t nV
     return SendMoney(scriptPubKey, nValue, wtxNew, fAskFee);
 }
 
-
-
-
 DBErrors CWallet::LoadWallet(bool& fFirstRunRet)
 {
     if (!fFileBacked)
@@ -1948,6 +1971,28 @@ DBErrors CWallet::LoadWallet(bool& fFirstRunRet)
     return DB_LOAD_OK;
 }
 
+DBErrors CWallet::ZapWalletTx(std::vector<CWalletTx>& vWtx)
+{
+    if (!fFileBacked)
+        return DB_LOAD_OK;
+    DBErrors nZapWalletTxRet = CWalletDB(strWalletFile,"cr+").ZapWalletTx(this, vWtx);
+    if (nZapWalletTxRet == DB_NEED_REWRITE)
+    {
+        if (CDB::Rewrite(strWalletFile, "\x04pool"))
+        {
+            LOCK(cs_wallet);
+            setKeyPool.clear();
+            // Note: can't top-up keypool here, because wallet is locked.
+            // User will be prompted to unlock wallet the next operation
+            // that requires a new key.
+        }
+    }
+
+    if (nZapWalletTxRet != DB_LOAD_OK)
+        return nZapWalletTxRet;
+
+    return DB_LOAD_OK;
+}
 
 bool CWallet::SetAddressBookName(const CTxDestination& address, const string& strName)
 {

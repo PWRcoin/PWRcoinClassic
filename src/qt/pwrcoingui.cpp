@@ -206,9 +206,14 @@ pwrcoinGUI::pwrcoinGUI(QWidget *parent):
     connect(transactionView, SIGNAL(doubleClicked(QModelIndex)), transactionView, SLOT(showDetails()));
 
     rpcConsole.reset(new RPCConsole);
-    connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(show()));
+    //connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(show()));
+    
+    connect(openInfoAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showInfo()));
+    connect(openRPCConsoleAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showConsole()));
+    connect(openNetworkAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showNetwork()));
+    connect(openPeersAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showPeers()));
+    connect(openConfEditorAction, SIGNAL(triggered()), rpcConsole.data(), SLOT(showConfEditor()));
 
-    // Clicking on "Verify Message" in the address book sends you to the verify message tab
     connect(addressBookPage, SIGNAL(verifyMessage(QString)), this, SLOT(gotoVerifyMessageTab(QString)));
     // Clicking on "Sign Message" in the receive coins page sends you to the sign message tab
     connect(receiveCoinsPage, SIGNAL(signMessage(QString)), this, SLOT(gotoSignMessageTab(QString)));
@@ -298,10 +303,35 @@ void pwrcoinGUI::createActions()
     signMessageAction = new QAction(QIcon(":/icons/edit"), tr("Sign &message..."), this);
     verifyMessageAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message..."), this);
 
+    facebookAction = new QAction(QIcon(":/icons/facebook"), tr("Facebook"), this);
+    facebookAction->setToolTip(tr("PWR Facebook"));
+    twitterAction = new QAction(QIcon(":/icons/twitter"), tr("Twitter"), this);
+    twitterAction->setToolTip(tr("PWR Twitter"));
+    discordAction = new QAction(QIcon(":/icons/discord"), tr("Discord"), this);
+    discordAction->setToolTip(tr("PWR Discord"));
+    youtubeAction = new QAction(QIcon(":/icons/youtube"), tr("Youtube"), this);
+    youtubeAction->setToolTip(tr("PWR Youtube"));
+    telegramAction = new QAction(QIcon(":/icons/telegram"), tr("Telegram"), this);
+    telegramAction->setToolTip(tr("PWR Telegram"));
+    telegram2Action = new QAction(QIcon(":/icons/telegram"), tr("Telegram - ANN"), this);
+    telegram2Action->setToolTip(tr("PWR Telegram Announcements"));
+    redditAction = new QAction(QIcon(":/icons/reddit"), tr("Reddit"), this);
+    redditAction->setToolTip(tr("PWR Reddit"));
+
     exportAction = new QAction(QIcon(":/icons/export"), tr("&Export..."), this);
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
-    openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug window"), this);
-    openRPCConsoleAction->setToolTip(tr("Open debugging and diagnostic console"));
+
+
+    openInfoAction = new QAction(QApplication::style()->standardIcon(QStyle::SP_MessageBoxInformation), tr("&Information"), this);
+    openInfoAction->setStatusTip(tr("Show diagnostic information"));
+    openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug console"), this);
+    openRPCConsoleAction->setToolTip(tr("Open diagnostic console"));
+    openNetworkAction = new QAction(QIcon(":/icons/notsynced"), tr("&Network Monitor"), this);
+    openNetworkAction->setStatusTip(tr("Show network monitor"));
+    openPeersAction = new QAction(QIcon(":/icons/connect_4"), tr("&Peers list"), this);
+    openPeersAction->setStatusTip(tr("Show peers info"));
+    openConfEditorAction = new QAction(QIcon(":/icons/edit"), tr("Open Wallet &Configuration File"), this);
+    openConfEditorAction->setStatusTip(tr("Open configuration file"));
 
     connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(aboutClicked()));
@@ -315,6 +345,20 @@ void pwrcoinGUI::createActions()
     connect(lockWalletAction, SIGNAL(triggered()), this, SLOT(lockWallet()));
     connect(signMessageAction, SIGNAL(triggered()), this, SLOT(gotoSignMessageTab()));
     connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(gotoVerifyMessageTab()));
+   
+    connect(facebookAction, SIGNAL(triggered()), this, SLOT(facebookActionClicked()));
+    connect(twitterAction, SIGNAL(triggered()), this, SLOT(twitterActionClicked()));
+    connect(discordAction, SIGNAL(triggered()), this, SLOT(discordActionClicked()));
+    connect(telegramAction, SIGNAL(triggered()), this, SLOT(telegramActionClicked()));
+    connect(telegram2Action, SIGNAL(triggered()), this, SLOT(telegram2ActionClicked()));
+    connect(youtubeAction, SIGNAL(triggered()), this, SLOT(youtubeActionClicked()));
+    connect(redditAction, SIGNAL(triggered()), this, SLOT(redditActionClicked()));
+
+    connect(openInfoAction, SIGNAL(triggered()), this, SLOT(showInfo()));
+    connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showConsole()));
+    connect(openNetworkAction, SIGNAL(triggered()), this, SLOT(showNetwork()));
+    connect(openPeersAction, SIGNAL(triggered()), this, SLOT(showPeers()));
+    connect(openConfEditorAction, SIGNAL(triggered()), this, SLOT(showConfEditor()));
 }
 
 void pwrcoinGUI::createMenuBar()
@@ -343,6 +387,23 @@ void pwrcoinGUI::createMenuBar()
     settings->addAction(lockWalletAction);
     settings->addSeparator();
     settings->addAction(optionsAction);
+
+    QMenu *socials = appMenuBar->addMenu(tr("Social"));
+    socials->addAction(facebookAction);
+    socials->addAction(twitterAction);
+    socials->addAction(discordAction);
+    socials->addAction(telegramAction);
+    socials->addAction(telegram2Action);
+    socials->addAction(youtubeAction);
+    socials->addAction(redditAction);
+
+    QMenu* tools = appMenuBar->addMenu(tr("&Tools"));
+    tools->addAction(openInfoAction);
+    tools->addAction(openRPCConsoleAction);
+    tools->addAction(openNetworkAction);
+    tools->addAction(openPeersAction);
+    tools->addSeparator();
+    tools->addAction(openConfEditorAction);
 
     QMenu *help = appMenuBar->addMenu(tr("&Help"));
     help->addAction(openRPCConsoleAction);
@@ -467,7 +528,14 @@ void pwrcoinGUI::createTrayIcon()
     trayIconMenu->addAction(verifyMessageAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(optionsAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(openInfoAction);
     trayIconMenu->addAction(openRPCConsoleAction);
+    trayIconMenu->addAction(openNetworkAction);
+    trayIconMenu->addAction(openPeersAction);
+    trayIconMenu->addSeparator();
+    trayIconMenu->addAction(openConfEditorAction);
+
 #ifndef Q_OS_MAC // This is built-in on Mac
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(quitAction);
@@ -502,6 +570,36 @@ void pwrcoinGUI::aboutClicked()
     dlg.setModel(clientModel);
     dlg.exec();
 }
+
+void pwrcoinGUI::facebookActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://www.facebook.com/pwrcoin/"));
+}
+void pwrcoinGUI::twitterActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://twitter.com/pwr_coin"));
+}
+void pwrcoinGUI::discordActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://discord.gg/Pgw2RNS"));
+}
+void pwrcoinGUI::telegramActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://t.me/pwr_coin_official"));
+}
+void pwrcoinGUI::telegram2ActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://t.me/pwr_coin"));
+}
+void pwrcoinGUI::youtubeActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg"));
+}
+void pwrcoinGUI::redditActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://www.reddit.com/r/PWRcoin/"));
+}
+
 
 void pwrcoinGUI::setNumConnections(int count)
 {

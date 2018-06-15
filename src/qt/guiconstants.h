@@ -19,6 +19,12 @@ static const int STATUSBAR_ICONSIZE = 16;
 #define COLOR_NEGATIVE QColor(255, 0, 0)
 /* Transaction list -- bare address (without label) */
 #define COLOR_BAREADDRESS QColor(140, 140, 140)
+/* Transaction list -- TX status decoration - open until date */
+#define COLOR_TX_STATUS_OPENUNTILDATE QColor(64, 64, 255)
+/* Transaction list -- TX status decoration - offline */
+#define COLOR_TX_STATUS_OFFLINE QColor(192, 192, 192)
+/* Transaction list -- TX status decoration - default color */
+#define COLOR_BLACK QColor(0, 0, 0)
 
 /* Tooltips longer than this (in characters) are converted into rich text,
    so that they can be word-wrapped.
@@ -30,5 +36,15 @@ static const int MAX_URI_LENGTH = 255;
 
 /* QRCodeDialog -- size of exported QR Code image */
 #define EXPORT_IMAGE_SIZE 256
+
+/* Number of frames in spinner animation */
+#define SPINNER_FRAMES 35
+
+
+#define QAPP_ORG_NAME "PWR coin"
+
+#define QAPP_ORG_DOMAIN "pwr-coin.com"
+#define QAPP_APP_NAME_DEFAULT "PWRcoin-Qt"
+#define QAPP_APP_NAME_TESTNET "PWRcoin-Qt-testnet"
 
 #endif // GUICONSTANTS_H

@@ -187,9 +187,13 @@ QString TransactionDesc::toHTML(CWallet *wallet, CWalletTx &wtx)
                     strHTML += "<b>" + tr("Credit") + ":</b> " + pwrcoinUnits::formatWithUnit(pwrcoinUnits::PWR, nValue) + "<br>";
                 }
 
-                int64_t nTxFee = nDebit - wtx.GetValueOut();
-                if (nTxFee > 0)
+                // Prevent a Wallet Crash, check MAX_VALUE first
+                if(wtx.CheckValueOut())
+                {
+                  int64_t nTxFee = nDebit - wtx.GetValueOut();
+                  if (nTxFee > 0)
                     strHTML += "<b>" + tr("Transaction fee") + ":</b> " + pwrcoinUnits::formatWithUnit(pwrcoinUnits::PWR, -nTxFee) + "<br>";
+                }
             }
             else
             {

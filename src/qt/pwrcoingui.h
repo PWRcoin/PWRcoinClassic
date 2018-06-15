@@ -94,7 +94,19 @@ private:
     QAction *unlockWalletAction;
     QAction *lockWalletAction;
     QAction *aboutQtAction;
-    QAction *openRPCConsoleAction;
+    QAction* openInfoAction;
+    QAction* openRPCConsoleAction;
+    QAction* openNetworkAction;
+    QAction* openPeersAction;
+    QAction* openConfEditorAction;
+ 
+    QAction *facebookAction;
+    QAction *twitterAction;
+    QAction *discordAction;
+    QAction *telegramAction;
+    QAction *telegram2Action;
+    QAction *youtubeAction;
+    QAction *redditAction;
 
     QSystemTrayIcon *trayIcon;
     Notificator *notificator;
@@ -117,6 +129,7 @@ public slots:
     void setNumConnections(int count);
     /** Set number of blocks shown in the UI */
     void setNumBlocks(int count, int nTotalBlocks);
+
     /** Set the encryption status as shown in the UI.
        @param[in] status            current encryption status
        @see WalletModel::EncryptionStatus
@@ -161,6 +174,16 @@ private slots:
     /** Handle tray icon clicked */
     void trayIconActivated(QSystemTrayIcon::ActivationReason reason);
 #endif
+
+    /** Social Channels */
+    void facebookActionClicked();
+    void twitterActionClicked();
+    void discordActionClicked();
+    void telegramActionClicked();
+    void telegram2ActionClicked();
+    void youtubeActionClicked();
+    void redditActionClicked();
+
     /** Show incoming transaction notification for new transactions.
 
         The new items are those between start and end inclusive, under the given parent item.
