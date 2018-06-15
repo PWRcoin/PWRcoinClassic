@@ -1,11 +1,11 @@
 
-### PWR Coin <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=2.0.2.0&x2=0">
+### PWR Coin (Phoenix) <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=3.0.0.0&x2=0">
 
 <p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
 
 ## Important Links
 
-  * Block explorer https://blockexplorer.pwr-coin.com/
+  * Block explorer t.b.d.
   * Website https://pwr-coin.com
   * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
   * CryptoHub Exchange https://cryptohub.online/market/PWR/
@@ -25,29 +25,28 @@
 Name: PWR Coin
 Ticker: PWR
 Maturity: 30 Blocks
-Block Size: 8MB
+Block Size: 2MB
 Block time: 30 seconds
 POW Algo: Nist5
 POS: 1% Annually – Maximum single POS payout is 500 coins
-Port: 4504
-Rpcport: 4502  
+Port: 22504
+Rpcport: 22502  
 
 POW Block Reward:
-- block 823000-993600    -> 5000 COINS 
-- block 993600-1123200   -> 2500 COINS 
-- block 1123200-1389600  -> 1250 COINS 
-- block 1389600-1915200  ->  750 COINS 
-- block 1915200-2440800  ->  500 COINS 
-- block 2440800-2966400  ->  400 COINS 
-- block 2966400-3492000  ->  300 COINS
-- block 3492000 and up   ->  200 COINS
+- block 50-242950       -> 5000 COINS - 3 months
+- block 242951-485950   -> 2500 COINS - 3 months
+- block 485951-971951   -> 1250 COINS - 6 months
+- block 971952-1957452  ->  750 COINS - 1 year
+- block 1957453-2942953 ->  500 COINS - 1 year
+- block 2942954-3928454 ->  400 COINS - 1 year
+- block 3928455-4913955 ->  300 COINS - 1 year
+- block 4913956 and up  ->  200 COINS 
 
 ```
 
 ## Wallet Instructions
 
-## PWR Coin Linux QT Compiled With Ubuntu 16.04.4 x86_64 (Tested 3-19-2018)
-
+## PWR Coin Linux QT Compiled With Ubuntu 16.04.4 x86_64 
 Install dependencies
 ---------------------
 When running the commands in the build instructions below, copy and paste one line and let it complete before running the next line. Watch for prompts in case you need to respond to a requested input and also to watch for any errors if they occur.
