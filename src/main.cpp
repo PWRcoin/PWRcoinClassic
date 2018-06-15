@@ -976,46 +976,25 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 {
     int64_t nSubsidy = 0 * COIN;
 
-    if(pindexBest->nHeight < 10) { 
-        nSubsidy = 2500000 * COIN; 
-    } else if(pindexBest->nHeight < 100) { 
-        nSubsidy = 0 * COIN; 
-    } else if(pindexBest->nHeight < 43200) { 
-        nSubsidy = 350 * COIN; 
-    } else if(pindexBest->nHeight < 86400) { 
-        nSubsidy = 230 * COIN; 
-
-    // Re-enable POW at FORK1
-    } else if(pindexBest->nHeight >= FORK1_BLOCK) { // Bonus POW begins at fork block
+    if(pindexBest->nHeight < 51) { 
+        nSubsidy = 1000000000 * COIN; 
+    } else if(pindexBest->nHeight >= 51) { // POW Tier 0 
         nSubsidy = 5000 * COIN; 
-    } else if(pindexBest->nHeight >= 993600) { // Tier 1 POW begins 3 months post fork
+    } else if(pindexBest->nHeight >= 242950) { // Tier 1 POW begins 3 months
         nSubsidy = 2500 * COIN; 
-    } else if(pindexBest->nHeight >= 1123200) { // Tier 2 POW begins 6 months post fork
+    } else if(pindexBest->nHeight >= 485951) { // Tier 2 POW begins 3 months
         nSubsidy = 1250 * COIN;
-    } else if(pindexBest->nHeight >= 1389600) { // Tier 3 POW begins 1 year post fork
+    } else if(pindexBest->nHeight >= 971952) { // Tier 3 POW begins 6 months
         nSubsidy = 750 * COIN;
-    } else if(pindexBest->nHeight >= 1915200) { // Tier 4 POW begins 2 years post fork
+    } else if(pindexBest->nHeight >= 1957453) { // Tier 4 POW begins 2 years
         nSubsidy = 500 * COIN;
-    } else if(pindexBest->nHeight >= 2440800) { // Tier 5 POW begins 3 years post fork
+    } else if(pindexBest->nHeight >= 2942954) { // Tier 5 POW begins 3 years
         nSubsidy = 400 * COIN;
-    } else if(pindexBest->nHeight >= 2966400) { // Tier 6 POW begins 4 years post fork
+    } else if(pindexBest->nHeight >= 3928455) { // Tier 6 POW begins 4 years
         nSubsidy = 300 * COIN;
-    } else if(pindexBest->nHeight >= 3492000) { // Tier 7 POW begins 5 years post fork
+    } else if(pindexBest->nHeight >= 4913956) { // Tier 7 POW begins 5 years
         nSubsidy = 200 * COIN;
     } 
-
-    if(fTestNet)
-    {
-        if(pindexBest->nHeight < 10) {
-            nSubsidy = 50000000 * COIN; // 50M
-        } else if(pindexBest->nHeight < 50) {
-            nSubsidy = 50000000 * COIN; // 25M
-        } else if(pindexBest->nHeight < FORK1_BLOCK) {
-            nSubsidy = 50000000 * COIN; // TEST PROOF OF STAKE WITHOUT POW
-        } else if(pindexBest->nHeight >= FORK1_BLOCK) { // Bonus POW begins at fork block
-            nSubsidy = 80000000 * COIN;
-        }
-    }
 
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfWorkReward() : create=%s nSubsidy=%" PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy);
@@ -1029,59 +1008,8 @@ int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees)
 {
     int64_t nSubsidy = 1 * COIN;
 
-    if(pindexBest->nHeight < 86000) // pow stage
-    {
-    nSubsidy = 0 * COIN;
-    }
-    else if(pindexBest->nHeight < 86400) // warmup 72000
-    {
-    nSubsidy = 5 * COIN;
-    }
-    else if(pindexBest->nHeight < 100800) // power1 144000
-    {
-    nSubsidy = 10 * COIN;
-    }
-    else if(pindexBest->nHeight < 115200) // power2 360000
-    {
-    nSubsidy = 25 * COIN;
-    }
-    else if(pindexBest->nHeight < 129600) // power3 720000
-    {
-    nSubsidy = 50 * COIN;
-    }
-    else if(pindexBest->nHeight < 144000) // power4 1440000
-    {
-    nSubsidy = 100 * COIN;
-    }
-    else if(pindexBest->nHeight < 158400) // power5 288000
-    {
-    nSubsidy = 20 * COIN;
-    }
-    else if(pindexBest->nHeight < 172800) // power6 216000 - 3240000 minted during powerstake stages
-    {
-    nSubsidy = 15 * COIN;
-    }
-    else
-    {
-        if(pindexBest->nHeight > FORK1_BLOCK)
-        {
-            nSubsidy = nCoinAge * FORK1_COIN_YEAR_REWARD * 33 / ( 365 * 33 + 8) ;
-            nSubsidy = std::min(nSubsidy,MAX_POS_REWARD);
-        }
-        else
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
-    }
-
-    if(fTestNet)
-    {
-        if(pindexBest->nHeight > FORK1_BLOCK)
-        {
-            nSubsidy = nCoinAge * FORK1_COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
-            nSubsidy = std::min(nSubsidy,MAX_POS_REWARD);
-        }
-        else
-            nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);
-    }
+    nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / ( 365 * 33 + 8) ;
+    nSubsidy = std::min(nSubsidy,MAX_POS_REWARD);
 
     if (fDebug && GetBoolArg("-printcreation", false))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%" PRId64" nFees=%s\n", FormatMoney(nSubsidy).c_str(), nCoinAge,FormatMoney(nFees).c_str());
@@ -1102,10 +1030,7 @@ unsigned int ComputeMaxBits(CBigNum bnTargetLimit, unsigned int nBase, int64_t n
     {
         // Maximum 200% adjustment per day...
         bnResult *= 2;
-        if(pindexBest->nHeight >= FORK1_BLOCK)
-            nTime -= 1 * 60 * 60;
-        else
-            nTime -= 24 * 60 * 60;
+        nTime -= 1 * 60 * 60;
     }
 
     if (bnResult > bnTargetLimit)
@@ -1148,10 +1073,6 @@ static unsigned int GetNextTargetRequired_(const CBlockIndex* pindexLast, bool f
 
     if (pindexLast == NULL)
         return bnTargetLimit.GetCompact(); // genesis block
-
-    // fix difficulty for moving chain again at FORK1
-    if (pindexLast->nHeight == FORK1_BLOCK)
-       return bnTargetLimit.GetCompact(); 
 
     const CBlockIndex* pindexPrev = GetLastBlockIndex(pindexLast, fProofOfStake);
     if (pindexPrev->pprev == NULL)
@@ -1703,12 +1624,7 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex, bool fJustCheck)
     // pwrcoin: track money supply and mint amount info
     pindex->nMint = nValueOut - nValueIn + nFees;
 
-    // Since the money supply field is broken we might as well use it to track new coin creation
-    // This is a one time reset
-    if(pindex->nHeight == FORK1_BLOCK)
-        pindex->nMoneySupply = 0;
-    else
-        pindex->nMoneySupply = ((pindex->pprev? pindex->pprev->nMoneySupply : 0) + nValueOut - nValueIn);
+    pindex->nMoneySupply = ((pindex->pprev? pindex->pprev->nMoneySupply : 0) + nValueOut - nValueIn);
 
     if (!txdb.WriteBlockIndex(CDiskBlockIndex(pindex)))
         return error("Connect() : WriteBlockIndex for pindex failed");
@@ -2022,9 +1938,7 @@ bool CTransaction::GetCoinAge(CTxDB& txdb, uint64_t& nCoinAge) const
             printf("coin age nValueIn=%" PRId64" nTimeDiff=%d bnCentSecond=%s\n", nValueIn, nTime - txPrev.nTime, bnCentSecond.ToString().c_str());
     }
 
-    CBigNum bnCoinDay = bnCentSecond * CENT / (24 * 60 * 60);
-    if(pindexBest->nHeight >= FORK1_BLOCK)
-       bnCoinDay = bnCentSecond * CENT / COIN / (24 * 60 * 60);
+    CBigNum bnCoinDay = bnCentSecond * CENT / COIN / (24 * 60 * 60);
 
     if (fDebug && GetBoolArg("-printcoinage"))
         printf("coin age bnCoinDay=%s\n", bnCoinDay.ToString().c_str());
@@ -2228,8 +2142,7 @@ bool CBlock::AcceptBlock()
     CBlockIndex* pindexPrev = (*mi).second;
     int nHeight = pindexPrev->nHeight+1;
 
-    // Re-enable at FORK1
-    if (IsProofOfWork() && nHeight > LAST_POW_BLOCK && nHeight < FORK1_BLOCK)
+    if (IsProofOfWork())
         return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
 
     if (!fTestNet && IsProofOfStake() && nHeight < MODIFIER_INTERVAL_SWITCH)
@@ -3001,7 +2914,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
         
-        if (pfrom->nVersion < MIN_PROTO_VERSION || (pindexBest->nHeight > FORK1_BLOCK && pfrom->nVersion < MIN_PROTO_VERSION_FORK1 ))
+        if (pfrom->nVersion < MIN_PROTO_VERSION_PWR)
         {
             printf("partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString().c_str(), pfrom->nVersion);
             pfrom->fDisconnect = true;

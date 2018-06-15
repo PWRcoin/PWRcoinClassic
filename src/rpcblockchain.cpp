@@ -45,9 +45,6 @@ double GetDifficulty(const CBlockIndex* blockindex)
 
 double GetPoWMHashPS()
 {
-    // Re-enable at FORK1
-    if (pindexBest->nHeight >= LAST_POW_BLOCK && pindexBest->nHeight < FORK1_BLOCK)
-        return 0;
 
     int nPoWInterval = 72;
     int64_t nTargetSpacingWorkMin = 30, nTargetSpacingWork = 30;

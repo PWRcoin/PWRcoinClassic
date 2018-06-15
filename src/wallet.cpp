@@ -1388,7 +1388,6 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
 {
     int64_t nValue = 0;
     uint64_t nCoinBurn  = 0;
-    bool isFork1 = false; // disabled for now pindexBest->nHeight > FORK1_BLOCK;
 
     // Lets avoid doing work if no sender is specified
     if (vecSend.empty()) return false;
@@ -1397,13 +1396,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
     {
         // negative values not allowed
         if (nValue < 0) return false;
-        
-        if(isFork1 && !::IsMine(*this,s.first)){
-            nCoinBurn += ((s.second * 10) / 100) ; // 10 % COIN BURN
-            nValue    += ((s.second * 90) / 100 );
-        } else {
-           nValue += s.second;
-        }
+        nValue += s.second;
         if(fDebug) printf("CreateTransaction:1 send=%s tx.value=%s nCoinBurn=%s nValue=%s\n", s.first.ToString(), FormatMoney(s.second).c_str(), FormatMoney(nCoinBurn).c_str(), FormatMoney(nValue).c_str());
     }
 
@@ -1433,24 +1426,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
                 // ADD COIN BURN WHEN NOT SENDING TO SELF
                 BOOST_FOREACH (const PAIRTYPE(CScript, int64_t)& s, vecSend)
                 {
-                    if(isFork1 && !::IsMine(*this,s.first))
-                    {
-                        CScript scriptBurnPubKey = CScript();
-                        CpwrcoinAddress burnAddr("69BURnBLrcKMwQmfFGFzz4r52scZvJpozs");
-                        if(fTestNet)
-                        	burnAddr = CpwrcoinAddress("MT7H4664PzSRitgyEpzfU4LKV35gxwQGcP");
-                        
-                        scriptBurnPubKey.SetDestination(burnAddr.Get());
-                        wtxNew.vout.push_back(CTxOut(nCoinBurn, scriptBurnPubKey));
-                        if(fDebug)
-                            printf("CreateTransaction:3 added coin burn for %s  nTotalValue=%s\n",FormatMoney(nCoinBurn).c_str(), FormatMoney(nTotalValue).c_str());
-
-                        // ADD vouts to Payee ( 10% coinburn subtracted )
-                        wtxNew.vout.push_back(CTxOut(((s.second * 90) / 100), s.first));
-
-                    } else {
-                        wtxNew.vout.push_back(CTxOut(s.second, s.first));
-                    }
+                    wtxNew.vout.push_back(CTxOut(s.second, s.first));
                 }
 
                 // Choose coins to use
