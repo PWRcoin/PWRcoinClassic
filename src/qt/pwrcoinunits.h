@@ -35,17 +35,21 @@ public:
     //! Longer description
     static QString description(int unit);
     //! Number of Satoshis (1e-8) per unit
-    static quint64 factor(int unit);
+    static qint64 factor(int unit);
     //! Number of amount digits (to represent max number of coins)
     static int amountDigits(int unit);
     //! Number of decimals left
     static int decimals(int unit);
     //! Format as string
+    static QString format(int unit, qint64 amount, bool plussign=false);
+    //! Format as string (with unit)
+    static QString formatWithUnit(int unit, qint64 amount, bool plussign=false);
+    //! Format as string
     static QString format(int unit, quint64 amount, bool plussign=false);
     //! Format as string (with unit)
     static QString formatWithUnit(int unit, quint64 amount, bool plussign=false);
     //! Parse string to coin amount
-    static bool parse(int unit, const QString &value, quint64 *val_out);
+    static bool parse(int unit, const QString &value, qint64 *val_out);
     ///@}
 
     //! @name AbstractListModel implementation
