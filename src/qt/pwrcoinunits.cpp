@@ -52,7 +52,7 @@ QString pwrcoinUnits::description(int unit)
     }
 }
 
-qint64 pwrcoinUnits::factor(int unit)
+quint64 pwrcoinUnits::factor(int unit)
 {
     switch(unit)
     {
@@ -85,17 +85,17 @@ int pwrcoinUnits::decimals(int unit)
     }
 }
 
-QString pwrcoinUnits::format(int unit, qint64 n, bool fPlus)
+QString pwrcoinUnits::format(int unit, quint64 n, bool fPlus)
 {
     // Note: not using straight sprintf here because we do NOT want
     // localized number formatting.
     if(!valid(unit))
         return QString(); // Refuse to format invalid unit
-    qint64 coin = factor(unit);
+    quint64 coin = factor(unit);
     int num_decimals = decimals(unit);
-    qint64 n_abs = (n > 0 ? n : -n);
-    qint64 quotient = n_abs / coin;
-    qint64 remainder = n_abs % coin;
+    quint64 n_abs = (n > 0 ? n : -n);
+    quint64 quotient = n_abs / coin;
+    quint64 remainder = n_abs % coin;
     QString quotient_str = QString::number(quotient);
     QString remainder_str = QString::number(remainder).rightJustified(num_decimals, '0');
 
@@ -112,12 +112,12 @@ QString pwrcoinUnits::format(int unit, qint64 n, bool fPlus)
     return quotient_str + QString(".") + remainder_str;
 }
 
-QString pwrcoinUnits::formatWithUnit(int unit, qint64 amount, bool plussign)
+QString pwrcoinUnits::formatWithUnit(int unit, quint64 amount, bool plussign)
 {
     return format(unit, amount, plussign) + QString(" ") + name(unit);
 }
 
-bool pwrcoinUnits::parse(int unit, const QString &value, qint64 *val_out)
+bool pwrcoinUnits::parse(int unit, const QString &value, quint64 *val_out)
 {
     if(!valid(unit) || value.isEmpty())
         return false; // Refuse to parse invalid unit or empty string

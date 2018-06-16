@@ -685,7 +685,7 @@ void CWalletTx::GetAmounts(list<pair<CTxDestination, int64_t> >& listReceived,
     listReceived.clear();
     listSent.clear();
     strSentAccount = strFromAccount;
-
+        
     // Compute fee:
     int64_t nDebit = GetDebit();
     if (nDebit > 0) // debit>0 means we signed/sent this transaction
@@ -1561,7 +1561,7 @@ bool CWallet::CreateTransaction(CScript scriptPubKey, int64_t nValue, CWalletTx&
 bool CWallet::GetStakeWeight(const CKeyStore& keystore, uint64_t& nMinWeight, uint64_t& nMaxWeight, uint64_t& nWeight)
 {
     // Choose coins to use
-    int64_t nBalance = GetBalance();
+    uint64_t nBalance = GetBalance();
 
     if (nBalance <= nReserveBalance)
         return false;
@@ -1627,7 +1627,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     txNew.vout.push_back(CTxOut(0, scriptEmpty));
 
     // Choose coins to use
-    int64_t nBalance = GetBalance();
+    uint64_t nBalance = GetBalance();
 
     if (nBalance <= nReserveBalance)
         return false;
