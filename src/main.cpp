@@ -2504,10 +2504,10 @@ bool LoadBlockIndex(bool fAllowNew)
 
     if (fTestNet)
     {
-        pchMessageStart[0] = 0xe7;
-        pchMessageStart[1] = 0xe3;
-        pchMessageStart[2] = 0xe2;
-        pchMessageStart[3] = 0xe1;
+        pchMessageStart[0] = 0xb4;
+        pchMessageStart[1] = 0x10;
+        pchMessageStart[2] = 0x26;
+        pchMessageStart[3] = 0xd2;
 
         bnProofOfWorkLimit = bnProofOfWorkLimitTestNet; // 0x0000ffff PoW base target is fixed in testnet
         nStakeMinAge = 20 * 60; // test net min age is 20 min
@@ -2882,7 +2882,7 @@ bool static AlreadyHave(CTxDB& txdb, const CInv& inv)
 // The message start string is designed to be unlikely to occur in normal data.
 // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
 // a large 4-byte int at any alignment.
-unsigned char pchMessageStart[4] = { 0xa1, 0xa0, 0xa2, 0xa3 };
+unsigned char pchMessageStart[4] = { 0xd2, 0xb4, 0x26, 0x10 };
 
 bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
 {
