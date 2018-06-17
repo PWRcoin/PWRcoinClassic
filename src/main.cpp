@@ -68,7 +68,7 @@ map<uint256, set<uint256> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "pwrcoin very Signed Message:\n";
+const string strMessageMagic = "PWRcoin very Signed Message:\n";
 
 // Settings
 int64_t nTransactionFee = MIN_TX_FEE;
@@ -2541,9 +2541,9 @@ bool LoadBlockIndex(bool fAllowNew)
 	if(!fTestNet)
 	{
 
-        const char* pszTimestamp = "cogito ergo sum";
+        const char* pszTimestamp = "Quia qui ex fide sunt benedicentur cum Deo";
         //CTransaction txNew;
-        txNew.nTime = 1462298970;
+        txNew.nTime = 1529260750; //Update when ready for new gen - Post Swap
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2553,7 +2553,7 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1462298970;
+        block.nTime    = 1529260750;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
         block.nNonce   = 275071;
 	
@@ -2562,7 +2562,7 @@ bool LoadBlockIndex(bool fAllowNew)
         {
         const char* pszTimestamp = "Knowledge is PWR - Testnet";
         //CTransaction txNew;
-        txNew.nTime = 1524316708;
+        txNew.nTime = 1529260750;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2572,7 +2572,7 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1524316708;
+        block.nTime    = 1529260750;
         block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
         block.nNonce   = 13161;
         }
@@ -2605,11 +2605,11 @@ bool LoadBlockIndex(bool fAllowNew)
        
          if(!fTestNet)
         {
-            assert(block.hashMerkleRoot == uint256("0x619de95fad57b2886dc74d8f5995c2d9d2197958aeb69dc5abf99fe26628dac4"));
+            assert(block.hashMerkleRoot == uint256("0x0"));
         }
         else
         {
-            assert(block.hashMerkleRoot == uint256("0x0256e8f5c90cbbdcd8c80c7c486d3bd8d4e6df8cca41087a7c6dd86116e43441"));
+            assert(block.hashMerkleRoot == uint256("0x0"));
         }                                                //Testnet Hash
 
 	block.print();
