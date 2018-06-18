@@ -135,11 +135,11 @@ void OverviewPage::setBalance(quint64 balance, qint64 stake, quint64 unconfirmed
     currentStake = stake;
     currentUnconfirmedBalance = unconfirmedBalance;
     currentImmatureBalance = immatureBalance;
-    ui->labelBalance->setText(pwrcoinUnits::formatWithUnit(unit, balance));
+    ui->labelBalance->setText(pwrcoinUnits::formatWithUnit2(unit, balance));
     ui->labelStake->setText(pwrcoinUnits::formatWithUnit(unit, stake));
-    ui->labelUnconfirmed->setText(pwrcoinUnits::formatWithUnit(unit, unconfirmedBalance));
-    ui->labelImmature->setText(pwrcoinUnits::formatWithUnit(unit, immatureBalance));
-    ui->labelTotal->setText(pwrcoinUnits::formatWithUnit(unit, balance + stake + unconfirmedBalance + immatureBalance));
+    ui->labelUnconfirmed->setText(pwrcoinUnits::formatWithUnit2(unit, unconfirmedBalance));
+    ui->labelImmature->setText(pwrcoinUnits::formatWithUnit2(unit, immatureBalance));
+    ui->labelTotal->setText(pwrcoinUnits::formatWithUnit2(unit, balance + stake + unconfirmedBalance + immatureBalance));
 
     // only show immature (newly mined) balance if it's non-zero, so as not to complicate things
     // for the non-mining users

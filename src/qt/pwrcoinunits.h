@@ -42,12 +42,12 @@ public:
     static int decimals(int unit);
     //! Format as string
     static QString format(int unit, qint64 amount, bool plussign=false);
+    //! Format as string
+    static QString format2(int unit, quint64 amount, bool plussign=false);
     //! Format as string (with unit)
     static QString formatWithUnit(int unit, qint64 amount, bool plussign=false);
-    //! Format as string
-    static QString format(int unit, quint64 amount, bool plussign=false);
     //! Format as string (with unit)
-    static QString formatWithUnit(int unit, quint64 amount, bool plussign=false);
+    static QString formatWithUnit2(int unit, quint64 amount, bool plussign=false);
 
     //! Parse string to coin amount
     static bool parse(int unit, const QString &value, qint64 *val_out);

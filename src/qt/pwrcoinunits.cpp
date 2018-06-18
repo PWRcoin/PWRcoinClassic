@@ -117,7 +117,7 @@ QString pwrcoinUnits::formatWithUnit(int unit, qint64 amount, bool plussign)
     return format(unit, amount, plussign) + QString(" ") + name(unit);
 }
 
-QString pwrcoinUnits::format(int unit, quint64 n, bool fPlus)
+QString pwrcoinUnits::format2(int unit, quint64 n, bool fPlus)
 {
     // Note: not using straight sprintf here because we do NOT want
     // localized number formatting.
@@ -145,7 +145,7 @@ QString pwrcoinUnits::format(int unit, quint64 n, bool fPlus)
 }
 
 
-QString pwrcoinUnits::formatWithUnit(int unit, quint64 amount, bool plussign)
+QString pwrcoinUnits::formatWithUnit2(int unit, quint64 amount, bool plussign)
 {
     return format(unit, amount, plussign) + QString(" ") + name(unit);
 }
