@@ -1010,13 +1010,13 @@ void PrintExceptionContinue(std::exception* pex, const char* pszThread)
 boost::filesystem::path GetDefaultDataDir()
 {
     namespace fs = boost::filesystem;
-    // Windows < Vista: C:\Documents and Settings\Username\Application Data\pwrcoin
-    // Windows >= Vista: C:\Users\Username\AppData\Roaming\pwrcoin
-    // Mac: ~/Library/Application Support/pwrcoin
-    // Unix: ~/.pwrcoin
+    // Windows < Vista: C:\Documents and Settings\Username\Application Data\PWRcoin3
+    // Windows >= Vista: C:\Users\Username\AppData\Roaming\PWRcoin3
+    // Mac: ~/Library/Application Support/PWRcoin3
+    // Unix: ~/.PWRcoin3
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "pwrcoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "PWRcoin3";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -1028,10 +1028,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     fs::create_directory(pathRet);
-    return pathRet / "pwrcoin";
+    return pathRet / "PWRcoin3";
 #else
     // Unix
-    return pathRet / ".pwrcoin";
+    return pathRet / ".PWRcoin3";
 #endif
 #endif
 }
