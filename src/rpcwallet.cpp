@@ -81,7 +81,7 @@ Value burn(const Array& params, bool fHelp)
 
     
     // TODO SET correct burnaddress
-    CpwrcoinAddress burnAddr("69BURnBLrcKMwQmfFGFzz4r52scZvJpozs");  \\TO DO: update for new coin
+    CpwrcoinAddress burnAddr("69BURnBLrcKMwQmfFGFzz4r52scZvJpozs");  //TO DO: update for new coin
     if(fTestNet)
         burnAddr = CpwrcoinAddress("MT7H4664PzSRitgyEpzfU4LKV35gxwQGcP");
 
