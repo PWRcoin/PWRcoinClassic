@@ -2555,7 +2555,7 @@ bool LoadBlockIndex(bool fAllowNew)
         block.nVersion = 1;
         block.nTime    = 1529260750;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = 275071;
+        block.nNonce   = 1247108;
 	
         }
 		else
@@ -2605,7 +2605,7 @@ bool LoadBlockIndex(bool fAllowNew)
        
          if(!fTestNet)
         {
-            assert(block.hashMerkleRoot == uint256("0x0"));
+            assert(block.hashMerkleRoot == uint256("0x99bd16bcd15d522a71b1f392601bc578d1658eeec5d9c7bb615b0f10ec44631e"));
         }
         else
         {
