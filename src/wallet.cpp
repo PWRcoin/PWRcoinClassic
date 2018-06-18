@@ -1417,7 +1417,6 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
                 wtxNew.vout.clear();
                 wtxNew.fFromMe = true;
 
-                // We add back the coin burn value because nTotalValue is used by SelectCoins to find Inputs !!
                 if(fDebug) printf("CreateTransaction:2 nFeeRet=%s\n",FormatMoney(nFeeRet).c_str());
 
                 int64_t nTotalValue = nValue + nCoinBurn + nFeeRet;
