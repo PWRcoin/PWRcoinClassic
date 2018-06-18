@@ -67,7 +67,7 @@ int pwrcoinUnits::amountDigits(int unit)
 {
     switch(unit)
     {
-    case PWR: return  8; // 21,000,000 (# digits, without commas)
+    case PWR: return  10; // 21,000,000 (# digits, without commas)
     case mPWR: return 11; // 21,000,000,000
     case uPWR: return 14; // 21,000,000,000,000
     default: return 0;
