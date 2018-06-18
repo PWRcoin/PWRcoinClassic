@@ -28,19 +28,20 @@ Maturity: 30 Blocks
 Block Size: 2MB
 Block time: 30 seconds
 POW Algo: Nist5
-POS: 1% Annually – Maximum single POS payout is 500 coins
+POS: 1% Annually – Maximum single POS payout is ? coins
 Port: 22504
 Rpcport: 22502  
+Max Supply: ??
 
 POW Block Reward:
-- block 50-242950       -> 5000 COINS - 3 months
-- block 242951-485950   -> 2500 COINS - 3 months
-- block 485951-971951   -> 1250 COINS - 6 months
-- block 971952-1957452  ->  750 COINS - 1 year
-- block 1957453-2942953 ->  500 COINS - 1 year
-- block 2942954-3928454 ->  400 COINS - 1 year
-- block 3928455-4913955 ->  300 COINS - 1 year
-- block 4913956 and up  ->  200 COINS 
+- block 50-242950       -> ? COINS - 3 months
+- block 242951-485950   -> ? COINS - 3 months
+- block 485951-971951   -> ? COINS - 6 months
+- block 971952-1957452  ->  ? COINS - 1 year
+- block 1957453-2942953 ->  ? COINS - 1 year
+- block 2942954-3928454 ->  ? COINS - 1 year
+- block 3928455-4913955 ->  ? COINS - 1 year
+- block 4913956 and up  ->  ? COINS 
 
 ```
 
