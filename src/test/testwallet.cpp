@@ -13,12 +13,18 @@ uint64_t GetBalanceXXL()
     uint64_t nCredit = 100000000; // 1 PWR
     uint64_t nCoins[10] = { 100000000 , 100000000 , 10000000000 ,9000000000012345678, 9000000000012345678, 9000000000012345678, 9000000000012345678, 9000000000012345678 ,9000000000012345678, 9000000000012345678 };
     int x = 0;
+    uint64_t nTotalDust=0;
 
     for (int x = 0; x < 10; x++) 
     { 
        nCredit = nCoins[x];  
+       uint64_t nDust = 0;
        if(nCredit > 0)
+       {
+            nDust   = nCredit % 100000000;
             nCredit = nCredit / 100000000;
+       }
+        nTotalDust += nDust;
 
         uint64_t nBalance = nTotal + nCredit;
         if (nBalance > nTotal)
@@ -26,7 +32,10 @@ uint64_t GetBalanceXXL()
            nTotal = nBalance;
         }
     }
-    return nTotal;
+ 
+    nTotalDust = nTotalDust / 100000000;
+
+    return nTotal+nTotalDust;
 }
 
 uint64_t GetBalance()
