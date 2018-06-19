@@ -1021,6 +1021,35 @@ void CWallet::ResendWalletTransactions(bool fForce)
 // Actions
 //
 
+/* Return valance without the 8 decimals ( excluding dust ) 
+ * This should give us the ability to show trillions 
+ */
+uint64_t CWallet::GetBalanceXXL() const
+{
+    uint64_t nTotal = 0;
+    {
+        LOCK(cs_wallet);
+        for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
+        {
+            const CWalletTx* pcoin = &(*it).second;
+            if (pcoin->IsTrusted())
+            {
+                uint64_t nCredit = pcoin->GetAvailableCredit();
+                if(nCredit > 0)
+                    nCredit = nCredit / 100000000;
+
+                uint64_t nBalance = nTotal + nCredit;
+                
+                if (nBalance > nTotal)
+                {
+                    nTotal = nBalance;
+                }
+            }
+        }
+    }
+
+    return nTotal;
+}
 
 uint64_t CWallet::GetBalance() const
 {
