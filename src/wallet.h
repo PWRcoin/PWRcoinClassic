@@ -179,6 +179,7 @@ public:
     int ScanForWalletTransaction(const uint256& hashTx);
     void ReacceptWalletTransactions();
     void ResendWalletTransactions(bool fForce = false);
+    uint64_t GetBalanceXXL() const;
     uint64_t GetBalance() const;
     uint64_t GetUnconfirmedBalance() const;
     uint64_t GetImmatureBalance() const;
