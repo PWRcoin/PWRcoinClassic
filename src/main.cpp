@@ -976,24 +976,24 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 {
     int64_t nSubsidy = 0 * COIN;
 
-    if(pindexBest->nHeight < 51) { 
-        nSubsidy = 1000000000 * COIN; 
-    } else if(pindexBest->nHeight >= 51) { // POW Tier 0 
-        nSubsidy = 5000 * COIN; 
-    } else if(pindexBest->nHeight >= 242950) { // Tier 1 POW begins 3 months
-        nSubsidy = 2500 * COIN; 
-    } else if(pindexBest->nHeight >= 485951) { // Tier 2 POW begins 3 months
-        nSubsidy = 1250 * COIN;
-    } else if(pindexBest->nHeight >= 971952) { // Tier 3 POW begins 6 months
-        nSubsidy = 750 * COIN;
-    } else if(pindexBest->nHeight >= 1957453) { // Tier 4 POW begins 2 years
-        nSubsidy = 500 * COIN;
-    } else if(pindexBest->nHeight >= 2942954) { // Tier 5 POW begins 3 years
-        nSubsidy = 400 * COIN;
-    } else if(pindexBest->nHeight >= 3928455) { // Tier 6 POW begins 4 years
-        nSubsidy = 300 * COIN;
-    } else if(pindexBest->nHeight >= 4913956) { // Tier 7 POW begins 5 years
-        nSubsidy = 200 * COIN;
+    if(pindexBest->nHeight <= 51) { 
+        nSubsidy = 400000 * COIN; // 20M pre-mine 
+    } else if(pindexBest->nHeight >= 52) { // POW Tier 0 
+        nSubsidy = 440 * COIN; 
+    } else if(pindexBest->nHeight >= 175250) { // Tier 1 POW begins 3 months
+        nSubsidy = 370 * COIN; 
+    } else if(pindexBest->nHeight >= 350450) { // Tier 2 POW begins 3 months
+        nSubsidy = 295 * COIN;
+    } else if(pindexBest->nHeight >= 700850) { // Tier 3 POW begins 6 months
+        nSubsidy = 225 * COIN;
+    } else if(pindexBest->nHeight >= 1401650) { // Tier 4 POW begins 2 years
+        nSubsidy = 210 * COIN;
+    } else if(pindexBest->nHeight >= 2102450) { // Tier 5 POW begins 3 years
+        nSubsidy = 195 * COIN;
+    } else if(pindexBest->nHeight >= 2803250) { // Tier 6 POW begins 4 years
+        nSubsidy = 180 * COIN;
+    } else if(pindexBest->nHeight >= 3504050) { // Tier 7 POW begins 5 years
+        nSubsidy = 165 * COIN;
     } 
 
     if (fDebug && GetBoolArg("-printcreation"))
