@@ -2541,40 +2541,39 @@ bool LoadBlockIndex(bool fAllowNew)
 	if(!fTestNet)
 	{
 
-        const char* pszTimestamp = "Quia qui ex fide sunt benedicentur cum Deo";
-        //CTransaction txNew;
-        txNew.nTime = 1529260750; //Update when ready for new gen - Post Swap
-        txNew.vin.resize(1);
-        txNew.vout.resize(1);
-        txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].SetEmpty();
-        //CBlock block;
-        block.vtx.push_back(txNew);
-        block.hashPrevBlock = 0;
-        block.hashMerkleRoot = block.BuildMerkleTree();
-        block.nVersion = 1;
-        block.nTime    = 1529260750;
-        block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = 1247108;
-	
+        	const char* pszTimestamp = "Quia qui ex fide sunt benedicentur cum Deo";
+        	//CTransaction txNew;
+        	txNew.nTime = 1532070750; //Update when ready for new gen - Post Swap
+        	txNew.vin.resize(1);
+        	txNew.vout.resize(1);
+        	txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+        	txNew.vout[0].SetEmpty();
+        	//CBlock block;
+        	block.vtx.push_back(txNew);
+        	block.hashPrevBlock = 0;
+        	block.hashMerkleRoot = block.BuildMerkleTree();
+        	block.nVersion = 1;
+        	block.nTime    = 1532070750;
+        	block.nBits    = bnProofOfWorkLimit.GetCompact();
+        	block.nNonce   = 761960;
         }
-		else
+	else
         {
-        const char* pszTimestamp = "Knowledge is PWR - Testnet";
-        //CTransaction txNew;
-        txNew.nTime = 1529260750;
-        txNew.vin.resize(1);
-        txNew.vout.resize(1);
-        txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].SetEmpty();
-        //CBlock block;
-        block.vtx.push_back(txNew);
-        block.hashPrevBlock = 0;
-        block.hashMerkleRoot = block.BuildMerkleTree();
-        block.nVersion = 1;
-        block.nTime    = 1529260750;
-        block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
-        block.nNonce   = 13161;
+        	const char* pszTimestamp = "Knowledge is PWR - Testnet";
+        	//CTransaction txNew;
+        	txNew.nTime = 1532070750;
+        	txNew.vin.resize(1);
+        	txNew.vout.resize(1);
+        	txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+        	txNew.vout[0].SetEmpty();
+        	//CBlock block;
+        	block.vtx.push_back(txNew);
+        	block.hashPrevBlock = 0;
+        	block.hashMerkleRoot = block.BuildMerkleTree();
+        	block.nVersion = 1;
+        	block.nTime    = 1532070750;
+        	block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
+        	block.nNonce   = 0;
         }
 
 	uint256 actualGenesisBlock = !fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet;
@@ -2605,7 +2604,7 @@ bool LoadBlockIndex(bool fAllowNew)
        
          if(!fTestNet)
         {
-            assert(block.hashMerkleRoot == uint256("0x99bd16bcd15d522a71b1f392601bc578d1658eeec5d9c7bb615b0f10ec44631e"));
+            assert(block.hashMerkleRoot == uint256("0xbb9c939e4dd2e72ec70884a561cda04de4c02a56afad87abddeeea31cff53c78"));
         }
         else
         {
