@@ -1023,10 +1023,12 @@ void CWallet::ResendWalletTransactions(bool fForce)
 
 /* Return valance without the 8 decimals ( excluding dust ) 
  * This should give us the ability to show trillions 
+ * The function does collect the dust and adds it back at the end.
  */
 uint64_t CWallet::GetBalanceXXL() const
 {
     uint64_t nTotal = 0;
+    uint64_t nTotalDust = 0;
     {
         LOCK(cs_wallet);
         for (map<uint256, CWalletTx>::const_iterator it = mapWallet.begin(); it != mapWallet.end(); ++it)
@@ -1035,20 +1037,27 @@ uint64_t CWallet::GetBalanceXXL() const
             if (pcoin->IsTrusted())
             {
                 uint64_t nCredit = pcoin->GetAvailableCredit();
+                uint64_t nDust = 0;
                 if(nCredit > 0)
+                {
+                    nDust   = nCredit % 100000000;
                     nCredit = nCredit / 100000000;
-
+                }
                 uint64_t nBalance = nTotal + nCredit;
-                
+                nTotalDust = nTotalDust + nDust;
                 if (nBalance > nTotal)
                 {
                     nTotal = nBalance;
                 }
+                //printf("nCredit=%" PRIu64 " nDust=%" PRIu64 " nBalance=%" PRIu64 " nTotalDust=%" PRIu64 " nTotal=%" PRIu64 "\n",nCredit,nDust,nBalance,nTotalDust,nTotal);
             }
         }
     }
 
-    return nTotal;
+    // Convert back to PWR coin , as we are not showing dust
+    nTotalDust = nTotalDust / 100000000;
+
+    return nTotal+nTotalDust;
 }
 
 uint64_t CWallet::GetBalance() const
