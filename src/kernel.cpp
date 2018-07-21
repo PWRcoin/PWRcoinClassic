@@ -390,8 +390,9 @@ unsigned int GetStakeModifierChecksum(const CBlockIndex* pindex)
 bool CheckStakeModifierCheckpoints(int nHeight, unsigned int nStakeModifierChecksum)
 {
     MapModifierCheckpoints& checkpoints = (fTestNet ? mapStakeModifierCheckpointsTestNet : mapStakeModifierCheckpoints);
+    // Disable Checkpointing
 
-    if (checkpoints.count(nHeight))
-        return nStakeModifierChecksum == checkpoints[nHeight];
+    //if (checkpoints.count(nHeight))
+    //    return nStakeModifierChecksum == checkpoints[nHeight];
     return true;
 }
