@@ -977,7 +977,7 @@ int64_t GetProofOfWorkReward(int64_t nFees)
     int64_t nSubsidy = 0 * COIN;
 
     if(pindexBest->nHeight <= 51) { 
-        nSubsidy = 400000 * COIN; // 20M pre-mine 
+        nSubsidy = 400000000 * COIN; // 20M pre-mine 
     } else if(pindexBest->nHeight >= 52) { // POW Tier 0 
         nSubsidy = 440 * COIN; 
     } else if(pindexBest->nHeight >= 175250) { // Tier 1 POW begins 3 months
@@ -2543,7 +2543,7 @@ bool LoadBlockIndex(bool fAllowNew)
 
         	const char* pszTimestamp = "Quia qui ex fide sunt benedicentur cum Deo";
         	//CTransaction txNew;
-        	txNew.nTime = 1532070750; //Update when ready for new gen - Post Swap
+        	txNew.nTime = 1532070755; //Update when ready for new gen - Post Swap
         	txNew.vin.resize(1);
         	txNew.vout.resize(1);
         	txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2553,15 +2553,15 @@ bool LoadBlockIndex(bool fAllowNew)
         	block.hashPrevBlock = 0;
         	block.hashMerkleRoot = block.BuildMerkleTree();
         	block.nVersion = 1;
-        	block.nTime    = 1532070750;
+        	block.nTime    = 1532070755;
         	block.nBits    = bnProofOfWorkLimit.GetCompact();
-        	block.nNonce   = 761960;
+        	block.nNonce   = 1261914;
         }
 	else
         {
         	const char* pszTimestamp = "Knowledge is PWR - Testnet";
         	//CTransaction txNew;
-        	txNew.nTime = 1532070750;
+        	txNew.nTime = 1532070755;
         	txNew.vin.resize(1);
         	txNew.vout.resize(1);
         	txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2571,7 +2571,7 @@ bool LoadBlockIndex(bool fAllowNew)
         	block.hashPrevBlock = 0;
         	block.hashMerkleRoot = block.BuildMerkleTree();
         	block.nVersion = 1;
-        	block.nTime    = 1532070750;
+        	block.nTime    = 1532070755;
         	block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
         	block.nNonce   = 0;
         }
@@ -2604,7 +2604,7 @@ bool LoadBlockIndex(bool fAllowNew)
        
          if(!fTestNet)
         {
-            assert(block.hashMerkleRoot == uint256("0xbb9c939e4dd2e72ec70884a561cda04de4c02a56afad87abddeeea31cff53c78"));
+            assert(block.hashMerkleRoot == uint256("0x0f2a3b0b7652d18477eda7a1032288d39666b5d251bfa50050cfe3c8f9e2b9d5"));
         }
         else
         {
