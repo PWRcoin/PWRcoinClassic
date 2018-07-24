@@ -98,8 +98,9 @@ private:
     QAction* openRPCConsoleAction;
     QAction* openNetworkAction;
     QAction* openPeersAction;
+    QAction* openBlockExplorerAction;
     QAction* openConfEditorAction;
- 
+
     QAction *facebookAction;
     QAction *twitterAction;
     QAction *discordAction;
@@ -170,6 +171,9 @@ private slots:
     void optionsClicked();
     /** Show about dialog */
     void aboutClicked();
+    /** Show block explorer */
+    void openBlockExplorerActionClicked();
+
 #ifndef Q_OS_MAC
     /** Handle tray icon clicked */
     void trayIconActivated(QSystemTrayIcon::ActivationReason reason);

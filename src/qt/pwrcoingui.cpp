@@ -282,7 +282,7 @@ void pwrcoinGUI::createActions()
     aboutAction = new QAction(QIcon(":/icons/pwrcoin"), tr("&About pwrcoin"), this);
     aboutAction->setToolTip(tr("Show information about pwrcoin"));
     aboutAction->setMenuRole(QAction::AboutRole);
-    aboutQtAction = new QAction(QIcon(":/trolltech/qmessagebox/images/qtlogo-64.png"), tr("About &Qt"), this);
+    aboutQtAction = new QAction(QIcon(":/images/qtlogo-64"), tr("About &Qt"), this);
     aboutQtAction->setToolTip(tr("Show information about Qt"));
     aboutQtAction->setMenuRole(QAction::AboutQtRole);
     optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options..."), this);
@@ -317,6 +317,9 @@ void pwrcoinGUI::createActions()
     telegram2Action->setToolTip(tr("PWR Telegram Announcements"));
     redditAction = new QAction(QIcon(":/icons/reddit"), tr("Reddit"), this);
     redditAction->setToolTip(tr("PWR Reddit"));
+
+    openBlockExplorerAction = new QAction(QIcon(":/icons/explorer"), tr("BlockExplorer"), this);
+    openBlockExplorerAction->setToolTip(tr("BlockExplorer"));
 
     exportAction = new QAction(QIcon(":/icons/export"), tr("&Export..."), this);
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
@@ -358,6 +361,7 @@ void pwrcoinGUI::createActions()
     connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showConsole()));
     connect(openNetworkAction, SIGNAL(triggered()), this, SLOT(showNetwork()));
     connect(openPeersAction, SIGNAL(triggered()), this, SLOT(showPeers()));
+    connect(openBlockExplorerAction, SIGNAL(triggered()), this , SLOT(openBlockExplorerActionClicked()));
     connect(openConfEditorAction, SIGNAL(triggered()), this, SLOT(showConfEditor()));
 }
 
@@ -402,6 +406,7 @@ void pwrcoinGUI::createMenuBar()
     tools->addAction(openRPCConsoleAction);
     tools->addAction(openNetworkAction);
     tools->addAction(openPeersAction);
+    tools->addAction(openBlockExplorerAction);
     tools->addSeparator();
     tools->addAction(openConfEditorAction);
 
@@ -533,6 +538,7 @@ void pwrcoinGUI::createTrayIcon()
     trayIconMenu->addAction(openRPCConsoleAction);
     trayIconMenu->addAction(openNetworkAction);
     trayIconMenu->addAction(openPeersAction);
+    trayIconMenu->addAction(openBlockExplorerAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(openConfEditorAction);
 
@@ -569,6 +575,11 @@ void pwrcoinGUI::aboutClicked()
     AboutDialog dlg;
     dlg.setModel(clientModel);
     dlg.exec();
+}
+
+void pwrcoinGUI::openBlockExplorerActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://blockexplorer2.pwr-coin.com/"));
 }
 
 void pwrcoinGUI::facebookActionClicked()
