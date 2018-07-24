@@ -2535,7 +2535,7 @@ bool LoadBlockIndex(bool fAllowNew)
 
         	const char* pszTimestamp = "Quia qui ex fide sunt benedicentur cum Deo";
         	//CTransaction txNew;
-        	txNew.nTime = 1532070760; //Update when ready for new gen - Post Swap
+        	txNew.nTime = 1532070765; //Update when ready for new gen - Post Swap
         	txNew.vin.resize(1);
         	txNew.vout.resize(1);
         	txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2545,9 +2545,9 @@ bool LoadBlockIndex(bool fAllowNew)
         	block.hashPrevBlock = 0;
         	block.hashMerkleRoot = block.BuildMerkleTree();
         	block.nVersion = 1;
-        	block.nTime    = 1532070760;
+        	block.nTime    = 1532070765;
         	block.nBits    = bnProofOfWorkLimit.GetCompact();
-        	block.nNonce   = 577202;
+        	block.nNonce   = 615112;
         }
 	else
         {
@@ -2563,7 +2563,7 @@ bool LoadBlockIndex(bool fAllowNew)
         	block.hashPrevBlock = 0;
         	block.hashMerkleRoot = block.BuildMerkleTree();
         	block.nVersion = 1;
-        	block.nTime    = 1532070760;
+        	block.nTime    = 1532070765;
         	block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
         	block.nNonce   = 0;
         }
@@ -2596,7 +2596,7 @@ bool LoadBlockIndex(bool fAllowNew)
        
          if(!fTestNet)
         {
-            assert(block.hashMerkleRoot == uint256("0x268d0855bfdbc3d29156be8b19ccaf3cc28fe50e61f0a7a4c15bdf7937d54ed1"));
+            assert(block.hashMerkleRoot == uint256("0x94741fc3d02564fade0d12a99bb6f9f224207222fe194b55594d087b5a2ab0c1"));
         }
         else
         {
