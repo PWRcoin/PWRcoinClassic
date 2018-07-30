@@ -579,7 +579,7 @@ void pwrcoinGUI::aboutClicked()
 
 void pwrcoinGUI::openBlockExplorerActionClicked()
 {
-        QDesktopServices::openUrl(QUrl("https://blockexplorer2.pwr-coin.com/"));
+        QDesktopServices::openUrl(QUrl("https://blockexplorer.pwr-coin.com/"));
 }
 
 void pwrcoinGUI::facebookActionClicked()
