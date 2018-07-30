@@ -1387,7 +1387,6 @@ bool CWallet::SelectCoinsSimple(int64_t nTargetValue, unsigned int nSpendTime, i
 bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, const CCoinControl* coinControl)
 {
     int64_t nValue = 0;
-    uint64_t nCoinBurn  = 0;
 
     // Lets avoid doing work if no sender is specified
     if (vecSend.empty()) return false;
@@ -1397,7 +1396,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
         // negative values not allowed
         if (nValue < 0) return false;
         nValue += s.second;
-        if(fDebug) printf("CreateTransaction:1 send=%s tx.value=%s nCoinBurn=%s nValue=%s\n", s.first.ToString(), FormatMoney(s.second).c_str(), FormatMoney(nCoinBurn).c_str(), FormatMoney(nValue).c_str());
+        if(fDebug) printf("CreateTransaction:1 send=%s tx.value=%s nValue=%s\n", s.first.ToString(), FormatMoney(s.second).c_str(), FormatMoney(nValue).c_str());
     }
 
     // Negative values not allowed
@@ -1419,7 +1418,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
 
                 if(fDebug) printf("CreateTransaction:2 nFeeRet=%s\n",FormatMoney(nFeeRet).c_str());
 
-                int64_t nTotalValue = nValue + nCoinBurn + nFeeRet;
+                int64_t nTotalValue = nValue  + nFeeRet;
                 double dPriority = 0;
 
                 // ADD COIN BURN WHEN NOT SENDING TO SELF
@@ -1440,8 +1439,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
                     dPriority += (double)nCredit * pcoin.first->GetDepthInMainChain();
                 }
                 
-                // nCoinBurn needs to be added or else the nChange will include it.
-                int64_t nChange = nValueIn - nValue - nCoinBurn - nFeeRet;
+                int64_t nChange = nValueIn - nValue - nFeeRet;
                 if(fDebug) printf("CreateTransaction:4 nValueIn=%s nChange=%s\n",FormatMoney(nValueIn).c_str(),FormatMoney(nChange).c_str());
 
                 // if sub-cent change is required, the fee must be raised to at least MIN_TX_FEE
