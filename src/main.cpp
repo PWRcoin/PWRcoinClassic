@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2010 Satoshi Nakamoto
+
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -976,7 +976,7 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 {
     int64_t nSubsidy = 0 * COIN;
 
-    if(pindexBest->nHeight <= 50) { 
+    if(pindexBest->nHeight < 50) { 
         nSubsidy = 198327361 * COIN;  
     } else if(pindexBest->nHeight >= 51) { // POW Tier 0 
         nSubsidy = 180 * COIN; 
@@ -2535,7 +2535,7 @@ bool LoadBlockIndex(bool fAllowNew)
 
         	const char* pszTimestamp = "Quia qui ex fide sunt benedicentur cum Deo";
         	//CTransaction txNew;
-        	txNew.nTime = 1532964082; //Update when ready for new gen - Post Swap
+        	txNew.nTime = 1532964090; //Update when ready for new gen - Post Swap
         	txNew.vin.resize(1);
         	txNew.vout.resize(1);
         	txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2545,15 +2545,15 @@ bool LoadBlockIndex(bool fAllowNew)
         	block.hashPrevBlock = 0;
         	block.hashMerkleRoot = block.BuildMerkleTree();
         	block.nVersion = 1;
-        	block.nTime    = 1532964082;
+        	block.nTime    = 1532964090;
         	block.nBits    = bnProofOfWorkLimit.GetCompact();
-        	block.nNonce   = 742022;
+        	block.nNonce   = 0;
         }
 	else
         {
         	const char* pszTimestamp = "Knowledge is PWR - Testnet";
         	//CTransaction txNew;
-        	txNew.nTime = 1532964082;
+        	txNew.nTime = 1532964090;
         	txNew.vin.resize(1);
         	txNew.vout.resize(1);
         	txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2563,9 +2563,9 @@ bool LoadBlockIndex(bool fAllowNew)
         	block.hashPrevBlock = 0;
         	block.hashMerkleRoot = block.BuildMerkleTree();
         	block.nVersion = 1;
-        	block.nTime    = 1532964082;
+        	block.nTime    = 1532964090;
         	block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
-        	block.nNonce   = 13530;
+        	block.nNonce   = 0;
         }
 
 	uint256 actualGenesisBlock = !fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet;
@@ -2596,11 +2596,11 @@ bool LoadBlockIndex(bool fAllowNew)
        
          if(!fTestNet)
         {
-            assert(block.hashMerkleRoot == uint256("0xd6959748513b4fe3119426abefbd6c5a6ca7a2701545c842d12a7142585d2e33"));
+            assert(block.hashMerkleRoot == uint256("0x0"));
         }
         else
         {
-            assert(block.hashMerkleRoot == uint256("0x6bc7f2b78cfea65bdc21962c284863bcf8da5abb9c4eaf336e28b49d1eff3f63"));
+            assert(block.hashMerkleRoot == uint256("0x0"));
         }                                                //Testnet Hash
 
 	block.print();
