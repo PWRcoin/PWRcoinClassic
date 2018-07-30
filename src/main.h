@@ -39,7 +39,7 @@ static const int64_t COIN_YEAR_REWARD =  1 * CENT; // 1% per year
 static const int64_t MAX_MINT_PROOF_OF_STAKE = 5 * CENT; // 5% annual interest
 static const int MODIFIER_INTERVAL_SWITCH = 60;
 static const int LAST_POW_BLOCK = 9855000; // DISABLE POW after 10 years
-static const int64_t MAX_POS_REWARD = 225 * COIN;
+static const int64_t MAX_POS_REWARD = 100 * COIN;
 inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 // Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp.
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
@@ -50,7 +50,7 @@ static const int fHaveUPnP = true;
 static const int fHaveUPnP = false;
 #endif
 
-static const uint256 hashGenesisBlock("0x000003ad05f643b19a9ab132e55604e9bac8225aa383c097e4b50f23c538e509");
+static const uint256 hashGenesisBlock("0x0");
 static const uint256 hashGenesisBlockTestNet("0x0");
 inline int64_t PastDrift(int64_t nTime)   { return nTime - 10 * 60; } // up to 10 minutes from the past
 inline int64_t FutureDrift(int64_t nTime) { return nTime + 10 * 60; } // up to 10 minutes from the future

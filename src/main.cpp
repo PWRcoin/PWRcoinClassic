@@ -976,24 +976,24 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 {
     int64_t nSubsidy = 0 * COIN;
 
-    if(pindexBest->nHeight <= 51) { 
-        nSubsidy = 400000000 * COIN; // 20M pre-mine 
-    } else if(pindexBest->nHeight >= 52) { // POW Tier 0 
-        nSubsidy = 440 * COIN; 
-    } else if(pindexBest->nHeight >= 175250) { // Tier 1 POW begins 3 months
-        nSubsidy = 370 * COIN; 
-    } else if(pindexBest->nHeight >= 350450) { // Tier 2 POW begins 3 months
-        nSubsidy = 295 * COIN;
-    } else if(pindexBest->nHeight >= 700850) { // Tier 3 POW begins 6 months
-        nSubsidy = 225 * COIN;
-    } else if(pindexBest->nHeight >= 1401650) { // Tier 4 POW begins 2 years
-        nSubsidy = 210 * COIN;
-    } else if(pindexBest->nHeight >= 2102450) { // Tier 5 POW begins 3 years
-        nSubsidy = 195 * COIN;
-    } else if(pindexBest->nHeight >= 2803250) { // Tier 6 POW begins 4 years
-        nSubsidy = 180 * COIN;
-    } else if(pindexBest->nHeight >= 3504050) { // Tier 7 POW begins 5 years
-        nSubsidy = 165 * COIN;
+    if(pindexBest->nHeight <= 50) { 
+        nSubsidy = 198327361 * COIN;  
+    } else if(pindexBest->nHeight >= 51) { // POW Tier 0 
+        nSubsidy = 180 * COIN; 
+    } else if(pindexBest->nHeight >= 262850) { // Tier 1 POW begins 3 months
+        nSubsidy = 150 * COIN; 
+    } else if(pindexBest->nHeight >= 1051250) { // Tier 2 POW begins 3 months
+        nSubsidy = 120 * COIN;
+    } else if(pindexBest->nHeight >= 2102450) { // Tier 3 POW begins 6 months
+        nSubsidy = 100 * COIN;
+    } else if(pindexBest->nHeight >= 3153650) { // Tier 4 POW begins 2 years
+        nSubsidy = 90 * COIN;
+    } else if(pindexBest->nHeight >= 4204850) { // Tier 5 POW begins 3 years
+        nSubsidy = 80 * COIN;
+    } else if(pindexBest->nHeight >= 5256050) { // Tier 6 POW begins 4 years
+        nSubsidy = 70 * COIN;
+    } else if(pindexBest->nHeight >= 6307250) { // Tier 7 POW begins 5 years
+        nSubsidy = 65 * COIN;
     } 
 
     if (fDebug && GetBoolArg("-printcreation"))
@@ -2535,7 +2535,7 @@ bool LoadBlockIndex(bool fAllowNew)
 
         	const char* pszTimestamp = "Quia qui ex fide sunt benedicentur cum Deo";
         	//CTransaction txNew;
-        	txNew.nTime = 1532070765; //Update when ready for new gen - Post Swap
+        	txNew.nTime = 1532964082; //Update when ready for new gen - Post Swap
         	txNew.vin.resize(1);
         	txNew.vout.resize(1);
         	txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2545,15 +2545,15 @@ bool LoadBlockIndex(bool fAllowNew)
         	block.hashPrevBlock = 0;
         	block.hashMerkleRoot = block.BuildMerkleTree();
         	block.nVersion = 1;
-        	block.nTime    = 1532070765;
+        	block.nTime    = 1532964082;
         	block.nBits    = bnProofOfWorkLimit.GetCompact();
-        	block.nNonce   = 615112;
+        	block.nNonce   = 0;
         }
 	else
         {
         	const char* pszTimestamp = "Knowledge is PWR - Testnet";
         	//CTransaction txNew;
-        	txNew.nTime = 1532070760;
+        	txNew.nTime = 1532964082;
         	txNew.vin.resize(1);
         	txNew.vout.resize(1);
         	txNew.vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -2563,7 +2563,7 @@ bool LoadBlockIndex(bool fAllowNew)
         	block.hashPrevBlock = 0;
         	block.hashMerkleRoot = block.BuildMerkleTree();
         	block.nVersion = 1;
-        	block.nTime    = 1532070765;
+        	block.nTime    = 1532964082;
         	block.nBits    = bnProofOfWorkLimitTestNet.GetCompact();
         	block.nNonce   = 0;
         }
@@ -2596,7 +2596,7 @@ bool LoadBlockIndex(bool fAllowNew)
        
          if(!fTestNet)
         {
-            assert(block.hashMerkleRoot == uint256("0x94741fc3d02564fade0d12a99bb6f9f224207222fe194b55594d087b5a2ab0c1"));
+            assert(block.hashMerkleRoot == uint256("0x0"));
         }
         else
         {
