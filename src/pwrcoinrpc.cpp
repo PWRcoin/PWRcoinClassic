@@ -751,7 +751,9 @@ static void RPCAcceptHandler(boost::shared_ptr< basic_socket_acceptor<Protocol, 
     if (error)
     {
         //delete conn;
+    #ifdef _WIN32
         printf("%s: Error: %s\n", __func__, error.message());
+    #endif
     }
 
     // Restrict callers by IP.  It is important to
