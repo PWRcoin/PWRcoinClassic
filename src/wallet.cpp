@@ -1396,7 +1396,9 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, int64_t> >& vecSend, 
         // negative values not allowed
         if (nValue < 0) return false;
         nValue += s.second;
+    #ifdef _WIN32
         if(fDebug) printf("CreateTransaction:1 send=%s tx.value=%s nValue=%s\n", s.first.ToString(), FormatMoney(s.second).c_str(), FormatMoney(nValue).c_str());
+    #endif
     }
 
     // Negative values not allowed
