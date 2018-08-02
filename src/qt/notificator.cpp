@@ -16,7 +16,8 @@
 #include <stdint.h>
 #endif
 
-#ifdef Q_OS_MAC
+#if QT_VERSION < 0x050000 && defined(Q_OS_MAC)
+#define USING_GROWL 1
 #include <ApplicationServices/ApplicationServices.h>
 extern bool qt_mac_execute_apple_script(const QString &script, AEDesc *ret);
 #endif
@@ -46,7 +47,7 @@ Notificator::Notificator(const QString &programName, QSystemTrayIcon *trayicon, 
         mode = Freedesktop;
     }
 #endif
-#ifdef Q_OS_MAC
+#ifdef USING_GROWL
     // Check if Growl is installed (based on Qt's tray icon implementation)
     CFURLRef cfurl;
     OSStatus status = LSGetApplicationForInfo(kLSUnknownType, kLSUnknownCreator, CFSTR("growlTicket"), kLSRolesAll, 0, &cfurl);
@@ -225,7 +226,7 @@ void Notificator::notifySystray(Class cls, const QString &title, const QString &
 }
 
 // Based on Qt's tray icon implementation
-#ifdef Q_OS_MAC
+#ifdef USING_GROWL
 void Notificator::notifyGrowl(Class cls, const QString &title, const QString &text, const QIcon &icon)
 {
     const QString script(
@@ -285,7 +286,7 @@ void Notificator::notify(Class cls, const QString &title, const QString &text, c
     case QSystemTray:
         notifySystray(cls, title, text, icon, millisTimeout);
         break;
-#ifdef Q_OS_MAC
+#ifdef USING_GROWL
     case Growl12:
     case Growl13:
         notifyGrowl(cls, title, text, icon);
