@@ -5,7 +5,7 @@
 
 ## Important Links
 
-  * Block explorer t.b.d.
+  * Block explorer blockexplorer.pwr-coin.com
   * Website https://pwr-coin.com
   * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
   * CryptoHub Exchange https://cryptohub.online/market/PWR/
@@ -24,24 +24,24 @@
 ```
 Name: PWR Coin
 Ticker: PWR
-Maturity: 30 Blocks
+Maturity: 40 Blocks
 Block Size: 2MB
 Block time: 30 seconds
 POW Algo: Nist5
-POS: 1% Annually – Maximum single POS payout is ? coins
+POS: 1% Annually – Maximum single POS payout is 100 coins
 Port: 22504
 Rpcport: 22502  
-Max Supply: ??
+Max Supply: 12,427,419,639 PWR
 
 POW Block Reward:
-- block 50-242950       -> ? COINS - 3 months
-- block 242951-485950   -> ? COINS - 3 months
-- block 485951-971951   -> ? COINS - 6 months
-- block 971952-1957452  ->  ? COINS - 1 year
-- block 1957453-2942953 ->  ? COINS - 1 year
-- block 2942954-3928454 ->  ? COINS - 1 year
-- block 3928455-4913955 ->  ? COINS - 1 year
-- block 4913956 and up  ->  ? COINS 
+- block  262850  -> 180 COINS - 3 months
+- block  525650  -> 150 COINS - 3 months
+- block 1051250  -> 120 COINS - 6 months
+- block 2102450  -> 100 COINS - 1 year
+- block 3153650  ->  90 COINS - 1 year
+- block 4204850  ->  80 COINS - 1 year
+- block 5256050  ->  70 COINS - 1 year
+- block 6307250 and up  ->  65 COINS 
 
 ```
 
