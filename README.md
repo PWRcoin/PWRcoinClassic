@@ -5,19 +5,25 @@
 
 ## Important Links
 
-  * Block explorer blockexplorer.pwr-coin.com
+  * Block explorer https://blockexplorer.pwr-coin.com
   * Website https://pwr-coin.com
+  * White Paper https://pwr-coin.com/downloads/PWR-Coin-White-Paper.pdf
+  * Paper Wallet https://paperwallet.pwr-coin.com/
   * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
-  * CryptoHub Exchange https://cryptohub.online/market/PWR/
-  * CryptoHub Mining Pool https://cryptohub.online/pools/PWR/
-  * Market cap statistics https://coinmarketcap.com/currencies/powercoin/
+  * Crex24 Exchange https://cryptohub.online/market/PWR
+  * CryptoHub Exchange https://crex24.com/exchange/PWR-BTC
+  * Hash Pool EU Mining Pool https://hashpool.eu
+  * Coin Mining Pool https://coinminingpool.org/
+  * Market cap statistics https://coinmarketcap.com/currencies/powercoin
   * Market cap statistics https://cryptocapworld.com/coin/PWR
-  * Facebook https://www.facebook.com/pwrcoin/
+  * Facebook https://www.facebook.com/pwrcoin
   * Twitter https://twitter.com/pwr_coin
   * Google Plus https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
   * YouTube https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
   * Discord channel https://discord.gg/8jhcqqs
-  * Reddit https://www.reddit.com/r/PWRcoin/
+  * Reddit https://www.reddit.com/r/PWRcoin
+  * Telegram https://t.me/pwr_coin_official
+  * Telegram Announcement Channel: https://t.me/pwr_coin
 
 ## PWR Coin Specifications
 
