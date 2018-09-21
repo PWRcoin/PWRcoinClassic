@@ -8,12 +8,12 @@
   * Block explorer https://blockexplorer.pwr-coin.com
   * Website https://pwr-coin.com
   * White Paper https://pwr-coin.com/downloads/PWR-Coin-White-Paper.pdf
-  * Paper Wallet https://paperwallet.pwr-coin.com/
+  * Paper Wallet https://paperwallet.pwr-coin.com
+  * Online Wallet https://online-wallet.pwr-coin.com
   * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
   * Crex24 Exchange https://cryptohub.online/market/PWR
-  * CryptoHub Exchange https://crex24.com/exchange/PWR-BTC
   * Hash Pool EU Mining Pool https://hashpool.eu
-  * Coin Mining Pool https://coinminingpool.org/
+  * Coin Mining Pool https://coinminingpool.org
   * Market cap statistics https://coinmarketcap.com/currencies/powercoin
   * Market cap statistics https://cryptocapworld.com/coin/PWR
   * Facebook https://www.facebook.com/pwrcoin
