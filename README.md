@@ -11,7 +11,7 @@
   * Paper Wallet https://paperwallet.pwr-coin.com
   * Online Wallet https://online-wallet.pwr-coin.com
   * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
-  * Crex24 Exchange https://cryptohub.online/market/PWR
+  * Crex24 Exchange https://crex24.com/exchange/PWR-BTC
   * Hash Pool EU Mining Pool https://hashpool.eu
   * Coin Mining Pool https://coinminingpool.org
   * Market cap statistics https://coinmarketcap.com/currencies/powercoin
