@@ -318,9 +318,6 @@ void pwrcoinGUI::createActions()
     redditAction = new QAction(QIcon(":/icons/reddit"), tr("Reddit"), this);
     redditAction->setToolTip(tr("PWR Reddit"));
 
-    openBlockExplorerAction = new QAction(QIcon(":/icons/explorer"), tr("BlockExplorer"), this);
-    openBlockExplorerAction->setToolTip(tr("BlockExplorer"));
-
     exportAction = new QAction(QIcon(":/icons/export"), tr("&Export..."), this);
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
 
