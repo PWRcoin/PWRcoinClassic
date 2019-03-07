@@ -402,7 +402,6 @@ void pwrcoinGUI::createMenuBar()
     tools->addAction(openRPCConsoleAction);
     tools->addAction(openNetworkAction);
     tools->addAction(openPeersAction);
-    tools->addAction(openBlockExplorerAction);
     tools->addSeparator();
     tools->addAction(openConfEditorAction);
 
