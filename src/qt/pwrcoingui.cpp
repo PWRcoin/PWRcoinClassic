@@ -533,7 +533,6 @@ void pwrcoinGUI::createTrayIcon()
     trayIconMenu->addAction(openRPCConsoleAction);
     trayIconMenu->addAction(openNetworkAction);
     trayIconMenu->addAction(openPeersAction);
-    trayIconMenu->addAction(openBlockExplorerAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(openConfEditorAction);
 
@@ -570,11 +569,6 @@ void pwrcoinGUI::aboutClicked()
     AboutDialog dlg;
     dlg.setModel(clientModel);
     dlg.exec();
-}
-
-void pwrcoinGUI::openBlockExplorerActionClicked()
-{
-        QDesktopServices::openUrl(QUrl("https://blockexplorer.pwr-coin.com/"));
 }
 
 void pwrcoinGUI::facebookActionClicked()
