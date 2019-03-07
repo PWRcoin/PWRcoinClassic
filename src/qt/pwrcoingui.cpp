@@ -358,7 +358,6 @@ void pwrcoinGUI::createActions()
     connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showConsole()));
     connect(openNetworkAction, SIGNAL(triggered()), this, SLOT(showNetwork()));
     connect(openPeersAction, SIGNAL(triggered()), this, SLOT(showPeers()));
-    connect(openBlockExplorerAction, SIGNAL(triggered()), this , SLOT(openBlockExplorerActionClicked()));
     connect(openConfEditorAction, SIGNAL(triggered()), this, SLOT(showConfEditor()));
 }
 
