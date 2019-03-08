@@ -9,6 +9,12 @@
         <file alias="telegram">res/icons/telegram.png</file>
         <file alias="youtube">res/icons/youtube.png</file>
         <file alias="reddit">res/icons/reddit.png</file>
+        <file alias="website">res/icons/website.png</file>
+        <file alias="blockexplorer">res/icons/blockexplorer.png</file>
+        <file alias="paperwallet">res/icons/paperwallet.png</file>
+        <file alias="githubsource">res/icons/github.png</file>
+        <file alias="whitepaper">res/icons/whitepaper.png</file>
+        <file alias="roadmap">res/icons/roadmap.png</file>
         <file alias="quit">res/icons/quit.png</file>
         <file alias="send">res/icons/send.png</file>
         <file alias="toolbar">res/icons/pwrcoin-16.png</file>
