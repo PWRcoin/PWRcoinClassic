@@ -191,6 +191,14 @@ private slots:
     void telegram2ActionClicked();
     void youtubeActionClicked();
     void redditActionClicked();
+    
+    /** Links Menu */
+    void websiteActionClicked();
+    void blockexplorerActionClicked();
+    void paperwalletActionClicked();
+    void githubsourceActionClicked();
+    void whitepaperActionClicked();
+    void roadmapActionClicked();
 
     /** Show incoming transaction notification for new transactions.
 
