@@ -396,6 +396,8 @@ void pwrcoinGUI::createMenuBar()
     socials->addAction(telegram2Action);
     socials->addAction(youtubeAction);
     socials->addAction(redditAction);
+    
+    QMenu *links = appMenuBar->addMenu(tr("Links"));
 
     QMenu* tools = appMenuBar->addMenu(tr("&Tools"));
     tools->addAction(openInfoAction);
