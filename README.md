@@ -1,7 +1,7 @@
 
 ### PWR Coin (Phoenix) <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=3.0.0.0&x2=0">
 
-<p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
+<p style="text-align:center;"><img src="https://github.com/DisasterFaster/PWRcoin/blob/phoenix/images/PWR-Coin-1.jpg"></p>
 
 ## Important Links
 
