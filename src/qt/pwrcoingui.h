@@ -107,6 +107,13 @@ private:
     QAction *telegram2Action;
     QAction *youtubeAction;
     QAction *redditAction;
+    
+    QAction *websiteAction;
+    QAction *blockexplorerAction;
+    QAction *paperwalletAction;
+    QAction *githubsourceAction;
+    QAction *whitepaperAction;
+    QAction *roadmapAction;
 
     QSystemTrayIcon *trayIcon;
     Notificator *notificator;
