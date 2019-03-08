@@ -119,7 +119,7 @@ addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
 ```
-You will need to replace SomeIPAddressHere with IP addresses that you can find here https://cryptohub.online/glossary/ajax_coin_nodes/58/ or here https://blockexplorer.pwr-coin.com/network
+You will need to replace SomeIPAddressHere with IP addresses that you can find here https://blockexplorer.pwr-coin.com/network
 
 After you add the IP addresses save the pwrcoin.conf file and then you will need to restart the QT wallet for the changes to take effect. You will now note that your wallet is sychronizing the blockchain. If your wallet will not begin to synchronize you should try adding some more/different IP addresses in the pwrcoin.conf file. If your wallet partially synchronizes but then stops at some point and won't progress you should shut it down and restart it. Once your QT wallet is fully synchronized you should check and make sure that the wallet block number matches the block height on the official block eplorer at https://blockexplorer.pwr-coin.com/
 
