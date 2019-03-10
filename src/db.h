@@ -76,7 +76,7 @@ public:
     void CheckpointLSN(std::string strFile);
     void SetDetach(bool fDetachDB_) { fDetachDB = fDetachDB_; }
     bool GetDetach() { return fDetachDB; }
-
+    void lsn_reset(const std::string& strFile);
     void CloseDb(const std::string& strFile);
     bool RemoveDb(const std::string& strFile);
 

@@ -1,5 +1,6 @@
 
-### PWR Coin (Phoenix) <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=3.0.0.1&x2=0">
+
+### PWR Coin (Phoenix) <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=3.1.0.0&x2=0">
 
 <p style="text-align:center;"><img src="https://github.com/DisasterFaster/PWRcoin/blob/phoenix/images/PWR-Coin-1.jpg"></p>
 
@@ -35,7 +36,7 @@ Maturity: 40 Blocks
 Block Size: 2MB
 Block time: 30 seconds
 POW Algo: Nist5
-POS: 1% Annually – Maximum single POS payout is 100 coins
+POS: single POS payout is 100 coins
 Port: 22504
 Rpcport: 22502  
 Max Supply: 12,427,419,639 PWR
@@ -49,6 +50,7 @@ POW Block Reward:
 - block 4204850  ->  80 COINS - 1 year
 - block 5256050  ->  70 COINS - 1 year
 - block 6307250 and up  ->  65 COINS 
+
 
 ```
 
