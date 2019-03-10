@@ -324,7 +324,7 @@ void pwrcoinGUI::createActions()
     blockexplorerAction->setToolTip(tr("PWR Block Explorer"));
     paperwalletAction = new QAction(QIcon(":/icons/paperwallet"), tr("Paper Wallet"), this);
     paperwalletAction->setToolTip(tr("PWR Paper Wallet"));
-    githubsourceAction = new QAction(QIcon(":/icons/github"), tr("Github Source"), this);
+    githubsourceAction = new QAction(QIcon(":/icons/githubsource"), tr("Github Source"), this);
     githubsourceAction->setToolTip(tr("PWR Github Source"));
     whitepaperAction = new QAction(QIcon(":/icons/whitepaper"), tr("White Paper"), this);
     whitepaperAction->setToolTip(tr("PWR White Paper"));
