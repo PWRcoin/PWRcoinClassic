@@ -1,23 +1,31 @@
 
+
 ### PWR Coin (Phoenix) <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=3.1.0.0&x2=0">
 
-<p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
+<p style="text-align:center;"><img src="https://github.com/DisasterFaster/PWRcoin/blob/phoenix/images/PWR-Coin-1.jpg"></p>
 
 ## Important Links
 
   * Block explorer https://blockexplorer.pwr-coin.com
   * Website https://pwr-coin.com
+  * White Paper https://pwr-coin.com/downloads/PWR-Coin-White-Paper.pdf
+  * Paper Wallet https://paperwallet.pwr-coin.com
+  * Online Wallet https://online-wallet.pwr-coin.com
   * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
-  * CryptoHub Exchange https://cryptohub.online/market/PWR/
-  * CryptoHub Mining Pool https://cryptohub.online/pools/PWR/
-  * Market cap statistics https://coinmarketcap.com/currencies/powercoin/
+  * Crex24 Exchange https://crex24.com/exchange/PWR-BTC
+  * Mercatox Exchange https://mercatox.com/exchange/PWR/BTC
+  * Hash Pool EU Mining Pool https://hashpool.eu
+  * Coin Mining Pool https://coinminingpool.org
+  * Market cap statistics https://coinmarketcap.com/currencies/powercoin
   * Market cap statistics https://cryptocapworld.com/coin/PWR
-  * Facebook https://www.facebook.com/pwrcoin/
+  * Facebook https://www.facebook.com/pwrcoin
   * Twitter https://twitter.com/pwr_coin
   * Google Plus https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
   * YouTube https://www.youtube.com/channel/UCVb0ZIaNjIjZc6HLE0RwVlg
   * Discord channel https://discord.gg/8jhcqqs
-  * Reddit https://www.reddit.com/r/PWRcoin/
+  * Reddit https://www.reddit.com/r/PWRcoin
+  * Telegram https://t.me/pwr_coin_official
+  * Telegram Announcement Channel: https://t.me/pwr_coin
 
 ## PWR Coin Specifications
 
@@ -41,7 +49,8 @@ POW Block Reward:
 - block 3153650  ->  90 COINS - 1 year
 - block 4204850  ->  80 COINS - 1 year
 - block 5256050  ->  70 COINS - 1 year
-- block 6307250 and up  ->  65 COINS
+- block 6307250 and up  ->  65 COINS 
+
 
 ```
 
@@ -112,7 +121,7 @@ addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
 ```
-You will need to replace SomeIPAddressHere with IP addresses that you can find here https://cryptohub.online/glossary/ajax_coin_nodes/58/ or here https://blockexplorer.pwr-coin.com/network
+You will need to replace SomeIPAddressHere with IP addresses that you can find here https://blockexplorer.pwr-coin.com/network
 
 After you add the IP addresses save the pwrcoin.conf file and then you will need to restart the QT wallet for the changes to take effect. You will now note that your wallet is sychronizing the blockchain. If your wallet will not begin to synchronize you should try adding some more/different IP addresses in the pwrcoin.conf file. If your wallet partially synchronizes but then stops at some point and won't progress you should shut it down and restart it. Once your QT wallet is fully synchronized you should check and make sure that the wallet block number matches the block height on the official block eplorer at https://blockexplorer.pwr-coin.com/
 
@@ -230,7 +239,7 @@ Let the daemon run for several more minutes and once again check it with:
 ./pwrcoind getinfo
 ```
 
-You should compare the block number now to the last one you saw and you should see it climbing higher because it is synchronizing the blockchain. If the number stays at 0 you need to revisit your pwrcoin.conf file and try some different addnodes. A good place to get those is here https://cryptohub.online/glossary/ajax_coin_nodes/58/ or here https://blockexplorer.pwr-coin.com/network
+You should compare the block number now to the last one you saw and you should see it climbing higher because it is synchronizing the blockchain. If the number stays at 0 you need to revisit your pwrcoin.conf file and try some different addnodes. A good place to get those is here https://blockexplorer.pwr-coin.com/network
 
 Let your daemon run and check it periodically. Once the block number in getinfo matches the block number on the block explorer you are fully synchronized. If you notice that your daemon reaches a certain block height but then stops synchronizing for any reason it's always a good idea to try stopping and restarting it using the commands listed below:
 

@@ -98,7 +98,6 @@ private:
     QAction* openRPCConsoleAction;
     QAction* openNetworkAction;
     QAction* openPeersAction;
-    QAction* openBlockExplorerAction;
     QAction* openConfEditorAction;
 
     QAction *facebookAction;
@@ -108,6 +107,13 @@ private:
     QAction *telegram2Action;
     QAction *youtubeAction;
     QAction *redditAction;
+    
+    QAction *websiteAction;
+    QAction *blockexplorerAction;
+    QAction *paperwalletAction;
+    QAction *githubsourceAction;
+    QAction *whitepaperAction;
+    QAction *roadmapAction;
 
     QSystemTrayIcon *trayIcon;
     Notificator *notificator;
@@ -171,8 +177,6 @@ private slots:
     void optionsClicked();
     /** Show about dialog */
     void aboutClicked();
-    /** Show block explorer */
-    void openBlockExplorerActionClicked();
 
 #ifndef Q_OS_MAC
     /** Handle tray icon clicked */
@@ -187,6 +191,14 @@ private slots:
     void telegram2ActionClicked();
     void youtubeActionClicked();
     void redditActionClicked();
+    
+    /** Links Menu */
+    void websiteActionClicked();
+    void blockexplorerActionClicked();
+    void paperwalletActionClicked();
+    void githubsourceActionClicked();
+    void whitepaperActionClicked();
+    void roadmapActionClicked();
 
     /** Show incoming transaction notification for new transactions.
 

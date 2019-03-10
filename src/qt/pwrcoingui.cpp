@@ -317,9 +317,19 @@ void pwrcoinGUI::createActions()
     telegram2Action->setToolTip(tr("PWR Telegram Announcements"));
     redditAction = new QAction(QIcon(":/icons/reddit"), tr("Reddit"), this);
     redditAction->setToolTip(tr("PWR Reddit"));
-
-    openBlockExplorerAction = new QAction(QIcon(":/icons/explorer"), tr("BlockExplorer"), this);
-    openBlockExplorerAction->setToolTip(tr("BlockExplorer"));
+    
+    websiteAction = new QAction(QIcon(":/icons/website"), tr("Website"), this);
+    websiteAction->setToolTip(tr("PWR Website"));
+    blockexplorerAction = new QAction(QIcon(":/icons/blockexplorer"), tr("Block Explorer"), this);
+    blockexplorerAction->setToolTip(tr("PWR Block Explorer"));
+    paperwalletAction = new QAction(QIcon(":/icons/paperwallet"), tr("Paper Wallet"), this);
+    paperwalletAction->setToolTip(tr("PWR Paper Wallet"));
+    githubsourceAction = new QAction(QIcon(":/icons/github"), tr("Github Source"), this);
+    githubsourceAction->setToolTip(tr("PWR Github Source"));
+    whitepaperAction = new QAction(QIcon(":/icons/whitepaper"), tr("White Paper"), this);
+    whitepaperAction->setToolTip(tr("PWR White Paper"));
+    roadmapAction = new QAction(QIcon(":/icons/roadmap"), tr("Road Map"), this);
+    roadmapAction->setToolTip(tr("PWR Road Map"));
 
     exportAction = new QAction(QIcon(":/icons/export"), tr("&Export..."), this);
     exportAction->setToolTip(tr("Export the data in the current tab to a file"));
@@ -356,12 +366,18 @@ void pwrcoinGUI::createActions()
     connect(telegram2Action, SIGNAL(triggered()), this, SLOT(telegram2ActionClicked()));
     connect(youtubeAction, SIGNAL(triggered()), this, SLOT(youtubeActionClicked()));
     connect(redditAction, SIGNAL(triggered()), this, SLOT(redditActionClicked()));
+    
+    connect(websiteAction, SIGNAL(triggered()), this, SLOT(websiteActionClicked()));
+    connect(blockexplorerAction, SIGNAL(triggered()), this, SLOT(blockexplorerActionClicked()));
+    connect(paperwalletAction, SIGNAL(triggered()), this, SLOT(paperwalletActionClicked()));
+    connect(githubsourceAction, SIGNAL(triggered()), this, SLOT(githubsourceActionClicked()));
+    connect(whitepaperAction, SIGNAL(triggered()), this, SLOT(whitepaperActionClicked()));
+    connect(roadmapAction, SIGNAL(triggered()), this, SLOT(roadmapActionClicked()));
 
     connect(openInfoAction, SIGNAL(triggered()), this, SLOT(showInfo()));
     connect(openRPCConsoleAction, SIGNAL(triggered()), this, SLOT(showConsole()));
     connect(openNetworkAction, SIGNAL(triggered()), this, SLOT(showNetwork()));
     connect(openPeersAction, SIGNAL(triggered()), this, SLOT(showPeers()));
-    connect(openBlockExplorerAction, SIGNAL(triggered()), this , SLOT(openBlockExplorerActionClicked()));
     connect(openConfEditorAction, SIGNAL(triggered()), this, SLOT(showConfEditor()));
 }
 
@@ -400,13 +416,20 @@ void pwrcoinGUI::createMenuBar()
     socials->addAction(telegram2Action);
     socials->addAction(youtubeAction);
     socials->addAction(redditAction);
+    
+    QMenu *links = appMenuBar->addMenu(tr("Links"));
+    links->addAction(websiteAction);
+    links->addAction(blockexplorerAction);
+    links->addAction(paperwalletAction);
+    links->addAction(githubsourceAction);
+    links->addAction(whitepaperAction);
+    links->addAction(roadmapAction);
 
     QMenu* tools = appMenuBar->addMenu(tr("&Tools"));
     tools->addAction(openInfoAction);
     tools->addAction(openRPCConsoleAction);
     tools->addAction(openNetworkAction);
     tools->addAction(openPeersAction);
-    tools->addAction(openBlockExplorerAction);
     tools->addSeparator();
     tools->addAction(openConfEditorAction);
 
@@ -538,7 +561,6 @@ void pwrcoinGUI::createTrayIcon()
     trayIconMenu->addAction(openRPCConsoleAction);
     trayIconMenu->addAction(openNetworkAction);
     trayIconMenu->addAction(openPeersAction);
-    trayIconMenu->addAction(openBlockExplorerAction);
     trayIconMenu->addSeparator();
     trayIconMenu->addAction(openConfEditorAction);
 
@@ -577,11 +599,6 @@ void pwrcoinGUI::aboutClicked()
     dlg.exec();
 }
 
-void pwrcoinGUI::openBlockExplorerActionClicked()
-{
-        QDesktopServices::openUrl(QUrl("https://blockexplorer.pwr-coin.com/"));
-}
-
 void pwrcoinGUI::facebookActionClicked()
 {
         QDesktopServices::openUrl(QUrl("https://www.facebook.com/pwrcoin/"));
@@ -609,6 +626,36 @@ void pwrcoinGUI::youtubeActionClicked()
 void pwrcoinGUI::redditActionClicked()
 {
         QDesktopServices::openUrl(QUrl("https://www.reddit.com/r/PWRcoin/"));
+}
+
+void pwrcoinGUI::websiteActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://pwr-coin.com/"));
+}
+
+void pwrcoinGUI::blockexplorerActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://blockexplorer.pwr-coin.com/"));
+}
+
+void pwrcoinGUI::paperwalletActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://paperwallet.pwr-coin.com/"));
+}
+
+void pwrcoinGUI::githubsourceActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://github.com/PWRcoin/PWRcoin"));
+}
+
+void pwrcoinGUI::whitepaperActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://pwr-coin.com/downloads/PWR-Coin-White-Paper.pdf"));
+}
+
+void pwrcoinGUI::roadmapActionClicked()
+{
+        QDesktopServices::openUrl(QUrl("https://pwr-coin.com/#roadmap"));
 }
 
 
