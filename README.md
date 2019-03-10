@@ -1,7 +1,8 @@
 
-### PWR Coin (Phoenix) <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=3.0.0.0&x2=0">
 
-<p style="text-align:center;"><img src="https://pwr-coin.com/wp-content/uploads/2018/02/PWR-Coin-1.jpg"></p>
+### PWR Coin (Phoenix) <img src="https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=3.1.0.0&x2=0">
+
+<p style="text-align:center;"><img src="https://github.com/DisasterFaster/PWRcoin/blob/phoenix/images/PWR-Coin-1.jpg"></p>
 
 ## Important Links
 
@@ -35,7 +36,7 @@ Maturity: 40 Blocks
 Block Size: 2MB
 Block time: 30 seconds
 POW Algo: Nist5
-POS: 1% Annually – Maximum single POS payout is 100 coins
+POS: single POS payout is 100 coins
 Port: 22504
 Rpcport: 22502  
 Max Supply: 12,427,419,639 PWR
@@ -49,6 +50,7 @@ POW Block Reward:
 - block 4204850  ->  80 COINS - 1 year
 - block 5256050  ->  70 COINS - 1 year
 - block 6307250 and up  ->  65 COINS 
+
 
 ```
 
@@ -119,7 +121,7 @@ addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
 addnode=SomeIPAddressHere
 ```
-You will need to replace SomeIPAddressHere with IP addresses that you can find here https://cryptohub.online/glossary/ajax_coin_nodes/58/ or here https://blockexplorer.pwr-coin.com/network
+You will need to replace SomeIPAddressHere with IP addresses that you can find here https://blockexplorer.pwr-coin.com/network
 
 After you add the IP addresses save the pwrcoin.conf file and then you will need to restart the QT wallet for the changes to take effect. You will now note that your wallet is sychronizing the blockchain. If your wallet will not begin to synchronize you should try adding some more/different IP addresses in the pwrcoin.conf file. If your wallet partially synchronizes but then stops at some point and won't progress you should shut it down and restart it. Once your QT wallet is fully synchronized you should check and make sure that the wallet block number matches the block height on the official block eplorer at https://blockexplorer.pwr-coin.com/
 
@@ -237,7 +239,7 @@ Let the daemon run for several more minutes and once again check it with:
 ./pwrcoind getinfo
 ```
 
-You should compare the block number now to the last one you saw and you should see it climbing higher because it is synchronizing the blockchain. If the number stays at 0 you need to revisit your pwrcoin.conf file and try some different addnodes. A good place to get those is here https://cryptohub.online/glossary/ajax_coin_nodes/58/ or here https://blockexplorer.pwr-coin.com/network
+You should compare the block number now to the last one you saw and you should see it climbing higher because it is synchronizing the blockchain. If the number stays at 0 you need to revisit your pwrcoin.conf file and try some different addnodes. A good place to get those is here https://blockexplorer.pwr-coin.com/network
 
 Let your daemon run and check it periodically. Once the block number in getinfo matches the block number on the block explorer you are fully synchronized. If you notice that your daemon reaches a certain block height but then stops synchronizing for any reason it's always a good idea to try stopping and restarting it using the commands listed below:
 
