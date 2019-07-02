@@ -14,6 +14,7 @@
   * Bitcointalk ANN https://bitcointalk.org/index.php?topic=2868184.100
   * Crex24 Exchange https://crex24.com/exchange/PWR-BTC
   * Mercatox Exchange https://mercatox.com/exchange/PWR/BTC
+  * Staking Lab Online Staking Pool https://stakinglab.io/coins/pwr-coin
   * Hash Pool EU Mining Pool https://hashpool.eu
   * Coin Mining Pool https://coinminingpool.org
   * Market cap statistics https://coinmarketcap.com/currencies/powercoin
