@@ -19,6 +19,7 @@
   * Coin Mining Pool https://coinminingpool.org
   * Market cap statistics https://coinmarketcap.com/currencies/powercoin
   * Market cap statistics https://cryptocapworld.com/coin/PWR
+   * Market cap statistics https://www.coinlore.com/coin/powercoin
   * Facebook https://www.facebook.com/pwrcoin
   * Twitter https://twitter.com/pwr_coin
   * Google Plus https://plus.google.com/u/0/b/111766350022342218047/111766350022342218047
